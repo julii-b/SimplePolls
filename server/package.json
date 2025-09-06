@@ -1,0 +1,32 @@
+{
+  "name": "server2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "DOTENV_CONFIG_PATH=.env.test vitest run",
+    "test:watch": "DOTENV_CONFIG_PATH=.env.test vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.3.1",
+    "@types/pg": "^8.15.5",
+    "@vitest/coverage-v8": "^3.2.4",
+    "dotenv": "^17.2.1",
+    "eslint": "^9.34.0",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
+    "supertest": "^7.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "pg": "^8.16.3"
+  }
+}

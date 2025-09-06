@@ -12,6 +12,7 @@ server/node_modules/
 client/dist/
 server/dist/
 *.local
+server2
 
 # Editor directories and files
 .vscode/*
@@ -31,3 +32,5 @@ client/.env
 server/.env
 client/.env.local
 server/.env.local
+client/.env.test
+server/.env.test
