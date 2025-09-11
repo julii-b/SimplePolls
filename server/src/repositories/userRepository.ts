@@ -34,3 +34,12 @@ export async function getUserByClientHash(clientHash: string): Promise<User | nu
   );
   return rows[0] ?? null;
 }
+
+export async function deleteUser(id: number): Promise<boolean> {
+  let { rowCount } = await pool.query(
+    `DELETE FROM users WHERE id = $1`,
+    [id]
+  )
+  rowCount = rowCount ?? 0
+  return (rowCount > 0);
+}

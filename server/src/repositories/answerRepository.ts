@@ -4,7 +4,7 @@ export interface Answer {
   id: number;
   pollId: number;
   answerText: string;
-  createdAt: string;
+  createdAt: string; // ISO from timestamptz
 }
 
 
@@ -25,4 +25,13 @@ export async function getAnswersForPoll(pollId: number): Promise<Answer[]> {
     [pollId]
   );
   return rows;
+}
+
+export async function deleteAnswer(id: number): Promise<boolean> {
+  let { rowCount } = await pool.query(
+    `DELETE FROM answers WHERE id = $1`,
+    [id]
+  )
+  rowCount = rowCount ?? 0
+  return (rowCount > 0);
 }

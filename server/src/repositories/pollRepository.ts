@@ -4,7 +4,7 @@ export interface Poll {
   id: number;
   ownerId: number;
   questionText: string;
-  createdAt: string;
+  createdAt: string; // ISO from timestamptz
 }
 
 
@@ -36,11 +36,16 @@ export async function getPollsByOwner(ownerId: number): Promise<Poll[]> {
   return rows;
 }
 
-export async function deletePoll(id: number): Promise<Poll | null> {
-  const { rows } = await pool.query<Poll>(
-    `DELETE FROM polls WHERE id = $1
-     RETURNING id, owner_id AS "ownerId", question_text AS "questionText", created_at AS "createdAt"`,
+export async function deletePoll(id: number): Promise<boolean> {
+  let { rowCount } = await pool.query(
+    `DELETE FROM polls WHERE id = $1`,
     [id]
-  );
-  return rows[0] ?? null;
+  )
+  rowCount = rowCount ?? 0
+  return (rowCount > 0);
 }
+
+/*
+To be implemented in the future if needed:
+changePollText(id, text)
+*/
