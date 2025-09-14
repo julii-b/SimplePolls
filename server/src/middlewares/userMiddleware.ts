@@ -7,7 +7,7 @@ export const userMiddleware = async (req: Request, res: Response, next: NextFunc
     // Read authotization token:
     const authHeaderRaw: undefined|string = req.headers['authorization']; // 'Bearer <token>'
     const authHeader: undefined|string[] = authHeaderRaw?.trim().split(/\s+/); // ['Bearer', <token>]
-    const authScheme: undefined|string = authHeader && authHeader[1];  // 'Bearer'
+    const authScheme: undefined|string = authHeader && authHeader[0];  // 'Bearer'
     let userToken: undefined|string = authHeader && authHeader[1]; // <token>
 
     // Get user id if token exists:
