@@ -3,7 +3,7 @@ CREATE TABLE users (
     INTEGER
     GENERATED ALWAYS AS IDENTITY
     PRIMARY KEY,
-  client_hash
+  user_token
     TEXT
     NOT NULL
     UNIQUE,

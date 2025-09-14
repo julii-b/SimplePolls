@@ -2,35 +2,35 @@ import { pool } from '../db/pool.js';
 
 export interface User {
   id: number;
-  clientHash: string;
+  userToken: string;
   createdAt: string; // ISO from timestamptz
 }
 
 
-export async function createUser(clientHash: string): Promise<User | null> {
+export async function createUser(userToken: string): Promise<User | null> {
   const { rows } = await pool.query<User>(
-    `INSERT INTO users (client_hash) VALUES ($1)
-     ON CONFLICT (client_hash) DO UPDATE SET client_hash = EXCLUDED.client_hash
-     RETURNING id, client_hash AS "clientHash", created_at AS "createdAt"`,
-    [clientHash]
+    `INSERT INTO users (user_token) VALUES ($1)
+     ON CONFLICT (user_token) DO UPDATE SET user_token = EXCLUDED.user_token
+     RETURNING id, user_token AS "userToken", created_at AS "createdAt"`,
+    [userToken]
   );
   return rows[0] ?? null;
 }
 
 export async function getUserById(id: number): Promise<User | null> {
   const { rows } = await pool.query<User>(
-    `SELECT id, client_hash AS "clientHash", created_at AS "createdAt"
+    `SELECT id, user_token AS "userToken", created_at AS "createdAt"
      FROM users WHERE id = $1`,
     [id]
   );
   return rows[0] ?? null;
 }
 
-export async function getUserByClientHash(clientHash: string): Promise<User | null> {
+export async function getUserByUserToken(userToken: string): Promise<User | null> {
   const { rows } = await pool.query<User>(
-    `SELECT id, client_hash AS "clientHash", created_at AS "createdAt"
-     FROM users WHERE client_hash = $1`,
-    [clientHash]
+    `SELECT id, user_token AS "userToken", created_at AS "createdAt"
+     FROM users WHERE user_token = $1`,
+    [userToken]
   );
   return rows[0] ?? null;
 }

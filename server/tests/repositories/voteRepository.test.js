@@ -10,7 +10,7 @@ describe('Answers Repository', () => {
     let poll = {};
 
     beforeEach( async () => {
-        user = await userRepository.createUser('testhash-answerRepository'); 
+        user = await userRepository.createUser('testtoken-answerRepository'); 
         poll = await pollRepository.createPoll(user.id, 'Is this true?');
     });
     afterEach( async () => {

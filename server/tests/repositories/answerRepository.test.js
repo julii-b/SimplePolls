@@ -14,8 +14,8 @@ describe('Votes Repository', () => {
     let answer2 = {};
 
     beforeEach( async () => {
-        user1 = await userRepository.createUser('testhash-voteRepository-1');
-        user2 = await userRepository.createUser('testhash-voteRepository-2');
+        user1 = await userRepository.createUser('testtoken-voteRepository-1');
+        user2 = await userRepository.createUser('testtoken-voteRepository-2');
         poll = await pollRepository.createPoll(user1.id, 'How are you?');
         answer1 = await answerRepository.createAnswer(poll.id, 'good');
         answer2 = await answerRepository.createAnswer(poll.id, 'bad');

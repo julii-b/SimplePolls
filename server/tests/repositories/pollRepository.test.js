@@ -8,7 +8,7 @@ describe('Polls Repository', async () => {
     let user = {}
 
     beforeAll( async () => {
-        user = await userRepository.createUser('testhash-pollRepository');
+        user = await userRepository.createUser('testtoke-pollRepository');
     });
     afterAll( async () => {
         await userRepository.deleteUser(user.id);
@@ -37,19 +37,19 @@ describe('Polls Repository', async () => {
     test('getPollsByOwner works', async () => {
         await userRepository.deleteUser(user.id);
         // get all polls from a user wit 0 polls:
-        user = await userRepository.createUser('testhash-pollRepository-getPollsByOwner-0');
+        user = await userRepository.createUser('testtoken-pollRepository-getPollsByOwner-0');
         const polls0 = await pollRepository.getPollsByOwner(user.id);
         expect(polls0).toEqual([]);
         await userRepository.deleteUser(user.id);
         // get all polls from a user with 1 poll:
-        user = await userRepository.createUser('testhash-pollRepository-getPollsByOwner-1');
+        user = await userRepository.createUser('testtoken-pollRepository-getPollsByOwner-1');
         await pollRepository.createPoll(user.id, "What do I ask?");
         const polls1 = await pollRepository.getPollsByOwner(user.id);
         expect(polls1.every(row => row.ownerId === user.id)).toBe(true);
         expect(polls1.length).toBe(1);
         await userRepository.deleteUser(user.id);
         // get all polls from a user with 2 polls:
-        user = await userRepository.createUser('testhash-pollRepository-getPollsByOwner-2');
+        user = await userRepository.createUser('testtoken-pollRepository-getPollsByOwner-2');
         await pollRepository.createPoll(user.id, "What do I ask?");
         await pollRepository.createPoll(user.id, "Who wants to know this?");
         const polls2 = await pollRepository.getPollsByOwner(user.id);
