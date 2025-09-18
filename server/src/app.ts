@@ -1,18 +1,22 @@
 import express from 'express';
+import { userMiddleware } from './middlewares/userMiddleware.js';
 import meRouter from './routes/meRouter.js';
 import pollsRouter from './routes/pollsRouter.js';
-// import { errorHandler } from './middlewares/errorHandler.js';
+import { errorHandler } from './middlewares/errorHandler.js';
 
 const app = express();
 
 app.use(express.json());
 
-// Routes
+// User verification middleware:
+app.use(userMiddleware);
+
+// Routes:
 app.use('/me', meRouter);
 app.use('/polls', pollsRouter);
 
-// Global error handler
-// app.use(errorHandler);
+// Global error handler:
+app.use(errorHandler);
 
 export default app;
 

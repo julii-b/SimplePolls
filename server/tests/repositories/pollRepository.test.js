@@ -60,10 +60,24 @@ describe('Polls Repository', async () => {
         expect(polls3).toEqual([]);
     });
 
+    test('updatePollText works', async () => {
+        // update poll that doesn't exist:
+        const poll1 = await pollRepository.updatePollText(1, -1, 'Can you change this?');
+        expect(poll1).toBe(null);
+        // update existing poll with wrong userId:
+        const poll2 = await pollRepository.createPoll(user.id, 'Does anyone read this?');
+        const poll3 = await pollRepository.updatePollText(-1, poll2.id);
+        expect(poll1).toBe(null);
+        // update poll correctly:
+        const poll4 = await pollRepository.updatePollText(user.id, poll2.id, 'Is this the new text?');
+        expect(poll4.id).toBe(poll2.id);
+        expect(poll4.questionText).toBe('Is this the new text?');
+    });
+
     test('deletePoll works', async () => {
         // create and delete poll:
         let poll1 = await pollRepository.createPoll(user.id, "Are ther no dumb questions?");
-        await pollRepository.deletePoll(poll1.id);
+        await pollRepository.deletePoll(user.id, poll1.id);
         poll1 = await pollRepository.getPollById(poll1.id);
         expect(poll1).toBe(null);
     });

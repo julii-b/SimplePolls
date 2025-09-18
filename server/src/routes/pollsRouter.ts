@@ -1,12 +1,13 @@
 import { Router } from 'express';
 import answersRouter from './answersRouter.js'
+import * as pollController from '../controllers/pollController.js';
 
 const pollsRouter = Router({ mergeParams: true })
 
-pollsRouter.post('/', () => { }); // create new poll
-pollsRouter.get('/:pollId', () => {}); // get poll text
-pollsRouter.patch('/:pollId', () => {}); // change poll text
-pollsRouter.delete('/:pollId', () => {}); // delete poll
+pollsRouter.post('/', pollController.createNewPoll);
+pollsRouter.get('/:pollId', pollController.getPoll);
+pollsRouter.patch('/:pollId', pollController.changePollText);
+pollsRouter.delete('/:pollId', pollController.deletePoll);
 
 pollsRouter.use('/:pollId/answers', answersRouter);
 

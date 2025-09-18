@@ -1,9 +1,10 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import {Request, Response, NextFunction } from 'express';
 
-import { userMiddleware } from '../../src/middlewares/userMiddleware.ts';
 vi.mock('../../src/repositories/userRepository.ts'); // mock userRepository
 import * as userRepository from '../../src/repositories/userRepository.ts';
+
+import { userMiddleware } from '../../src/middlewares/userMiddleware.ts';
 
 describe('userMiddleware', () => {
 
