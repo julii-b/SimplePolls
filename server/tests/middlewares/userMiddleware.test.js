@@ -14,7 +14,7 @@ describe('userMiddleware', () => {
 
     beforeEach(() => {
         mockRequest = {
-            headers: {},
+            headers: {}
         };
         mockResponse = {
             json: vi.fn(),

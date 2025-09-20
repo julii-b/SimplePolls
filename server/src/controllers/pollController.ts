@@ -10,19 +10,19 @@ import * as pollRepository from './../repositories/pollRepository.js';
 export const createNewPoll = async (req: Request, res: Response, next: NextFunction) => {
     // check if userId was assigned by the middleware:
     if (!req.userId) throw HttpError.serverError("middleware couldn't assign userId");
-    // check if the client sent a pollText:
-    const pollText = req.body?.pollText;
-    if (typeof pollText !== 'string' || pollText.trim().length === 0) {
-        throw HttpError.badRequest('pollText must be a string');
+    // check if the client sent a questionText:
+    const questionText = req.body?.questionText;
+    if (typeof questionText !== 'string' || questionText.trim().length === 0) {
+        throw HttpError.badRequest('questionText must be a string');
     }
     // create new poll:
-    const newPoll: pollRepository.Poll|null = await pollRepository.createPoll(req.userId, pollText.trim());
+    const newPoll: pollRepository.Poll|null = await pollRepository.createPoll(req.userId, questionText.trim());
     // validate if poll was created:
     if (!newPoll) throw HttpError.serverError('failed to create poll');
 
     res
         .status(201)
-        .location('/v1/polls/'+newPoll.id)
+        .location('/polls/'+newPoll.id)
         .json(newPoll);
 };
 
@@ -44,13 +44,13 @@ export const changePollText = async (req: Request, res: Response, next: NextFunc
     // parse ad validate pollId:
     const pollId = Number(req.params.pollId);
     if (!Number.isInteger(pollId)) throw HttpError.badRequest('pollId must be an integer');
-    // check if client sent pollText:
-    const pollText = req.body?.pollText;
-    if (typeof pollText !== 'string' || pollText.trim().length === 0) {
-        throw HttpError.badRequest('pollId must be a number, pollText must be a string');
+    // check if client sent questionText:
+    const questionText = req.body?.questionText;
+    if (typeof questionText !== 'string' || questionText.trim().length === 0) {
+        throw HttpError.badRequest('questionText must be a string');
     }
     // update poll:
-    const poll: pollRepository.Poll|null = await pollRepository.updatePollText(req.userId, pollId, pollText.trim());
+    const poll: pollRepository.Poll|null = await pollRepository.updatePollText(req.userId, pollId, questionText.trim());
     // validate if updated poll was returned:
     if (!poll) throw HttpError.notFound('poll not found');
 
