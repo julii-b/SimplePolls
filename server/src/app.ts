@@ -29,6 +29,7 @@ export default app;
 
 // POST /v1/polls/:pollId/answers -> create new answer
 // GET /v1/polls/:pollId/answers -> get all answers with aggregated vote counts
+// GET /v1/polls/:pollId/answers/:answerId -> get answer with aggregated vote count
 // PATCH /v1/polls/:pollId/answers/:answerId -> change answer text
 // DELETE /v1/polls/:pollId/answers/:answerId -> delete answer
 

@@ -29,7 +29,7 @@ export const createNewPoll = async (req: Request, res: Response, next: NextFunct
 export const getPoll = async (req: Request, res: Response, next: NextFunction) => {
     // parse ad validate pollId:
     const pollId = Number(req.params.pollId);
-    if (!Number.isInteger(pollId)) throw HttpError.badRequest('pollId must be an integer');
+    if (!Number.isInteger(pollId) || pollId <= 0) throw HttpError.badRequest('pollId must be an integer');
     // get poll:
     const poll: pollRepository.Poll|null = await pollRepository.getPollById(pollId);
     // validate if poll was retreived:
@@ -43,7 +43,7 @@ export const changePollText = async (req: Request, res: Response, next: NextFunc
     if (!req.userId) throw HttpError.serverError("middleware couldn't assign userId");
     // parse ad validate pollId:
     const pollId = Number(req.params.pollId);
-    if (!Number.isInteger(pollId)) throw HttpError.badRequest('pollId must be an integer');
+    if (!Number.isInteger(pollId) || pollId <= 0) throw HttpError.badRequest('pollId must be an integer');
     // check if client sent questionText:
     const questionText = req.body?.questionText;
     if (typeof questionText !== 'string' || questionText.trim().length === 0) {
