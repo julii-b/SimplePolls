@@ -2,10 +2,11 @@ import type { Request, Response, NextFunction } from 'express';
 import * as HttpError from '../errors/httpError.js';
 import * as pollRepository from './../repositories/pollRepository.js';
 import * as answerRepository from './../repositories/answerRepository.js';
+import * as voteRepository from './../repositories/voteRepository.js';
 
 // POST /v1/polls/:pollId/answers -> create new answer
-// GET /v1/polls/:pollId/answers -> get all answers with aggregated vote counts
-// GET /v1/polls/:pollId/answers/:answerId -> get answer with aggregated vote count
+// GET /v1/polls/:pollId/answers -> get all answers with votes
+// GET /v1/polls/:pollId/answers/:answerId -> get answer with votes
 // PATCH /v1/polls/:pollId/answers/:answerId -> change answer text
 // DELETE /v1/polls/:pollId/answers/:answerId -> delete answer
 
@@ -40,8 +41,15 @@ export const getAnswers = async (req: Request, res: Response, next: NextFunction
     }
     // get answers:
     const answers: answerRepository.Answer[] = await answerRepository.getAnswersForPoll(pollId);
+    // get votes for answers:
+    let answersWithVotes: answerRepository.AnswerWithVotes[] = [];
+    for (const answer of answers) {
+        const votes: voteRepository.Vote[] = await voteRepository.getVotesForAnswer(answer.id);
+        const answerWithVotes: answerRepository.AnswerWithVotes = {...answer, votes};
+        answersWithVotes.push(answerWithVotes);
+    }
 
-    res.json(answers);
+    res.json(answersWithVotes);
 };
 
 export const getAnswer = async (req: Request, res: Response, next: NextFunction) => {
@@ -54,8 +62,11 @@ export const getAnswer = async (req: Request, res: Response, next: NextFunction)
     const answer: answerRepository.Answer|null = await answerRepository.getAnswerById(answerId);
     // validate if poll was retreived:
     if (!answer) throw HttpError.notFound('answer not found');
+    // get votes for answer:
+    const votes: voteRepository.Vote[] = await voteRepository.getVotesForAnswer(answerId);
+    const answerWithVotes: answerRepository.AnswerWithVotes = {...answer, votes};
 
-    res.json(answer);
+    res.json(answerWithVotes);
 };
 
 export const changeAnswerText = async (req: Request, res: Response, next: NextFunction) => {

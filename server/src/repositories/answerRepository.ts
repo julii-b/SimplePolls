@@ -1,11 +1,16 @@
 import { pool } from '../db/pool.js';
 import * as pollRepository from './pollRepository.js';
+import * as voteRepository from './voteRepository.js';
 
 export interface Answer {
     id: number;
     pollId: number;
     answerText: string;
     createdAt: string; // ISO from timestamptz
+}
+
+export interface AnswerWithVotes extends Answer {
+    votes: voteRepository.Vote[];
 }
 
 async function verifyAnswerOwnership(userId: number, answerId: number): Promise<boolean> {
