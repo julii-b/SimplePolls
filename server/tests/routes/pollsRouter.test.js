@@ -8,9 +8,6 @@ import * as pollRepository from '../../src/repositories/pollRepository.js';
 
 describe('pollsRouter', () => {
 
-    let mockRequest;
-    let mockResponse;
-    let nextFunction;
     let examplePoll;
 
     beforeEach(() => {
@@ -23,7 +20,7 @@ describe('pollsRouter', () => {
         vi.clearAllMocks();
         vi.mocked(pollRepository.createPoll).mockResolvedValue(examplePoll);
         vi.mocked(pollRepository.getPollById).mockResolvedValue(examplePoll);
-        vi.mocked(pollRepository.getPollsByOwner).mockResolvedValue(examplePoll);
+        vi.mocked(pollRepository.getPollsByOwner).mockResolvedValue([examplePoll]);
         vi.mocked(pollRepository.updatePollText).mockResolvedValue(examplePoll);
         vi.mocked(pollRepository.deletePoll).mockResolvedValue(true);
     });

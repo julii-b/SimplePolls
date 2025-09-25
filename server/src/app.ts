@@ -20,18 +20,18 @@ app.use(errorHandler);
 
 export default app;
 
-// GET /v1/me -> get own user object (for user id) with all poll ids (created and voted) and vote ids
+// GET /me -> get own user object (for user id) with all poll ids (created and voted) and vote ids
 
-// POST /v1/polls -> create new poll
-// GET /v1/polls/:pollId -> get poll text
-// PATCH /v1/polls/:pollId -> change poll text
-// DELETE /v1/polls/:pollId -> delete poll
+// POST /polls -> create new poll
+// GET /polls/:pollId -> get poll text
+// PATCH /polls/:pollId -> change poll text
+// DELETE /polls/:pollId -> delete poll
 
-// POST /v1/polls/:pollId/answers -> create new answer
-// GET /v1/polls/:pollId/answers -> get all answers with votes
-// GET /v1/polls/:pollId/answers/:answerId -> get answer with votes
-// PATCH /v1/polls/:pollId/answers/:answerId -> change answer text
-// DELETE /v1/polls/:pollId/answers/:answerId -> delete answer
+// POST /polls/:pollId/answers -> create new answer
+// GET /polls/:pollId/answers -> get all answers with votes
+// GET /polls/:pollId/answers/:answerId -> get answer with votes
+// PATCH /polls/:pollId/answers/:answerId -> change answer text
+// DELETE /polls/:pollId/answers/:answerId -> delete answer
 
-// POST /v1/polls/:pollId/answers/:answerId/votes -> vote
-// DELETE /v1/polls/:pollId/answers/:answerId/votes -> delete vote
+// POST /polls/:pollId/answers/:answerId/votes -> vote
+// DELETE /polls/:pollId/answers/:answerId/votes -> delete vote

@@ -14,13 +14,13 @@ export const createNewAnswer = async (req: Request, res: Response, next: NextFun
     // check if userId was assigned by the middleware:
     if (!req.userId) throw HttpError.serverError("middleware couldn't assign userId");
     // check if the client sent pollId and answerText:
-    const pollId = Number(req.body?.pollId);
-    const answerText = req.body?.questionText;
-    if (Number.isInteger(pollId) || pollId <= 0) {
+    const pollId = Number(req.params.pollId);
+    const answerText = req.body?.answerText;
+    if (!Number.isInteger(pollId) || pollId <= 0) {
         throw HttpError.badRequest('pollId must be an integer');
     }
     if (typeof answerText !== 'string' || answerText.trim().length === 0) {
-        throw HttpError.badRequest('questionText must be a string');
+        throw HttpError.badRequest('answerText must be a string');
     }
     // create new answer:
     const newAnswer: answerRepository.Answer|null = await answerRepository.createAnswer(req.userId, pollId, answerText.trim());
@@ -35,8 +35,8 @@ export const createNewAnswer = async (req: Request, res: Response, next: NextFun
 
 export const getAnswers = async (req: Request, res: Response, next: NextFunction) => {
     // check if the client sent pollId:
-    const pollId = Number(req.body?.pollId);
-    if (Number.isInteger(pollId) || pollId <= 0) {
+    const pollId = Number(req.params.pollId);
+    if (!Number.isInteger(pollId) || pollId <= 0) {
         throw HttpError.badRequest('pollId must be an integer');
     }
     // get answers:
@@ -54,8 +54,8 @@ export const getAnswers = async (req: Request, res: Response, next: NextFunction
 
 export const getAnswer = async (req: Request, res: Response, next: NextFunction) => {
     // check if the client sent answerId:
-    const answerId = Number(req.body?.answerId);
-    if (Number.isInteger(answerId) || answerId <= 0) {
+    const answerId = Number(req.params.answerId);
+    if (!Number.isInteger(answerId) || answerId <= 0) {
         throw HttpError.badRequest('answerId must be an integer');
     }
     // get answer:
@@ -73,8 +73,8 @@ export const changeAnswerText = async (req: Request, res: Response, next: NextFu
     // check if userId was assigned by the middleware:
     if (!req.userId) throw HttpError.serverError("middleware couldn't assign userId");
     // check if the client sent answerId:
-    const answerId = Number(req.body?.answerId);
-    if (Number.isInteger(answerId) || answerId <= 0) {
+    const answerId = Number(req.params.answerId);
+    if (!Number.isInteger(answerId) || answerId <= 0) {
         throw HttpError.badRequest('answerId must be an integer');
     }
     // check if client sent answerText:
@@ -94,8 +94,8 @@ export const deleteAnswer = async (req: Request, res: Response, next: NextFuncti
     // check if userId was assigned by the middleware:
     if (!req.userId) throw HttpError.serverError("middleware couldn't assign userId");
     // check if the client sent answerId:
-    const answerId = Number(req.body?.answerId);
-    if (Number.isInteger(answerId) || answerId <= 0) {
+    const answerId = Number(req.params.answerId);
+    if (!Number.isInteger(answerId) || answerId <= 0) {
         throw HttpError.badRequest('answerId must be an integer');
     }
     // delete answer:
