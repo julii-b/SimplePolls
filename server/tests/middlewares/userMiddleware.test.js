@@ -4,7 +4,7 @@ import {Request, Response, NextFunction } from 'express';
 vi.mock('../../src/repositories/userRepository.ts'); // mock userRepository
 import * as userRepository from '../../src/repositories/userRepository.ts';
 
-import { userMiddleware } from '../../src/middlewares/userMiddleware.ts';
+import userMiddleware from '../../src/middlewares/userMiddleware.ts';
 
 describe('userMiddleware', () => {
 

@@ -94,7 +94,6 @@ describe('answersRouter', () => {
         // change other user's answer or unknown answer:
         vi.mocked(answerRepository.updateAnswerText).mockResolvedValue(null);
         result = await request(app).patch('/polls/1/answers/2').send({ answerText: 'Maybe' });
-        console.log(result)
         expect(result.status).toBe(404);
     });
 

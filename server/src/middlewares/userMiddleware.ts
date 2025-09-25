@@ -3,7 +3,7 @@ import * as userRepository from '../repositories/userRepository.js';
 import { HttpError, unauthorized } from '../errors/httpError.js';
 import { randomBytes } from 'node:crypto';
 
-export const userMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+const userMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     // Read authotization token:
     const authHeaderRaw: undefined|string = req.headers['authorization']; // 'Bearer <token>'
     const authHeader: undefined|string[] = authHeaderRaw?.trim().split(/\s+/); // ['Bearer', <token>]
@@ -31,3 +31,5 @@ export const userMiddleware = async (req: Request, res: Response, next: NextFunc
         throw new HttpError(500, 'Error while creating new user.');
     }
 };
+
+export default userMiddleware;

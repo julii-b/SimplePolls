@@ -1,8 +1,8 @@
 import express from 'express';
-import { userMiddleware } from './middlewares/userMiddleware.js';
+import userMiddleware from './middlewares/userMiddleware.js';
 import meRouter from './routes/meRouter.js';
 import pollsRouter from './routes/pollsRouter.js';
-import { errorHandler } from './middlewares/errorHandler.js';
+import errorHandler from './middlewares/errorHandler.js';
 
 const app = express();
 
