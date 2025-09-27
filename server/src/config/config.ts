@@ -5,6 +5,7 @@ dotenv.config();
 // Define types of .env variables:
 interface Config {
 
+    port: number;
     nodeEnv: string;
 
     // PostgreSQL:
@@ -17,6 +18,7 @@ interface Config {
 
 // Define default values of .env variables:
 const config: Config = {
+    port: Number(process.env.PORT)|| 3000,
     nodeEnv: process.env.NODE_ENV || 'development',
     
     // PostgreSQL:
