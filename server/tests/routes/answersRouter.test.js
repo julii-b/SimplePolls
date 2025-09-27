@@ -11,7 +11,6 @@ vi.mock('../../src/repositories/voteRepository.js'); // mock voteRepository
 import * as voteRepository from '../../src/repositories/voteRepository.js';
 
 describe('answersRouter', () => {
-
     let examplePoll;
     let exampleAnswer;
     let exampleAnswerWithVotes;
@@ -21,29 +20,39 @@ describe('answersRouter', () => {
             id: 1,
             ownerId: 2,
             questionText: 'Whill this test work?',
-            createdAt: 'exampleTime'
+            createdAt: 'exampleTime',
         };
         exampleAnswer = {
             id: 2,
             pollId: 1,
             answerText: 'Yes',
-            createdAt: 'exampleTime'
+            createdAt: 'exampleTime',
         };
         exampleAnswerWithVotes = {
             ...exampleAnswer,
-            votes: []
+            votes: [],
         };
         vi.clearAllMocks();
         vi.mocked(pollRepository.createPoll).mockResolvedValue(examplePoll);
         vi.mocked(pollRepository.getPollById).mockResolvedValue(examplePoll);
-        vi.mocked(pollRepository.getPollsByOwner).mockResolvedValue([examplePoll]);
+        vi.mocked(pollRepository.getPollsByOwner).mockResolvedValue([
+            examplePoll,
+        ]);
         vi.mocked(pollRepository.updatePollText).mockResolvedValue(examplePoll);
         vi.mocked(pollRepository.deletePoll).mockResolvedValue(true);
 
-        vi.mocked(answerRepository.createAnswer).mockResolvedValue(exampleAnswer);
-        vi.mocked(answerRepository.getAnswerById).mockResolvedValue(exampleAnswer);
-        vi.mocked(answerRepository.getAnswersForPoll).mockResolvedValue([exampleAnswer]);
-        vi.mocked(answerRepository.updateAnswerText).mockResolvedValue(examplePoll);
+        vi.mocked(answerRepository.createAnswer).mockResolvedValue(
+            exampleAnswer,
+        );
+        vi.mocked(answerRepository.getAnswerById).mockResolvedValue(
+            exampleAnswer,
+        );
+        vi.mocked(answerRepository.getAnswersForPoll).mockResolvedValue([
+            exampleAnswer,
+        ]);
+        vi.mocked(answerRepository.updateAnswerText).mockResolvedValue(
+            examplePoll,
+        );
         vi.mocked(answerRepository.deleteAnswer).mockResolvedValue(true);
 
         vi.mocked(voteRepository.getVotesForAnswer).mockResolvedValue([]);
@@ -51,8 +60,10 @@ describe('answersRouter', () => {
 
     test('POST /polls/:pollId/answers/ works', async () => {
         // create answer correctly:
-        let result = await request(app).post('/polls/1/answers/').send({ answerText: 'Yes' });
-        console.log(result.body)
+        let result = await request(app)
+            .post('/polls/1/answers/')
+            .send({ answerText: 'Yes' });
+        console.log(result.body);
         expect(result.body).toEqual(exampleAnswer);
         expect(result.status).toBe(201);
         expect(result.headers.location).toBe('/polls/1/answers/2');
@@ -60,7 +71,9 @@ describe('answersRouter', () => {
         result = await request(app).post('/polls/1/answers').send({});
         expect(result.status).toBe(400);
         // create answer with empty answerText:
-        result = await request(app).post('/polls/1/answers').send({ questionText: '   ' });
+        result = await request(app)
+            .post('/polls/1/answers')
+            .send({ questionText: '   ' });
         expect(result.status).toBe(400);
     });
 
@@ -88,12 +101,16 @@ describe('answersRouter', () => {
 
     test('PATCH /polls/:pollId/:answerId works', async () => {
         // change answerText of answer that exists:
-        let result = await request(app).patch('/polls/1/answers/2').send({ answerText: 'No' });
+        let result = await request(app)
+            .patch('/polls/1/answers/2')
+            .send({ answerText: 'No' });
         expect(result.body).toEqual(examplePoll);
         expect(result.status).toBe(200);
         // change other user's answer or unknown answer:
         vi.mocked(answerRepository.updateAnswerText).mockResolvedValue(null);
-        result = await request(app).patch('/polls/1/answers/2').send({ answerText: 'Maybe' });
+        result = await request(app)
+            .patch('/polls/1/answers/2')
+            .send({ answerText: 'Maybe' });
         expect(result.status).toBe(404);
     });
 
@@ -106,5 +123,4 @@ describe('answersRouter', () => {
         result = await request(app).delete('/polls/1/answers/2').send();
         expect(result.status).toBe(404);
     });
-
-})
+});

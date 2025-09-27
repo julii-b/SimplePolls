@@ -7,14 +7,13 @@ vi.mock('../../src/repositories/voteRepository.js'); // mock voteRepository
 import * as voteRepository from '../../src/repositories/voteRepository.js';
 
 describe('votesRouter', () => {
-
     let exampleVote = {};
 
     beforeEach(() => {
         exampleVote = {
             userId: 1,
             answerId: 2,
-            createdAt: 'axample time'
+            createdAt: 'axample time',
         };
 
         vi.clearAllMocks();
@@ -35,7 +34,9 @@ describe('votesRouter', () => {
 
     test('DELETE /polls/:pollId/answers/:answerId/votes', async () => {
         // delete vote for answer that exists:
-        let result = await request(app).delete('/polls/1/answers/2/votes').send();
+        let result = await request(app)
+            .delete('/polls/1/answers/2/votes')
+            .send();
         expect(result.status).toBe(204);
         // delete vote for answer that doesn't exist:
         vi.mocked(voteRepository.deleteVote).mockReturnValue(false);

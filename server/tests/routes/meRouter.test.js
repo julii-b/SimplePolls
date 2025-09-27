@@ -11,44 +11,45 @@ vi.mock('../../src/repositories/answerRepository.js'); // mock answerRepository
 import * as answerRepository from '../../src/repositories/answerRepository.js';
 
 describe('meRouter', () => {
-
     let examplePolls = [
         {
             id: 1,
             ownerId: 1,
             questionText: 'example question',
-            createdAt: 'example time'
+            createdAt: 'example time',
         },
         {
             id: 2,
             ownerId: 1,
             questionText: 'example question',
-            createdAt: 'example time'
-        }
+            createdAt: 'example time',
+        },
     ];
     let exampleVotes = [
         {
             userId: 1,
             answerId: 1,
-            createdAt: 'example time'
-        }
+            createdAt: 'example time',
+        },
     ];
     let exampleAnswer = {
         id: 1,
         pollId: 3,
         answerText: 'example answer',
-        createdAt: 'example time'
+        createdAt: 'example time',
     };
     let exampleUser = {
-        createdPolls: [1,2],
-        participatedPolls: [3]
+        createdPolls: [1, 2],
+        participatedPolls: [3],
     };
 
     beforeEach(() => {
         vi.clearAllMocks();
         vi.mocked(pollRepository.getPollsByOwner).mockReturnValue(examplePolls);
         vi.mocked(voteRepository.getVotesByUser).mockReturnValue(exampleVotes);
-        vi.mocked(answerRepository.getAnswerById).mockReturnValue(exampleAnswer);
+        vi.mocked(answerRepository.getAnswerById).mockReturnValue(
+            exampleAnswer,
+        );
     });
 
     test('GET /me works', async () => {
