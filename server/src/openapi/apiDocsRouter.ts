@@ -10,21 +10,21 @@ const apiDocsRouter = Router();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const apis = [
-    path.join(__dirname, '../routes/**/*.js'),
-    path.join(__dirname, '../routes/**/*.ts'),
-    path.join(__dirname, '*.ts'),
-    path.join(__dirname, '*.js'),
+  path.join(__dirname, '../routes/**/*.js'),
+  path.join(__dirname, '../routes/**/*.ts'),
+  path.join(__dirname, '*.ts'),
+  path.join(__dirname, '*.js'),
 ];
 
 const openapiSpecification = swaggerJsdoc({
-    definition: {
-        openapi: '3.0.0',
-        info: {
-            title: 'SimplePolls API',
-            version: '1.0.0',
-        },
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'SimplePolls API',
+      version: '1.0.0',
     },
-    apis: apis, // files containing openAPI annotations
+  },
+  apis: apis, // files containing openAPI annotations
 });
 
 apiDocsRouter.use('/', swaggerUi.serve);

@@ -5,41 +5,41 @@ import * as answerRepository from './../repositories/answerRepository.js';
 import * as voteRepository from './../repositories/voteRepository.js';
 
 interface UserProfile {
-    createdPolls: number[];
-    participatedPolls: number[];
+  createdPolls: number[];
+  participatedPolls: number[];
 }
 
 // GET /me -> get own user object (for user id) with all poll ids (created and voted)
 
 export const getUserInformation = async (
-    req: Request,
-    res: Response,
-    next: NextFunction,
+  req: Request,
+  res: Response,
+  next: NextFunction,
 ) => {
-    // check if userId was assigned by the middleware:
-    if (!req.userId)
-        throw HttpError.serverError("middleware couldn't assign userId");
-    // get poll ids for created polls:
-    const createdPolls: pollRepository.Poll[] =
-        await pollRepository.getPollsByOwner(req.userId);
-    const createdPollsIds: number[] = [];
-    for (const poll of createdPolls) createdPollsIds.push(poll.id);
-    // get votes:
-    const votes: voteRepository.Vote[] = await voteRepository.getVotesByUser(
-        req.userId,
-    );
-    // get poll ids for polls where votes were casted:
-    const participatedPollsIds: number[] = [];
-    for (const vote of votes) {
-        const answer: answerRepository.Answer | null =
-            await answerRepository.getAnswerById(vote.answerId);
-        if (answer) participatedPollsIds.push(answer.pollId);
-    }
+  // check if userId was assigned by the middleware:
+  if (!req.userId)
+    throw HttpError.serverError("middleware couldn't assign userId");
+  // get poll ids for created polls:
+  const createdPolls: pollRepository.Poll[] =
+    await pollRepository.getPollsByOwner(req.userId);
+  const createdPollsIds: number[] = [];
+  for (const poll of createdPolls) createdPollsIds.push(poll.id);
+  // get votes:
+  const votes: voteRepository.Vote[] = await voteRepository.getVotesByUser(
+    req.userId,
+  );
+  // get poll ids for polls where votes were casted:
+  const participatedPollsIds: number[] = [];
+  for (const vote of votes) {
+    const answer: answerRepository.Answer | null =
+      await answerRepository.getAnswerById(vote.answerId);
+    if (answer) participatedPollsIds.push(answer.pollId);
+  }
 
-    const userProfile: UserProfile = {
-        createdPolls: createdPollsIds,
-        participatedPolls: participatedPollsIds,
-    };
+  const userProfile: UserProfile = {
+    createdPolls: createdPollsIds,
+    participatedPolls: participatedPollsIds,
+  };
 
-    res.json(userProfile);
+  res.json(userProfile);
 };

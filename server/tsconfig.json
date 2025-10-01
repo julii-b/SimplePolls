@@ -1,32 +1,32 @@
 {
-    "compilerOptions": {
-        // File layout:
-        "rootDir": "./src",
-        "outDir": "./dist",
+  "compilerOptions": {
+    // File layout:
+    "rootDir": "./src",
+    "outDir": "./dist",
 
-        // Module + target environment:
-        "module": "nodenext", // ESM/CJS hybrid
-        "target": "esnext", // output JS
-        "types": ["node"], // load Node.js type definitions
+    // Module + target environment:
+    "module": "nodenext", // ESM/CJS hybrid
+    "target": "esnext", // output JS
+    "types": ["node"], // load Node.js type definitions
 
-        // Output settings:
-        "sourceMap": true,
-        "declaration": true, // generate .d.ts files
-        "declarationMap": true, // link declarations back to source
-        "noEmitOnError": true,
+    // Output settings:
+    "sourceMap": true,
+    "declaration": true, // generate .d.ts files
+    "declarationMap": true, // link declarations back to source
+    "noEmitOnError": true,
 
-        // Type safety:
-        "strict": true,
-        "noUncheckedIndexedAccess": true,
-        "exactOptionalPropertyTypes": true,
+    // Type safety:
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
 
-        // Module handling;
-        "esModuleInterop": true,
-        "verbatimModuleSyntax": true,
-        "isolatedModules": true,
-        "moduleDetection": "auto",
-        "noUncheckedSideEffectImports": true,
-        "skipLibCheck": true
-    },
-    "include": ["src", "types"]
+    // Module handling;
+    "esModuleInterop": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "moduleDetection": "auto",
+    "noUncheckedSideEffectImports": true,
+    "skipLibCheck": true
+  },
+  "include": ["src", "types"]
 }

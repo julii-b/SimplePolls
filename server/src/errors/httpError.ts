@@ -1,11 +1,11 @@
 export class HttpError extends Error {
-    status: number;
-    expose?: boolean;
+  status: number;
+  expose?: boolean;
 
-    constructor(status: number, message: string) {
-        super(message);
-        this.status = status;
-    }
+  constructor(status: number, message: string) {
+    super(message);
+    this.status = status;
+  }
 }
 
 // kleine Helfer
@@ -15,4 +15,4 @@ export const forbidden = (msg = 'Forbidden') => new HttpError(403, msg);
 export const notFound = (msg = 'Not Found') => new HttpError(404, msg);
 export const conflict = (msg = 'Conflict') => new HttpError(409, msg);
 export const serverError = (msg = 'Internal Server Error') =>
-    new HttpError(500, msg);
+  new HttpError(500, msg);
