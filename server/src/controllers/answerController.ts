@@ -2,6 +2,8 @@ import type { Request, Response, NextFunction } from 'express';
 import * as HttpError from '../errors/httpError.js';
 import * as answerRepository from './../repositories/answerRepository.js';
 import * as voteRepository from './../repositories/voteRepository.js';
+import type { Answer } from '../types/answer.js';
+import * as answerService from '../services/answerService.js'
 
 // POST /v1/polls/:pollId/answers -> create new answer
 // GET /v1/polls/:pollId/answers -> get all answers with votes
@@ -31,11 +33,14 @@ export const createNewAnswer = async (
     await answerRepository.createAnswer(req.userId, pollId, answerText.trim());
   // validate if answer was created:
   if (!newAnswer) throw HttpError.serverError('failed to create answer');
+  // get full answer object:
+  const answerWithVotes: Answer|null = await answerService.getAnswerWithVotes(newAnswer.id);
+  if (!answerWithVotes) throw HttpError.serverError('failed to retreive created answer');
 
   res
     .status(201)
     .location('/polls/' + pollId + '/answers/' + newAnswer.id)
-    .json(newAnswer);
+    .json(answerWithVotes);
 };
 
 export const getAnswers = async (
@@ -52,16 +57,10 @@ export const getAnswers = async (
   const answers: answerRepository.Answer[] =
     await answerRepository.getAnswersForPoll(pollId);
   // get votes for answers:
-  const answersWithVotes: answerRepository.AnswerWithVotes[] = [];
+  const answersWithVotes: Answer[] = [];
   for (const answer of answers) {
-    const votes: voteRepository.Vote[] = await voteRepository.getVotesForAnswer(
-      answer.id,
-    );
-    const answerWithVotes: answerRepository.AnswerWithVotes = {
-      ...answer,
-      votes,
-    };
-    answersWithVotes.push(answerWithVotes);
+    let answerWithVotes: Answer|null = await answerService.getAnswerWithVotes(answer.id);
+    if (answerWithVotes) answersWithVotes.push(answerWithVotes);
   }
 
   res.json(answersWithVotes);
@@ -78,19 +77,10 @@ export const getAnswer = async (
     throw HttpError.badRequest('answerId must be an integer');
   }
   // get answer:
-  const answer: answerRepository.Answer | null =
-    await answerRepository.getAnswerById(answerId);
-  // validate if poll was retreived:
+  const answer: Answer|null = await answerService.getAnswerWithVotes(answerId);
   if (!answer) throw HttpError.notFound('answer not found');
-  // get votes for answer:
-  const votes: voteRepository.Vote[] =
-    await voteRepository.getVotesForAnswer(answerId);
-  const answerWithVotes: answerRepository.AnswerWithVotes = {
-    ...answer,
-    votes,
-  };
 
-  res.json(answerWithVotes);
+  res.json(answer);
 };
 
 export const changeAnswerText = async (
@@ -120,8 +110,11 @@ export const changeAnswerText = async (
     );
   // validate if updated answer was returned:
   if (!answer) throw HttpError.notFound('answer not found');
+  // get full answer object:
+  const answerWithVotes: Answer|null = await answerService.getAnswerWithVotes(answerId);
+  if (!answerWithVotes) throw HttpError.notFound('answer not found');
 
-  res.status(200).json(answer);
+  res.status(200).json(answerWithVotes);
 };
 
 export const deleteAnswer = async (

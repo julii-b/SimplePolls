@@ -37,7 +37,7 @@ pollsRouter.post('/', pollController.createNewPoll);
  * @openapi
  * /polls/{pollId}:
  *   get:
- *     summary: Get a poll
+ *     summary: Get a poll, including answers for poll
  *     parameters:
  *       - in: path
  *         name: pollId
@@ -53,7 +53,7 @@ pollsRouter.post('/', pollController.createNewPoll);
  *         content:
  *           application/json:
  *             schema:
- *               type: '#/components/schemas/Poll'
+ *               $ref: '#/components/schemas/Poll'
  */
 pollsRouter.get('/:pollId', pollController.getPoll);
 
@@ -79,7 +79,7 @@ pollsRouter.get('/:pollId', pollController.getPoll);
  *         content:
  *           application/json:
  *             schema:
- *               type: '#/components/schemas/Poll'
+ *               $ref: '#/components/schemas/Poll'
  */
 pollsRouter.patch('/:pollId', pollController.changePollText);
 

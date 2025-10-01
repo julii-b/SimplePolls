@@ -61,7 +61,7 @@ answersRouter.post('/', answerController.createNewAnswer); // create new answer
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/AnswerWithVotes'
+ *                 $ref: '#/components/schemas/Answer'
  */
 answersRouter.get('/', answerController.getAnswers);
 
@@ -85,7 +85,7 @@ answersRouter.get('/', answerController.getAnswers);
  *         content:
  *           application/json:
  *             schema:
- *               type: '#/components/schemas/AnswerWithVotes'
+ *               $ref: '#/components/schemas/Answer'
  */
 answersRouter.get('/:answerId', answerController.getAnswer);
 
@@ -111,7 +111,7 @@ answersRouter.get('/:answerId', answerController.getAnswer);
  *         content:
  *           application/json:
  *             schema:
- *               type: '#/components/schemas/AnswerWithVotes'
+ *               $ref: '#/components/schemas/Answer'
  */
 answersRouter.patch('/:answerId', answerController.changeAnswerText);
 

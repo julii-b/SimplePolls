@@ -30,31 +30,14 @@
  *         questionText:
  *           type: string
  *           example: "Is this a question?"
- *         createdAt:
- *           type: string
- *           example: "2025-09-26T20:43:37.116Z"
+ *         answers:
+ *           type: array
+ *           items:
+ *             $ref: "#/components/schemas/Answer"
  *     Answer:
  *       type: object
  *       properties:
  *         id:
- *           type: integer
- *           example: 1
- *         pollId:
- *           type: integer
- *           example: 1
- *         answerText:
- *           type: string
- *           example: "Yes"
- *         createdAt:
- *           type: string
- *           example: "2025-09-26T20:43:37.116Z"
- *     AnswerWithVotes:
- *       type: object
- *       properties:
- *         id:
- *           type: integer
- *           example: 1
- *         pollId:
  *           type: integer
  *           example: 1
  *         answerText:
@@ -64,9 +47,6 @@
  *           type: array
  *           items:
  *             $ref: "#/components/schemas/Vote"
- *         createdAt:
- *           type: string
- *           example: "2025-09-26T20:43:37.116Z"
  *     Vote:
  *       type: object
  *       properties:
@@ -76,7 +56,4 @@
  *         answerId:
  *           type: integer
  *           example: 1
- *         createdAt:
- *           type: string
- *           example: "2025-09-26T20:43:37.116Z"
  */

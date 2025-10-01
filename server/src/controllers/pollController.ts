@@ -1,6 +1,8 @@
 import type { Request, Response, NextFunction } from 'express';
 import * as HttpError from '../errors/httpError.js';
 import * as pollRepository from './../repositories/pollRepository.js';
+import type { Poll } from '../types/poll.js';
+import * as pollService from '../services/pollService.js';
 
 // POST /v1/polls -> create new poll
 // GET /v1/polls/:pollId -> get poll text
@@ -27,11 +29,14 @@ export const createNewPoll = async (
   );
   // validate if poll was created:
   if (!newPoll) throw HttpError.serverError('failed to create poll');
+  // get full poll object:
+  const pollWithAnswers: Poll|null = await pollService.getPollWithAnswers(newPoll.id)
+  if (!pollWithAnswers) throw HttpError.serverError('failed to retreive created answer');
 
   res
     .status(201)
     .location('/polls/' + newPoll.id)
-    .json(newPoll);
+    .json(pollWithAnswers);
 };
 
 export const getPoll = async (
@@ -44,9 +49,7 @@ export const getPoll = async (
   if (!Number.isInteger(pollId) || pollId <= 0)
     throw HttpError.badRequest('pollId must be an integer');
   // get poll:
-  const poll: pollRepository.Poll | null =
-    await pollRepository.getPollById(pollId);
-  // validate if poll was retreived:
+  const poll: Poll|null = await pollService.getPollWithAnswers(pollId)
   if (!poll) throw HttpError.notFound('poll not found');
 
   res.json(poll);
@@ -77,8 +80,11 @@ export const changePollText = async (
   );
   // validate if updated poll was returned:
   if (!poll) throw HttpError.notFound('poll not found');
+  // get full poll object:
+  const pollWithAnswers: Poll|null = await pollService.getPollWithAnswers(poll.id)
+  if (!pollWithAnswers) throw HttpError.serverError('failed to retreive created answer');
 
-  res.status(200).json(poll);
+  res.status(200).json(pollWithAnswers);
 };
 
 export const deletePoll = async (

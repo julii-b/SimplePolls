@@ -9,10 +9,6 @@ export interface Answer {
   createdAt: string; // ISO from timestamptz
 }
 
-export interface AnswerWithVotes extends Answer {
-  votes: voteRepository.Vote[];
-}
-
 async function verifyAnswerOwnership(
   userId: number,
   answerId: number,
