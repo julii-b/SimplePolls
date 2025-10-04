@@ -4,15 +4,23 @@ import * as pollRepository from './../repositories/pollRepository.js';
 import type { Poll } from '../types/poll.js';
 import * as pollService from '../services/pollService.js';
 
-// POST /v1/polls -> create new poll
-// GET /v1/polls/:pollId -> get poll text
-// PATCH /v1/polls/:pollId -> change poll text
-// DELETE /v1/polls/:pollId -> delete poll
-
+/**
+ * Creates a new poll
+ * 
+ * @param {Request} req
+ * @param {number} req.userId - userId assigned by the middleware
+ * @param {string} req.body.questionText - text of the question, sent by the client in the request body
+ * 
+ * @param {Response} res
+ * 
+ * @returns Sends:
+ * - 201: Poll sucesfully created, returns Poll object
+ * - 400: Bad request
+ * - 500: Internal server error
+ */
 export const createNewPoll = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ) => {
   // check if userId was assigned by the middleware:
   if (!req.userId)
@@ -27,7 +35,6 @@ export const createNewPoll = async (
     req.userId,
     questionText.trim(),
   );
-  // validate if poll was created:
   if (!newPoll) throw HttpError.serverError('failed to create poll');
   // get full poll object:
   const pollWithAnswers: Poll|null = await pollService.getPollWithAnswers(newPoll.id)
@@ -39,12 +46,24 @@ export const createNewPoll = async (
     .json(pollWithAnswers);
 };
 
+/**
+ * Get a poll by pollId
+ * 
+ * @param {Request} req
+ * @param {number}req.params.pollId - pollId of the poll to get, sent by the client as a parameter in the route
+ * 
+ * @param {Response} res
+ * 
+ * @returns Sends:
+ * - 201: returns Poll object
+ * - 400: Bad request
+ * - 500: Internal server error
+ */
 export const getPoll = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ) => {
-  // parse ad validate pollId:
+  // parse and validate pollId:
   const pollId = Number(req.params.pollId);
   if (!Number.isInteger(pollId) || pollId <= 0)
     throw HttpError.badRequest('pollId must be an integer');
@@ -55,10 +74,24 @@ export const getPoll = async (
   res.json(poll);
 };
 
+/**
+ * Change questionText of a poll
+ * 
+ * @param {Request} req
+ * @param {number} req.userId - userId assigned by the middleware
+ * @param {number}req.params.pollId - pollId of the poll of which to change the questioText, sent by the client as a parameter in the route
+ * @param {string} req.body.questionText - new text of the question, sent by the client in the request body
+ * 
+ * @param {Response} res
+ * 
+ * @returns Sends:
+ * - 200: Poll sucesfully changed, returns Poll object
+ * - 400: Bad request
+ * - 500: Internal server error
+ */
 export const changePollText = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ) => {
   // check if userId was assigned by the middleware:
   if (!req.userId)
@@ -78,7 +111,6 @@ export const changePollText = async (
     pollId,
     questionText.trim(),
   );
-  // validate if updated poll was returned:
   if (!poll) throw HttpError.notFound('poll not found');
   // get full poll object:
   const pollWithAnswers: Poll|null = await pollService.getPollWithAnswers(poll.id)
@@ -87,15 +119,28 @@ export const changePollText = async (
   res.status(200).json(pollWithAnswers);
 };
 
+/**
+ * Delete a poll
+ * 
+ * @param {Request} req
+ * @param {number} req.userId - userId assigned by the middleware
+ * @param {number}req.params.pollId - pollId of the poll to delete, sent by the client as a parameter in the route
+ * 
+ * @param {Response} res
+ * 
+ * @returns Sends:
+ * - 204: Poll sucesfully deleted
+ * - 400: Bad request
+ * - 500: Internal server error
+ */
 export const deletePoll = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ) => {
   // check if userId was assigned by the middleware:
   if (!req.userId)
     throw HttpError.serverError("middleware couldn't assign userId");
-  // parse ad validate pollId:
+  // parse and validate pollId:
   const pollId = Number(req.params.pollId);
   if (!Number.isInteger(pollId))
     throw HttpError.badRequest('pollId must be an integer');

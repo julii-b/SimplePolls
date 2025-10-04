@@ -3,6 +3,15 @@ import * as userRepository from '../repositories/userRepository.js';
 import { HttpError } from '../errors/httpError.js';
 import { randomBytes } from 'node:crypto';
 
+/**
+ * Middleware that maps the Bearer token to a userId.
+ * If no token is present, a new user is created.
+ * The userId is passed on in Request.userId.
+ * 
+ * @param {Request} req 
+ * @param {Response} res 
+ * @param {NextFunction} next 
+ */
 const userMiddleware = async (
   req: Request,
   res: Response,
@@ -17,19 +26,17 @@ const userMiddleware = async (
   // Get user id if token exists:
   let userId: undefined | number = undefined;
   if (authScheme?.toLowerCase() === 'bearer' && userToken != null) {
-    const user: userRepository.User | null =
-      await userRepository.getUserByUserToken(userToken);
+    const user: userRepository.User | null = await userRepository.getUserByUserToken(userToken);
     userId = user?.id;
   }
   // Create new user if no user/token exists:
   if (userId == null) {
     userToken = 'token_' + randomBytes(32).toString('base64url');
-    const user: userRepository.User | null =
-      await userRepository.createUser(userToken);
+    const user: userRepository.User | null = await userRepository.createUser(userToken);
     userId = user?.id;
     res.setHeader('X-New-Token', userToken);
   }
-  // Store user id:
+  // Store user id in Request.userId:
   if (userId != null) {
     req.userId = userId;
     next();

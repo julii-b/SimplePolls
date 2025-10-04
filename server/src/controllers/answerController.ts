@@ -5,16 +5,24 @@ import * as voteRepository from './../repositories/voteRepository.js';
 import type { Answer } from '../types/answer.js';
 import * as answerService from '../services/answerService.js'
 
-// POST /v1/polls/:pollId/answers -> create new answer
-// GET /v1/polls/:pollId/answers -> get all answers with votes
-// GET /v1/polls/:pollId/answers/:answerId -> get answer with votes
-// PATCH /v1/polls/:pollId/answers/:answerId -> change answer text
-// DELETE /v1/polls/:pollId/answers/:answerId -> delete answer
-
+/**
+ * Creates a new answer for a poll
+ * 
+ * @param {Request} req
+ * @param {number} req.userId - userId assigned by the middleware
+ * @param {number}req.params.pollId - pollId of the poll to create the answer for, sent by the client as a parameter in the route
+ * @param {string} req.body.answerText - text of the answer, sent by the client in the request body
+ * 
+ * @param {Response} res
+ * 
+ * @returns Sends:
+ * - 201: Answer sucesfully created, returns Answer object
+ * - 400: Bad request
+ * - 500: Internal server error
+ */
 export const createNewAnswer = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ) => {
   // check if userId was assigned by the middleware:
   if (!req.userId)
@@ -31,7 +39,6 @@ export const createNewAnswer = async (
   // create new answer:
   const newAnswer: answerRepository.Answer | null =
     await answerRepository.createAnswer(req.userId, pollId, answerText.trim());
-  // validate if answer was created:
   if (!newAnswer) throw HttpError.serverError('failed to create answer');
   // get full answer object:
   const answerWithVotes: Answer|null = await answerService.getAnswerWithVotes(newAnswer.id);
@@ -43,10 +50,22 @@ export const createNewAnswer = async (
     .json(answerWithVotes);
 };
 
+/**
+ * Get all answers for a poll by pollId
+ * 
+ * @param {Request} req
+ * @param {number}req.params.pollId - pollId of the poll to get the answers of, sent by the client as a parameter in the route
+ * 
+ * @param {Response} res
+ * 
+ * @returns Sends:
+ * - 201: returns Answer[] array
+ * - 400: Bad request
+ * - 500: Internal server error
+ */
 export const getAnswers = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ) => {
   // check if the client sent pollId:
   const pollId = Number(req.params.pollId);
@@ -66,10 +85,22 @@ export const getAnswers = async (
   res.json(answersWithVotes);
 };
 
+/**
+ * Get an answer by answerId
+ * 
+ * @param {Request} req
+ * @param {number}req.params.answerId - answerId of the answer to get, sent by the client as a parameter in the route
+ * 
+ * @param {Response} res
+ * 
+ * @returns Sends:
+ * - 201: returns Answer object
+ * - 400: Bad request
+ * - 500: Internal server error
+ */
 export const getAnswer = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ) => {
   // check if the client sent answerId:
   const answerId = Number(req.params.answerId);
@@ -83,10 +114,24 @@ export const getAnswer = async (
   res.json(answer);
 };
 
+/**
+ * Change answerText of an answer
+ * 
+ * @param {Request} req
+ * @param {number} req.userId - userId assigned by the middleware
+ * @param {number}req.params.answerId - answerId of the answer of which to change the answerText, sent by the client as a parameter in the route
+ * @param {string} req.body.answerText - new text of the answer, sent by the client in the request body
+ * 
+ * @param {Response} res
+ * 
+ * @returns Sends:
+ * - 200: Answer sucesfully changed, returns Answer object
+ * - 400: Bad request
+ * - 500: Internal server error
+ */
 export const changeAnswerText = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ) => {
   // check if userId was assigned by the middleware:
   if (!req.userId)
@@ -108,7 +153,6 @@ export const changeAnswerText = async (
       answerId,
       answerText.trim(),
     );
-  // validate if updated answer was returned:
   if (!answer) throw HttpError.notFound('answer not found');
   // get full answer object:
   const answerWithVotes: Answer|null = await answerService.getAnswerWithVotes(answerId);
@@ -117,10 +161,23 @@ export const changeAnswerText = async (
   res.status(200).json(answerWithVotes);
 };
 
+/**
+ * Delete an answer
+ * 
+ * @param {Request} req
+ * @param {number} req.userId - userId assigned by the middleware
+ * @param {number}req.params.answerId - answerId of the answer to delete, sent by the client as a parameter in the route
+ * 
+ * @param {Response} res
+ * 
+ * @returns Sends:
+ * - 204: Answer sucesfully deleted
+ * - 400: Bad request
+ * - 500: Internal server error
+ */
 export const deleteAnswer = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ) => {
   // check if userId was assigned by the middleware:
   if (!req.userId)

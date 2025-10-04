@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express from 'express';
 import userMiddleware from './middlewares/userMiddleware.js';
 import apiDocsRouter from './openapi/apiDocsRouter.js';
@@ -8,8 +9,13 @@ import errorHandler from './middlewares/errorHandler.js';
 
 const app = express();
 
+// Parse incoming JSON payload:
 app.use(express.json());
-
+// Allow the frontend to read x-New-Token header:
+app.use(cors({
+  origin: '*',
+  exposedHeaders: ['X-New-Token'],
+}));
 // User verification middleware:
 app.use(userMiddleware);
 

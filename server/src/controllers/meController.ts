@@ -3,18 +3,24 @@ import * as HttpError from '../errors/httpError.js';
 import * as pollRepository from './../repositories/pollRepository.js';
 import * as answerRepository from './../repositories/answerRepository.js';
 import * as voteRepository from './../repositories/voteRepository.js';
+import type { UserProfile } from '../types/userProfile.js';
 
-interface UserProfile {
-  createdPolls: number[];
-  participatedPolls: number[];
-}
-
-// GET /me -> get own user object (for user id) with all poll ids (created and voted)
-
+/**
+ * Gets the curent user's user profile
+ * 
+ * @param {Request} req
+ * @param {number} req.userId - userId assigned by the middleware
+ * 
+ * @param {Response} res
+ * 
+ * @returns Sends:
+ * - 201: returns UserProfile object
+ * - 400: Bad request
+ * - 500: Internal server error
+ */
 export const getUserInformation = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ) => {
   // check if userId was assigned by the middleware:
   if (!req.userId)
