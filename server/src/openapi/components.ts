@@ -40,6 +40,9 @@
  *         id:
  *           type: integer
  *           example: 1
+ *         pollId:
+ *           type: integer
+ *           example: 1
  *         answerText:
  *           type: string
  *           example: "Yes"
