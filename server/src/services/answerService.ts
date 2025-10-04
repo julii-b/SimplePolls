@@ -11,6 +11,7 @@ export async function getAnswerWithVotes(answerId: number): Promise<Answer | nul
 
   let answer: Answer = {
     id: dbAnswer.id,
+    pollId: dbAnswer.pollId,
     answerText: dbAnswer.answerText,
     votes: dbVotes
   }

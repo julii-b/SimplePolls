@@ -14,7 +14,7 @@ describe('pollsRouter', () => {
       id: 1,
       ownerId: 2,
       questionText: 'Whill this test work?',
-      createdAt: 'exampleTime',
+      answers: []
     };
     vi.clearAllMocks();
     vi.mocked(pollRepository.createPoll).mockResolvedValue(examplePoll);

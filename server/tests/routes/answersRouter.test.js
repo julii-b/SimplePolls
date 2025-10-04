@@ -13,23 +13,18 @@ import * as voteRepository from '../../src/repositories/voteRepository.js';
 describe('answersRouter', () => {
   let examplePoll;
   let exampleAnswer;
-  let exampleAnswerWithVotes;
 
   beforeEach(() => {
     examplePoll = {
       id: 1,
       ownerId: 2,
       questionText: 'Whill this test work?',
-      createdAt: 'exampleTime',
+      answers: [],
     };
     exampleAnswer = {
       id: 2,
       pollId: 1,
       answerText: 'Yes',
-      createdAt: 'exampleTime',
-    };
-    exampleAnswerWithVotes = {
-      ...exampleAnswer,
       votes: [],
     };
     vi.clearAllMocks();
@@ -72,7 +67,7 @@ describe('answersRouter', () => {
   test('GET /polls/:pollId/answers/ works', async () => {
     // get answer that exists:
     let result = await request(app).get('/polls/1/answers/').send();
-    expect(result.body).toEqual([exampleAnswerWithVotes]);
+    expect(result.body).toEqual([exampleAnswer]);
     expect(result.status).toBe(200);
     // get answer that doesn't exist:
     vi.mocked(pollRepository.getPollById).mockResolvedValue(null);
@@ -83,7 +78,7 @@ describe('answersRouter', () => {
   test('GET /polls/:pollId/answers/:answerId works', async () => {
     // get answer that exists:
     let result = await request(app).get('/polls/1/answers/2').send();
-    expect(result.body).toEqual(exampleAnswerWithVotes);
+    expect(result.body).toEqual(exampleAnswer);
     expect(result.status).toBe(200);
     // get answer that doesn't exist:
     vi.mocked(pollRepository.getPollById).mockResolvedValue(null);
@@ -96,7 +91,7 @@ describe('answersRouter', () => {
     let result = await request(app)
       .patch('/polls/1/answers/2')
       .send({ answerText: 'No' });
-    expect(result.body).toEqual(examplePoll);
+    expect(result.body).toEqual(exampleAnswer);
     expect(result.status).toBe(200);
     // change other user's answer or unknown answer:
     vi.mocked(answerRepository.updateAnswerText).mockResolvedValue(null);
