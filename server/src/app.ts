@@ -1,5 +1,6 @@
 import cors from 'cors';
 import express from 'express';
+import rateLimiter from './middlewares/rateLimiter.js'
 import userMiddleware from './middlewares/userMiddleware.js';
 import apiDocsRouter from './openapi/apiDocsRouter.js';
 import meRouter from './routes/meRouter.js';
@@ -9,8 +10,10 @@ import errorHandler from './middlewares/errorHandler.js';
 
 const app = express();
 
+//Rate limiter middleware:
+app.use(rateLimiter);
 // Parse incoming JSON payload:
-app.use(express.json());
+app.use(express.json({ limit: '100kb' }));
 // Allow the frontend to read x-New-Token header:
 app.use(cors({
   origin: '*',

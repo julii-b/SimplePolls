@@ -76,3 +76,5 @@ CREATE TABLE answers_given_by_users (
 );
 
 CREATE INDEX idx_answers_given_by_users_answer_id ON answers_given_by_users(answer_id);
+CREATE INDEX idx_polls_created_at ON polls(created_at);
+CREATE INDEX idx_users_created_at ON users(created_at);
