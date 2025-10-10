@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 import * as userRepository from '../repositories/userRepository.js';
-import { HttpError } from '../errors/httpError.js';
+import { HttpError } from '../types/httpError.js';
 import { randomBytes } from 'node:crypto';
 
 /**

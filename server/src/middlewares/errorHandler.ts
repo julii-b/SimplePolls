@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from 'express';
-import { HttpError } from '../errors/httpError.js';
+import { HttpError } from '../types/httpError.js';
 
 /**
  * Express error handler

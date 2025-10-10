@@ -5,14 +5,25 @@
 ```yaml
 client/ # Frontend (React)
 server/ # Backend (Express)
+    db/ # Contains DB initialization
+    dist/ # Where the built backend will be stored
+    src/
+        controllers/
+        middlewares/
+        openapi/
+        repositories/
+        routes/
+        services/
+        types/
     .env.example # Backend config template
+    package.json # Backend package.json
     docker-compose.yml # PostgreSQL docker file
 ```
 
 
 ## Prerequisites
 
-- Node.js (recommended: >=18)
+- Node.js (recommended: 24)
 - Docker
 
 ## 1. Backend Setup

@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from 'express';
-import * as HttpError from '../errors/httpError.js';
+import * as HttpError from '../types/httpError.js';
 import * as pollRepository from './../repositories/pollRepository.js';
 import type { Poll } from '../types/poll.js';
 import * as pollService from '../services/pollService.js';
