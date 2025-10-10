@@ -1,4 +1,5 @@
 import { pool } from '../db/pool.js';
+import config from '../config/config.js';
 import * as pollRepository from './pollRepository.js';
 import * as voteRepository from './voteRepository.js';
 
@@ -45,8 +46,10 @@ export async function createAnswer(
 export async function getAnswersForPoll(pollId: number): Promise<Answer[]> {
   const { rows } = await pool.query<Answer>(
     `SELECT id, poll_id AS "pollId", answer_text AS "answerText", created_at AS "createdAt"
-        FROM answers WHERE poll_id = $1 ORDER BY id ASC`,
-    [pollId],
+        FROM answers WHERE poll_id = $1
+        ORDER BY created_at DESC
+        LIMIT $2`,
+    [pollId, config.dbQueryLimit],
   );
   return rows;
 }
@@ -54,8 +57,10 @@ export async function getAnswersForPoll(pollId: number): Promise<Answer[]> {
 export async function getAnswerById(id: number): Promise<Answer | null> {
   const { rows } = await pool.query<Answer>(
     `SELECT id, poll_id AS "pollId", answer_text AS "answerText", created_at AS "createdAt"
-        FROM answers WHERE id = $1`,
-    [id],
+        FROM answers WHERE id = $1
+        ORDER BY created_at DESC
+        LIMIT $2`,
+    [id, config.dbQueryLimit],
   );
   return rows[0] ?? null;
 }
@@ -69,7 +74,7 @@ export async function updateAnswerText(
   if (!userIsOwner) return null;
 
   const { rows } = await pool.query<Answer>(
-    `UPDATE polls
+    `UPDATE answers
         SET answer_text = $2
         WHERE id = $1
         RETURNING id, poll_id AS "pollId", answer_text AS "answerText", created_at AS "createdAt"`,

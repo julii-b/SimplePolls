@@ -1,3 +1,4 @@
+import config from '../config/config.js';
 import { pool } from '../db/pool.js';
 
 export interface Poll {
@@ -13,8 +14,8 @@ export async function createPoll(
 ): Promise<Poll | null> {
   const { rows } = await pool.query<Poll>(
     `INSERT INTO polls (owner_id, question_text)
-     VALUES ($1, $2)
-     RETURNING id, owner_id AS "ownerId", question_text AS "questionText", created_at AS "createdAt"`,
+      VALUES ($1, $2)
+      RETURNING id, owner_id AS "ownerId", question_text AS "questionText", created_at AS "createdAt"`,
     [ownerId, questionText],
   );
   return rows[0] ?? null;
@@ -23,8 +24,10 @@ export async function createPoll(
 export async function getPollById(id: number): Promise<Poll | null> {
   const { rows } = await pool.query<Poll>(
     `SELECT id, owner_id AS "ownerId", question_text AS "questionText", created_at AS "createdAt"
-     FROM polls WHERE id = $1`,
-    [id],
+      FROM polls WHERE id = $1
+      ORDER BY created_at DESC
+      LIMIT $2`,
+    [id, config.dbQueryLimit],
   );
   return rows[0] ?? null;
 }
@@ -32,8 +35,10 @@ export async function getPollById(id: number): Promise<Poll | null> {
 export async function getPollsByOwner(ownerId: number): Promise<Poll[]> {
   const { rows } = await pool.query<Poll>(
     `SELECT id, owner_id AS "ownerId", question_text AS "questionText", created_at AS "createdAt"
-     FROM polls WHERE owner_id = $1 ORDER BY id DESC`,
-    [ownerId],
+      FROM polls WHERE owner_id = $1 ORDER BY id DESC
+      ORDER BY created_at DESC
+      LIMIT $2`,
+    [ownerId, config.dbQueryLimit],
   );
   return rows;
 }
@@ -45,9 +50,9 @@ export async function updatePollText(
 ): Promise<Poll | null> {
   const { rows } = await pool.query<Poll>(
     `UPDATE polls
-     SET question_text = $3
-     WHERE id = $2 AND owner_id = $1
-     RETURNING id, owner_id AS "ownerId", question_text AS "questionText", created_at AS "createdAt"`,
+      SET question_text = $3
+      WHERE id = $2 AND owner_id = $1
+      RETURNING id, owner_id AS "ownerId", question_text AS "questionText", created_at AS "createdAt"`,
     [userId, pollId, questionText],
   );
   return rows[0] ?? null;
