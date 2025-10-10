@@ -6,18 +6,22 @@
 client/ # Frontend (React)
 server/ # Backend (Express)
     db/ # Contains DB initialization
-    dist/ # Where the built backend will be stored
+    dist/ # Where the built backend will be output
     src/
-        controllers/
-        middlewares/
-        openapi/
-        repositories/
-        routes/
-        services/
-        types/
+        config/ # Type definition and defaults for .env
+        controllers/ # Route handlers
+        db/ # DB pool
+        middlewares/ # Middleware (error handling, rate limiter, user validation)
+        openapi/ # Swagger router and OpenAPI schema definition
+        repositories/ # Database access
+        routes/ # Route definitions
+        services/ # Logic used by controllers
+        types/ # TS types
     .env.example # Backend config template
-    package.json # Backend package.json
+    package.json # Backend dependencies
     docker-compose.yml # PostgreSQL docker file
+tests/ # Backend tests
+types/ # Type extention for Express types
 ```
 
 
