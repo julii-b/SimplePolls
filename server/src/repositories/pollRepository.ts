@@ -35,7 +35,7 @@ export async function getPollById(id: number): Promise<Poll | null> {
 export async function getPollsByOwner(ownerId: number): Promise<Poll[]> {
   const { rows } = await pool.query<Poll>(
     `SELECT id, owner_id AS "ownerId", question_text AS "questionText", created_at AS "createdAt"
-      FROM polls WHERE owner_id = $1 ORDER BY id DESC
+      FROM polls WHERE owner_id = $1
       ORDER BY created_at DESC
       LIMIT $2`,
     [ownerId, config.dbQueryLimit],
