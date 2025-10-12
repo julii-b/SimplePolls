@@ -1,10 +1,11 @@
 import { Outlet } from 'react-router-dom';
 
-export default function VoteContainer () {
+const VoteContainer = () => {
     return (
         <div>
             <h2>Participate</h2>
             <Outlet/>
         </div>
     );
-}
+};
+export default VoteContainer;

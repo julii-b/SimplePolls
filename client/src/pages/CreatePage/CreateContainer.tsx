@@ -1,4 +1,8 @@
-export default function CreateContainer () {
+export async function action () {
+
+}
+
+const CreateContainer = () => {
     return (
         <div>
             Create new poll <br/>
@@ -8,4 +12,5 @@ export default function CreateContainer () {
             <input type="text" />
         </div>
     );
-}
+};
+export default CreateContainer;

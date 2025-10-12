@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
+import { customFetch } from "../services/api";
 
-export default function HomePage(){
+const HomePage = () => {
 
-    fetch('http://172.17.0.4:3000/me')
-        .then(async res => {
-            console.log('Headers:', Array.from(res.headers.entries()));
-            console.log('X-New-Token:', res.headers.get('X-New-Token'));
-        });
+    customFetch('/me').then( (res)=>{
+        console.log(res);
+    });
     return (
         <div>
             <div>
@@ -19,4 +18,5 @@ export default function HomePage(){
             </div>
         </div>
     );
-}
+};
+export default HomePage;

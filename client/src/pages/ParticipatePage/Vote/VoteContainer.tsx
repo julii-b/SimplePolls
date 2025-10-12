@@ -1,4 +1,17 @@
-export default function VoteContainer () {
+import { useLoaderData } from "react-router-dom";
+
+export async function loader () {
+
+}
+
+export async function action () {
+
+}
+
+const VoteContainer = () => {
+
+    let { poll } = useLoaderData();
+
     return (
         <div>
             Result: <br/>
@@ -12,4 +25,5 @@ export default function VoteContainer () {
             <label htmlFor="C"> C </label> <br/>
         </div>
     );
-}
+};
+export default VoteContainer;
