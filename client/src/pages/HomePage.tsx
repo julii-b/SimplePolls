@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { customFetch } from "../services/api";
+import { customFetch } from "../services/backendApi";
 
 const HomePage = () => {
 
