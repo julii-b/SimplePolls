@@ -27,12 +27,15 @@ export async function action({request}: {request: Request}): Promise<void|Respon
   const promises: Promise<any>[] = []; 
   // tracks which action was performed to control redirect at the end:
   let performedAction: 'answerDeleted'|'pollCreated'|'pollChanged' = 'pollChanged';
-
+  console.log(action);
   // Delete answer if action is 'delete-<id>':
+  let deletedAnswerId: number|null = null;
   if(action?.includes('delete-')){
     const [_, answerId] = action.split('-');
+    console.log(answerId);
     const newPromise = answerService.deleteAnswer(Number(answerId));
     promises.push(newPromise);
+    deletedAnswerId = Number(answerId);
     performedAction = 'answerDeleted';
   }
 
@@ -40,16 +43,15 @@ export async function action({request}: {request: Request}): Promise<void|Respon
 
   // Create new poll, or get existing pollId:
   let pollId: number|undefined;
-  const newQuestionText: string|undefined = formData.get('newQuestion')?.toString();
-  if(newQuestionText && newQuestionText.length > 0){  // Create new poll if necessary and store pollId
-    const newPoll: Poll = await pollService.createPoll(newQuestionText);
+  const newQuestionText: FormDataEntryValue|null = formData.get('newQuestion');
+  if(newQuestionText && String(newQuestionText).length > 0){  // Create new poll if necessary and store pollId
+    const newPoll: Poll = await pollService.createPoll(String(newQuestionText));
     pollId = newPoll.id;
     performedAction = 'pollCreated';
-  } else {
+  } else if (newQuestionText && String(newQuestionText).length === 0) {
     throw new Error("The question text can't be empty.");
-  }
-  if (!newQuestionText) { // Get pollId if poll already exists
-    pollId = Number(formData.get('pollId')!.toString);
+  } else { // Get pollId if poll already exists
+    pollId = Number(formData.get('pollId')!);
   }
 
   // Change question texts and answer texts, and create new answers:
@@ -64,8 +66,10 @@ export async function action({request}: {request: Request}): Promise<void|Respon
     } else if (key.includes('existingAnswer-')) { // Change text of existing answer
       if (String(value).length > 0) {
         const [_, answerId] = key.split('-');
-        const newPromise = answerService.changeAnswerText(Number(answerId), String(value));
-        promises.push(newPromise);
+        if (Number(answerId) != deletedAnswerId) {
+          const newPromise = answerService.changeAnswerText(Number(answerId), String(value));
+          promises.push(newPromise);
+        }
       } else {
         throw new Error("The answer text can't be empty.");
       }
@@ -79,8 +83,8 @@ export async function action({request}: {request: Request}): Promise<void|Respon
 
   await Promise.all(promises);
 
-  if (performedAction === 'pollCreated') return redirect(`/participate/${pollId}`);
-  else if (performedAction === 'pollChanged') return redirect(`/participate/${pollId}`);
+  if (performedAction === 'pollCreated') return redirect(`/create/${pollId}`);
+  else if (performedAction === 'pollChanged') return redirect(`/create/${pollId}`);
   //else if (performedAction === 'answerDeleted') return redirect(`/participate/${pollId}`);
 }
 

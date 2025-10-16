@@ -11,7 +11,19 @@ import type { Answer } from "../../types/answer";
 const EditAnswers = ({answers}: {answers: Answer[]}): JSX.Element[] => {
 
   const [answersJSX, setAnswersJSX] = useState<JSX.Element[]>([]); // Array of all answers, old and new
-  const [newAnswerCounter, setNewAnswerCounter] = useState<number>(0); // Counter of new answers, so unique keys and names can be assigned
+
+  // Function to create one new answer and add it to the array:
+  const createNewAnswer = (index: number) => {
+    const newAnswer = <NewAnswer
+      key={'newAnswer-'+index}
+      answerIndex={index}
+      onNewAnswer={() => createNewAnswer(index+1)} // Can itself call the function to create another new answer
+    />;
+    setAnswersJSX((answersJSX) => [
+      ...answersJSX,
+      newAnswer
+    ]);
+  }
 
   // Create all already existing answers and set up possibility to create new answers:
   useEffect(() => {
@@ -27,20 +39,8 @@ const EditAnswers = ({answers}: {answers: Answer[]}): JSX.Element[] => {
       );
     }
 
-    // Function to create one new answer and add it to the array:
-    const createNewAnswer = () => {
-      setAnswersJSX((answersJSX) => [
-        ...answersJSX,
-        <NewAnswer
-          key={'newAnswer-'+newAnswerCounter}
-          answerIndex={newAnswerCounter}
-          onNewAnswer={createNewAnswer} // Can itself call the function to create another new answer
-        />
-      ]);
-      setNewAnswerCounter(i => i+1);
-    }
     // Create one new answer at the beginning:
-    createNewAnswer();
+    createNewAnswer(0);
 
   }, []);
 
@@ -71,7 +71,7 @@ const EditAnswer = ({answer}: {answer: Answer}): JSX.Element => {
       <button
         type='submit'
         name='action' // action: delete - can later be used to determine if form was submitted using delete button
-        value='delete'
+        value={'delete-'+answer.id} // 'delete-<id>', so action function knows which answer to delete
       >
         Delete
       </button> <br />

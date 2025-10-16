@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from './RootLayout.tsx';
 import HomePage from './pages/HomePage.tsx';
 import CreatePage, { action as createAction } from './pages/CreatePage/CreateContainer.tsx';
+import {loader as createLoader} from './pages/CreatePage/createLoader.tsx'
 import ParticipatePage from './pages/ParticipatePage/ParticipateContainer.tsx';
 import JoinPage, { loader as joinLoader } from './pages/ParticipatePage/Join/JoinContainer.tsx';
 import VotePage, { loader as voteLoader, action as voteAction } from './pages/ParticipatePage/Vote/VoteContainer.tsx';
@@ -18,9 +19,21 @@ const router = createBrowserRouter([
             element: <HomePage />
         },
         {
-            path: 'create', // '/create'
-            action: createAction, // create new poll & redirect to participate/:pollId
-            element: <CreatePage />
+            path: 'create', 
+            children: [
+                {
+                    index: true, // '/create'
+                    loader: createLoader,
+                    action: createAction,
+                    element: <CreatePage />
+                },
+                {
+                    path: ':pollId', // '/create/:pollId'
+                    loader: createLoader,
+                    action: createAction,
+                    element: <CreatePage />
+                }
+            ]
         },
         {
             path: 'participate',

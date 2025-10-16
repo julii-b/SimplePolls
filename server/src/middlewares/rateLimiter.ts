@@ -5,7 +5,7 @@ import rateLimit from 'express-rate-limit';
  */
 const limiter = rateLimit({
   windowMs: 60 * 1000, // 1 Minute
-  max: 20, // each IP can send 20 requests per minute.
+  max: 50, // each IP can send 50 requests per minute.
   standardHeaders: true,
   legacyHeaders: false,
 });
