@@ -1,0 +1,117 @@
+import { Form } from 'react-router-dom';
+import type { Poll } from '../../types/poll';
+import { useState } from 'react';
+import * as pollService from '../../services/pollService';
+import * as answerService from '../../services/answerService';
+import EditAnswers from './EditAnswers';
+
+
+/**
+ * Receives the request caused by submitting the Form rendered by EditPoll.
+ * - Deletes answers, if delete button was pressed
+ * - Creates new poll if no poll exists
+ * - Updates question if poll exists
+ * - Updates answers if poll exists
+ * - Creates new answers if needed
+ * 
+ * @param { { request: Request } } param - Request object
+ * @returns { Promise<void> }
+ */
+export async function action({request}: {request: Request}): Promise<void> {
+
+  const formData: FormData = await request.formData();
+
+  // get value of key action (if it exists) - it is 'delete-<id>' or 'save':
+  const action: string|undefined = formData.get('action')?.toString();
+
+  const promises: Promise<any>[] = []; // Array of all promises, to wait at the end
+
+  // Delete answer if action is 'delete-<id>':
+  if(action?.includes('delete-')){
+    const [_, answerId] = action.split('-');
+    const newPromise = answerService.deleteAnswer(Number(answerId));
+    promises.push(newPromise);
+  }
+
+  // Everything else is saved, regardless if request was caused by save or delete button:
+
+  // Create new poll, or get existing pollId:
+  let pollId: number|undefined;
+  const newQuestionText: string|undefined = formData.get('newQuestion')?.toString();
+  if(newQuestionText && newQuestionText.length > 0){  // Create new poll if necessary and store pollId
+    const newPoll: Poll = await pollService.createPoll(newQuestionText);
+    pollId = newPoll.id;
+  } else {
+    throw new Error("The question text can't be empty.");
+  }
+  if (!newQuestionText) { // Get pollId if poll already exists
+    pollId = Number(formData.get('pollId')!.toString);
+  }
+
+  // Change question texts and answer texts, and create new answers:
+  for (const [key, value] of formData.entries()) {
+    if (key.includes('existingQuestion-')) { // Change text of existing question
+      if (String(value).length > 0) {
+        const newPromise = pollService.changePollText(pollId, String(value));
+        promises.push(newPromise);
+      } else {
+        throw new Error("The question text can't be empty.");
+      }
+    } else if (key.includes('existingAnswer-')) { // Change text of existing answer
+      if (String(value).length > 0) {
+        const [_, answerId] = key.split('-');
+        const newPromise = answerService.changeAnswerText(Number(answerId), String(value));
+        promises.push(newPromise);
+      } else {
+        throw new Error("The answer text can't be empty.");
+      }
+    } else if (key.includes('newAnswer-')) { // Create new answer if necessary
+      if (String(value).length > 0) {
+        const newPromise = answerService.createAnswer(pollId, String(value));
+        promises.push(newPromise);
+      }
+    }
+  }
+
+  await Promise.all(promises);
+}
+
+/**
+ * Renders the Form to create/change a poll:
+ * - Renders the element needed to create/change the question of a poll.
+ * - Calls the function to also render the elements needed for the poll's answers.
+ * 
+ * @param props
+ * @param { Poll } [props.poll] - Optional: The existing poll to edit. 
+ * @returns 
+ */
+const EditPoll = ({poll}: {poll?: Poll|undefined}) => {
+  const [questionText, setQuestionText] = useState(poll? poll.questionText : '')
+
+  return (
+    <Form method='post' >
+      {poll && ( // store pollId as hidden input if poll was passed
+        <input 
+          type='hidden'
+          name='pollId'
+          value={poll.id}
+        />
+      )}
+      <input
+        name={poll ? 'existingQuestion-'+poll.id : 'newQuestion'} // 'existingQuestion-<id>' or 'newQuestion', so action function knows what to do
+        placeholder="Type you poll's question..."
+        value={questionText}
+        onChange={(e)=>{setQuestionText(e.target.value)}}
+      /><br/>
+
+      <EditAnswers answers={poll? poll.answers : []} />
+
+      <button
+        type='submit'
+        name='action' // action: save - can later be used to determine if form was submitted using save button
+        value='save'
+      >Save</button>
+    </Form>
+  );
+}
+export default EditPoll;

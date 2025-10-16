@@ -26,7 +26,7 @@ export async function createPoll (questionText: string): Promise<Poll> {
  * @param { string } questionText - New text of the poll
  * @returns { Poll } the changed Poll object
  */
-export async function changePollText (pollId: number, questionText: number): Promise<Poll> {
+export async function changePollText (pollId: number, questionText: string): Promise<Poll> {
   // create request body:
   const requestBody = {
     questionText: questionText,
