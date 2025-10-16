@@ -1,4 +1,4 @@
-import { Form } from 'react-router-dom';
+import { Form, redirect } from 'react-router-dom';
 import type { Poll } from '../../types/poll';
 import { useState } from 'react';
 import * as pollService from '../../services/pollService';
@@ -17,20 +17,23 @@ import EditAnswers from './EditAnswers';
  * @param { { request: Request } } param - Request object
  * @returns { Promise<void> }
  */
-export async function action({request}: {request: Request}): Promise<void> {
+export async function action({request}: {request: Request}): Promise<void|Response> {
 
   const formData: FormData = await request.formData();
 
   // get value of key action (if it exists) - it is 'delete-<id>' or 'save':
   const action: string|undefined = formData.get('action')?.toString();
-
-  const promises: Promise<any>[] = []; // Array of all promises, to wait at the end
+  // Array of all promises, to wait at the end:
+  const promises: Promise<any>[] = []; 
+  // tracks which action was performed to control redirect at the end:
+  let performedAction: 'answerDeleted'|'pollCreated'|'pollChanged' = 'pollChanged';
 
   // Delete answer if action is 'delete-<id>':
   if(action?.includes('delete-')){
     const [_, answerId] = action.split('-');
     const newPromise = answerService.deleteAnswer(Number(answerId));
     promises.push(newPromise);
+    performedAction = 'answerDeleted';
   }
 
   // Everything else is saved, regardless if request was caused by save or delete button:
@@ -41,6 +44,7 @@ export async function action({request}: {request: Request}): Promise<void> {
   if(newQuestionText && newQuestionText.length > 0){  // Create new poll if necessary and store pollId
     const newPoll: Poll = await pollService.createPoll(newQuestionText);
     pollId = newPoll.id;
+    performedAction = 'pollCreated';
   } else {
     throw new Error("The question text can't be empty.");
   }
@@ -74,7 +78,12 @@ export async function action({request}: {request: Request}): Promise<void> {
   }
 
   await Promise.all(promises);
+
+  if (performedAction === 'pollCreated') return redirect(`/participate/${pollId}`);
+  else if (performedAction === 'pollChanged') return redirect(`/participate/${pollId}`);
+  //else if (performedAction === 'answerDeleted') return redirect(`/participate/${pollId}`);
 }
+
 
 /**
  * Renders the Form to create/change a poll:
