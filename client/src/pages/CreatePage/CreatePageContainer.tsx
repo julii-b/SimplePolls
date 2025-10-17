@@ -1,11 +1,7 @@
 import type { JSX } from "react";
-import EditPoll, {action as editPollAction} from "../../components/EditPoll/EditPollContainer"
+import EditPoll from "./CreatePageForm"
 import { useLoaderData } from "react-router-dom";
 import type { Poll } from "../../types/poll";
-
-export async function action ({request}: {request: Request}) {
-  return editPollAction({request}); // Use action function from EditPoll
-}
 
 /**
  * Renders the page to create a new poll

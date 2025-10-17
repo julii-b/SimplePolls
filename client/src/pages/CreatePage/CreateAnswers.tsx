@@ -1,6 +1,11 @@
 import { useEffect, useState, type JSX } from "react";
 import type { Answer } from "../../types/answer";
 
+type NewAnswer = { // Type declaration for a new answer, which will be later stored in the db
+  newAnswerIndex: number; // Index of the new answer
+  onNewAnswer: ()=>void // Function to create another new answer
+}
+
 /**
  * Renders the elements to change/delete already existing answers and to create new answers.
  * 
@@ -8,43 +13,36 @@ import type { Answer } from "../../types/answer";
  * @param { Answer[] } props.answers - Array of all already existing answers.
  * @returns { JSX.Element[] }
  */
-const EditAnswers = ({answers}: {answers: Answer[]}): JSX.Element[] => {
+const EditAnswers = ({answers}: {answers: (Answer|NewAnswer)[]}): JSX.Element[] => {
 
-  const [answersJSX, setAnswersJSX] = useState<JSX.Element[]>([]); // Array of all answers, old and new
+  const [answersToRender, setAnswersToRender] = useState<(Answer|NewAnswer)[]>(answers); // Array of all answers, old and new
 
-  // Function to create one new answer and add it to the array:
+  // Function to create a new answer and add it to the array:
   const createNewAnswer = (index: number) => {
-    const newAnswer = <NewAnswer
-      key={'newAnswer-'+index}
-      answerIndex={index}
-      onNewAnswer={() => createNewAnswer(index+1)} // Can itself call the function to create another new answer
-    />;
-    setAnswersJSX((answersJSX) => [
-      ...answersJSX,
-      newAnswer
-    ]);
-  }
-
-  // Create all already existing answers and set up possibility to create new answers:
-  useEffect(() => {
-    // Create all already existing answers and add them to the array:
-    for (let answer of answers){
-      setAnswersJSX((answersJSX) => [
-        ...answersJSX,
-        <EditAnswer
-          key={'existingAnswer-'+answer.id}
-          answer={answer}
-        />
-      ]
-      );
+    const newAnswer: NewAnswer = {
+      newAnswerIndex: index,
+      onNewAnswer: ()=>createNewAnswer(index+1) // Answer itself can create a new answer
     }
+    setAnswersToRender(answers =>[
+      ...answers,
+      newAnswer
+    ])
+  };
 
-    // Create one new answer at the beginning:
+  // Create one new answer at the start:
+  useEffect(() => {
     createNewAnswer(0);
-
   }, []);
 
-  // Render all answers:
+  // Build array of all answers and render them:
+  let answersJSX: JSX.Element[] = [];
+  for (const answer of answersToRender){
+    if (!('newAnswerIndex' in answer)){ // If answer is an answer from the db
+      answersJSX.push(<EditExistingAnswer key={'existingAnswer-'+answer.id} answer={answer}/>);
+    } else { // If answer is a new answer
+      answersJSX.push(<EditNewAnswer key={'newAnswer-'+answer.newAnswerIndex} answer={answer}/>);
+    }
+  }
   return answersJSX;
 }
 export default EditAnswers;
@@ -57,7 +55,7 @@ export default EditAnswers;
  * @param { Answer } props.answer - Answer which should be edited with this element
  * @returns {JSX.Element}
  */
-const EditAnswer = ({answer}: {answer: Answer}): JSX.Element => {
+const EditExistingAnswer = ({answer}: {answer: Answer}): JSX.Element => {
 
   const [answerText, setAnswerText] = useState(answer.answerText);
 
@@ -79,29 +77,30 @@ const EditAnswer = ({answer}: {answer: Answer}): JSX.Element => {
   );
 }
 
+
 /**
  * Renders the elements needed in a form to create a new Answer object.
  * 
  * @param props
- * @param { number } props.answerIndex - Index of the new answer in the form, so a unique name can be assigned
- * @param { ()=>{} } props.onNewAnswer - function to call, when the input field is filled out for the first time. Is used to create a new input field.
- * @returns 
+ * @param { NewAnswer } props.answer - New answer which should be edited with this element
+ * @returns {JSX.Element}
  */
-const NewAnswer = ({answerIndex, onNewAnswer}: {answerIndex: number, onNewAnswer: ()=>void}): JSX.Element => {
+const EditNewAnswer = ({answer}: {answer: NewAnswer}): JSX.Element => {
+
   const [answerText, setAnswerText] = useState('');
   const [firstChange, setFirstChange] = useState(true); // is initially true, and false after the user typed in the input field
   return (
     <>
       <input
-        name={'newAnswer-'+answerIndex} // 'newAnswer', so action function knows what to do
+        name={'newAnswer-'+answer.newAnswerIndex} // 'newAnswer', so action function knows what to do
         placeholder='Type to add a new answer to your poll...'
         value={answerText}
         onChange={(e) => {
-          if (firstChange) onNewAnswer(); // If the current change is the first change, create new answer input field
+          if (firstChange) answer.onNewAnswer(); // If the current change is the first change, create new answer input field
           setFirstChange(false);
           setAnswerText(e.target.value)
         }}
       /><br />
     </>
-  )
+  );
 }
