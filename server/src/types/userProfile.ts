@@ -1,4 +1,6 @@
+import type { Poll } from "./poll.js";
+
 export interface UserProfile {
-  createdPolls: number[];
-  participatedPolls: number[];
+  createdPolls: Poll[];
+  participatedPolls: Poll[];
 }

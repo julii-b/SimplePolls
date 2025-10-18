@@ -9,21 +9,18 @@ vi.mock('../../src/repositories/voteRepository.js'); // mock voteRepository
 import * as voteRepository from '../../src/repositories/voteRepository.js';
 vi.mock('../../src/repositories/answerRepository.js'); // mock answerRepository
 import * as answerRepository from '../../src/repositories/answerRepository.js';
+vi.mock('../../src/services/pollService.js'); // mock pollService
+import * as pollService from '../../src/services/pollService.js';
 
 describe('meRouter', () => {
-  let examplePolls = [
-    {
+  let examplePoll = {
       id: 1,
       ownerId: 1,
       questionText: 'example question',
       createdAt: 'example time',
-    },
-    {
-      id: 2,
-      ownerId: 1,
-      questionText: 'example question',
-      createdAt: 'example time',
-    },
+    };
+  let examplePolls = [
+    examplePoll
   ];
   let exampleVotes = [
     {
@@ -39,8 +36,8 @@ describe('meRouter', () => {
     createdAt: 'example time',
   };
   let exampleUser = {
-    createdPolls: [1, 2],
-    participatedPolls: [3],
+    createdPolls: examplePolls,
+    participatedPolls: examplePolls,
   };
 
   beforeEach(() => {
@@ -48,6 +45,7 @@ describe('meRouter', () => {
     vi.mocked(pollRepository.getPollsByOwner).mockReturnValue(examplePolls);
     vi.mocked(voteRepository.getVotesByUser).mockReturnValue(exampleVotes);
     vi.mocked(answerRepository.getAnswerById).mockReturnValue(exampleAnswer);
+    vi.mocked(pollService.getPollWithAnswers).mockReturnValue(examplePoll);
   });
 
   test('GET /me works', async () => {
