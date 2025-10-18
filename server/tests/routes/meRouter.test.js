@@ -38,6 +38,7 @@ describe('meRouter', () => {
   let exampleUser = {
     createdPolls: examplePolls,
     participatedPolls: examplePolls,
+    votedAnswers: [1]
   };
 
   beforeEach(() => {

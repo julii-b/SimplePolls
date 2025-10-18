@@ -54,10 +54,15 @@ export const getUserInformation = async (
   // filter participated polls for null values:
   const participatedPolls: Poll[] = (await Promise.all(participatedPollsPromise)).filter(poll=>poll!=null);
 
+  // get user's votes:
+  const dbVotes: voteRepository.Vote[] = await voteRepository.getVotesByUser(req.userId);
+  const voteIds: number[] = dbVotes.map((vote) => vote.answerId);
+
 
   const userProfile: UserProfile = {
     createdPolls: createdPolls,
     participatedPolls: participatedPolls,
+    votedAnswers: voteIds,
   };
 
   res.json(userProfile);

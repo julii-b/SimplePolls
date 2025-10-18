@@ -12,7 +12,7 @@ const meRouter = Router({ mergeParams: true });
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: List of poll ids of polls created and participated in by the user.
+ *         description: Arrays of polls created and participated in by the user. And array of anserIds voted for
  *         headers:
  *           X-New-Token:
  *             $ref: '#/components/headers/X-New-Token'
@@ -24,9 +24,13 @@ const meRouter = Router({ mergeParams: true });
  *                 createdPolls:
  *                   type: array
  *                   items:
- *                     type: integer
+ *                     $ref: '#/components/schemas/Poll'
  *                 participatedPolls:
  *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Poll'
+ *                 votedAnswers:
+ *                   type: arry
  *                   items:
  *                     type: integer
  */
