@@ -57,17 +57,29 @@ export async function getAllUsersPolls (): Promise<Poll[]> {
   // get userProfile, which includes all polls:
   const userProfile: UserProfile = await backendApi.get<UserProfile>(`/me`);
   // filter participated polls, to exclude created polls, so all polls are unique:
-  userProfile.participatedPolls.filter((participatedPoll) => {
-    for (const createdPoll of userProfile.createdPolls){
-      if (participatedPoll.id === createdPoll.id) return false;
+  let uniquePolls: Poll[] = userProfile.createdPolls; // all created polls are included
+  for (const participatedPoll of userProfile.participatedPolls) { // all participated polls not yet included are included
+    let isInUniquePollsArray: boolean = false;
+    for (const uniquePoll of uniquePolls) { 
+      if (uniquePoll.id === participatedPoll.id){
+        isInUniquePollsArray = true;
+        break;
+      }
     }
-    return true;
-  });
-  // create list with unique polls:
-  const polls = [
-    ...userProfile.createdPolls,
-    ...userProfile.participatedPolls,
-  ]
+    if (!isInUniquePollsArray) uniquePolls.push(participatedPoll);
+  }
 
-  return polls;
+  return uniquePolls;
+}
+
+/**
+ * Get all polls the user created from the API.
+ * 
+ * @returns { Promise<Poll[]> } Ar ray of all polls the user created
+ */
+export async function getUsersCreatedPolls (): Promise<Poll[]> {
+  // get userProfile, which includes all created polls:
+  const userProfile: UserProfile = await backendApi.get<UserProfile>(`/me`);
+
+  return userProfile.createdPolls;
 }

@@ -1,0 +1,24 @@
+import { useLoaderData } from "react-router-dom";
+import type { Poll } from "../../../types/poll";
+import JoinNewInput from './JoinNewInput';
+import PollList from "./PollList";
+
+/**
+ * Renders the join-page with an input field to type a new poll id and a list of all created and participated polls.
+ * 
+ * @returns { JSX.Element }
+ */
+const JoinPageContainer = () => {
+    
+  const { polls }: { polls: Poll[]} = useLoaderData();
+
+  return (
+    <>
+      <div>
+        <JoinNewInput />
+        <PollList polls={polls} />
+      </div>
+    </>
+  );
+}
+export default JoinPageContainer;

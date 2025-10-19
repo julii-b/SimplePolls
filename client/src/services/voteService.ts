@@ -1,3 +1,4 @@
+import type { UserProfile } from "../types/userProfile";
 import type { Vote } from "../types/vote";
 import * as backendApi from './backendApi';
 
@@ -8,7 +9,7 @@ import * as backendApi from './backendApi';
  * @returns { Promise<void> }
  */
 export async function vote (answerId: number): Promise<void> {
-  await backendApi.post<Vote>(`/answers/${answerId}/vote`, {});
+  await backendApi.post<Vote>(`/answers/${answerId}/votes`, {});
 }
 
 /**
@@ -18,5 +19,16 @@ export async function vote (answerId: number): Promise<void> {
  * @returns { Promise<void> }
  */
 export async function deleteVote (answerId: number): Promise<void> {
-  await backendApi.del<null>(`/answers/${answerId}/vote`);
+  await backendApi.del<null>(`/answers/${answerId}/votes`);
+}
+
+/**
+ * Get all answer ids the user voted for from the API.
+ * 
+ * @returns { Promise<number[]> } Answer ids of the answers the user voted for
+ */
+export async function getAllUsersVotes (): Promise<number[]> {
+  const userProfile: UserProfile = await backendApi.get<UserProfile>(`/me`);
+
+  return userProfile.votedAnswers;
 }

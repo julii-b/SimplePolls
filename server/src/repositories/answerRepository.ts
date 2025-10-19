@@ -47,7 +47,7 @@ export async function getAnswersForPoll(pollId: number): Promise<Answer[]> {
   const { rows } = await pool.query<Answer>(
     `SELECT id, poll_id AS "pollId", answer_text AS "answerText", created_at AS "createdAt"
         FROM answers WHERE poll_id = $1
-        ORDER BY created_at DESC
+        ORDER BY created_at ASC
         LIMIT $2`,
     [pollId, config.dbQueryLimit],
   );
@@ -57,10 +57,8 @@ export async function getAnswersForPoll(pollId: number): Promise<Answer[]> {
 export async function getAnswerById(id: number): Promise<Answer | null> {
   const { rows } = await pool.query<Answer>(
     `SELECT id, poll_id AS "pollId", answer_text AS "answerText", created_at AS "createdAt"
-        FROM answers WHERE id = $1
-        ORDER BY created_at DESC
-        LIMIT $2`,
-    [id, config.dbQueryLimit],
+        FROM answers WHERE id = $1`,
+    [id],
   );
   return rows[0] ?? null;
 }

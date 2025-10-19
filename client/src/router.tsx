@@ -1,15 +1,17 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import App from './RootLayout.tsx';
+
 import HomePage from './pages/HomePage.tsx';
 import CreatePage from './pages/CreatePage/CreatePageContainer.tsx';
 import createPageLoader from './pages/CreatePage/createPageLoader.tsx';
 import createPageAction from './pages/CreatePage/createPageAction.tsx';
 import ParticipatePage from './pages/ParticipatePage/ParticipatePageContainer.tsx';
-import JoinPage from './pages/ParticipatePage/Join/JoinPage.tsx';
+import JoinPage from './pages/ParticipatePage/Join/JoinPageContainer.tsx';
 import { loader as joinPageLoader } from './pages/ParticipatePage/Join/joinPageLoader.tsx';
-import VotePage, { loader as voteLoader, action as voteAction } from './pages/ParticipatePage/Vote/VoteContainer.tsx';
-
+import VotePage from './pages/ParticipatePage/Vote/VotePageContainer.tsx';
+import { loader as votePageLoader } from './pages/ParticipatePage/Vote/votePageLoader.tsx';
+import { action as votePageAction } from './pages/ParticipatePage/Vote/votePageAction.tsx';
 
 const router = createBrowserRouter([
 {
@@ -48,8 +50,8 @@ const router = createBrowserRouter([
                 },
                 {
                     path: ':pollId', // '/participate/:pollId'
-                    loader: voteLoader, // load poll and answers
-                    action: voteAction, // submit vote/change poll/change answer/add answer/remove answer
+                    loader: votePageLoader, // load poll and answers
+                    action: votePageAction, // submit vote/change poll/change answer/add answer/remove answer
                     element: <VotePage />
                 }
             ]

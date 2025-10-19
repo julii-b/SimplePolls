@@ -81,8 +81,8 @@ async function action({request}: {request: Request}): Promise<void|Response> {
 
   await Promise.all(promises);
 
-  if (performedAction === 'pollCreated') return redirect(`/create/${pollId}`);
-  else if (performedAction === 'pollChanged') return redirect(`/create/${pollId}`);
-  //else if (performedAction === 'answerDeleted') return redirect(`/participate/${pollId}`);
+  if (performedAction === 'pollCreated') return redirect(`/participate/${pollId}`);
+  else if (performedAction === 'pollChanged') return redirect(`/participate/${pollId}`);
+  else if (performedAction === 'answerDeleted') return redirect(`/create/${pollId}`);
 }
 export default action;
