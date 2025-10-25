@@ -1,0 +1,20 @@
+.errorContainer {
+  background-color: #e08b8b50;
+  border: 6px solid #e28383;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 30em;
+  max-width: 65vw;
+  height: 30vh;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+}
+.errorContainer div {
+  margin: -1em 0 1em 0 0;
+}
+.errorContainer h2 {
+  margin: 0;
+  font-size: 1.8em;;
+}

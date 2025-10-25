@@ -12,6 +12,7 @@ import { loader as joinPageLoader } from './pages/ParticipatePage/Join/joinPageL
 import VotePage from './pages/ParticipatePage/Vote/VotePageContainer.tsx';
 import { loader as votePageLoader } from './pages/ParticipatePage/Vote/votePageLoader.tsx';
 import { action as votePageAction } from './pages/ParticipatePage/Vote/votePageAction.tsx';
+import ErrorElement from './pages/ErrorElement.tsx';
 
 const router = createBrowserRouter([
 {
@@ -20,7 +21,8 @@ const router = createBrowserRouter([
     children: [
         {
             index: true, // '/'
-            element: <HomePage />
+            element: <HomePage />,
+            errorElement: <ErrorElement />
         },
         {
             path: 'create', 
@@ -29,30 +31,35 @@ const router = createBrowserRouter([
                     index: true, // '/create'
                     loader: createPageLoader,
                     action: createPageAction,
-                    element: <CreatePage />
+                    element: <CreatePage />,
+                    errorElement: <ErrorElement />
                 },
                 {
                     path: ':pollId', // '/create/:pollId'
                     loader: createPageLoader,
                     action: createPageAction,
-                    element: <CreatePage />
+                    element: <CreatePage />,
+                    errorElement: <ErrorElement />
                 }
             ]
         },
         {
             path: 'participate',
             element: <ParticipatePage />,
+            errorElement: <ErrorElement />,
             children: [
                 {
                     index: true, // '/participate'
                     loader: joinPageLoader, // load list of all polls of user
-                    element: <JoinPage />
+                    element: <JoinPage />,
+                    errorElement: <ErrorElement />
                 },
                 {
                     path: ':pollId', // '/participate/:pollId'
                     loader: votePageLoader, // load poll and answers
                     action: votePageAction, // submit vote/change poll/change answer/add answer/remove answer
-                    element: <VotePage />
+                    element: <VotePage />,
+                    errorElement: <ErrorElement />
                 }
             ]
         }
