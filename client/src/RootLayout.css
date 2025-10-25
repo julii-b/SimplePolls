@@ -1,42 +1,45 @@
 #root {
-  max-width: 1280px;
+  width: 100%;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 1.5rem 3rem 1.5rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
+.simplePollsTitle {
+  font-size: 5em;
+  letter-spacing: -0.07em;
+  line-height: 0.78em;
+  margin: 0.6em;
+  text-shadow: 0 0 0.03em white;
+}
+
+.simpleTitle {
+  color: #6F382F;
+}
+
+.pollsTitle {
+  color: #462E6E;
+}
+
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0rem 0 0rem;
+  width: 100%;
+}
+
+.contentCard {
+  background-color: #B38EBB50;
+  border: 6px solid #6F2F5D;
+  backdrop-filter: blur(10px);
+  flex-grow: 1;
+  border-radius: 25px;
   padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  width: 200px;
+  height: 60vh;
+  max-height: 110vw;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }

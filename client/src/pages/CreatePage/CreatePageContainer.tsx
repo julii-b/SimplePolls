@@ -2,6 +2,7 @@ import type { JSX } from "react";
 import EditPoll from "./CreatePageForm"
 import { useLoaderData } from "react-router-dom";
 import type { Poll } from "../../types/poll";
+import style from './CreatePage.module.css';
 
 /**
  * Renders the page to create a new poll
@@ -14,12 +15,14 @@ const CreateContainer = (): JSX.Element => {
   let poll: Poll|undefined = loaderData.poll;
 
   return (
-    <>
-    { poll ?
-      <EditPoll poll={poll} /> : // If loader retrieved poll, use it in EditPoll
-      <EditPoll /> // Use EditPoll component without sending a poll to edit
-    }
-    </>
+    <div className={`cardsContainer`} >
+      <div className={`contentCard ${style.createPageCard}`} >
+        { poll ?
+          <EditPoll poll={poll} /> : // If loader retrieved poll, use it in EditPoll
+          <EditPoll /> // Use EditPoll component without sending a poll to edit
+        }
+      </div>
+    </div>
   );
 };
 export default CreateContainer;

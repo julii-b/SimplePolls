@@ -46,7 +46,7 @@ Start the database:
 cd server
 docker compose up -d
 ```
-Create the tables after starting it (replace `myuser` and `simplepolls` if you set a different user- or app-name in your `server/.env`):
+Create the tables after starting it (replace `myuser` and `simplepolls` if you set a different user- or db-name in your `server/.env`):
 ```bash
-docker exec -i postgres-db psql -U myuser -d simplepolls < db/init.sql
+docker exec -i simplepolls-postgresdb psql -U myuser -d simplepolls < db/init.sql
 ```

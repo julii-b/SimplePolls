@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { customFetch } from "../services/backendApi";
+import style from './HomePage.module.css';
 
 const HomePage = () => {
 
@@ -7,12 +8,12 @@ const HomePage = () => {
         console.log(res);
     });
     return (
-        <div>
-            <div>
+        <div className={`cardsContainer`} >
+            <div className={`contentCard ${style.createNewCard}`} >
                 <h2>Create new poll</h2>
                 <Link to='/create'> Create </Link>
             </div>
-            <div>
+            <div className={`contentCard ${style.participateCard}`} >
                 <h2>Participate in a poll</h2>
                 <Link to='/participate'> Participate </Link>
             </div>

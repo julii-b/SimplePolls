@@ -1,0 +1,13 @@
+.createNewCard {
+    background-color: #8C90BA50;
+    border: 6px solid #452F6F;
+    display: grid;
+    place-items: center;
+}
+
+.participateCard {
+    background-color: #B98E9B50;
+    border: 6px solid #6F372E;
+    display: grid;
+    place-items: center;
+}
