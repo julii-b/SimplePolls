@@ -1,20 +1,32 @@
 .errorContainer {
-  background-color: #e08b8b50;
-  border: 6px solid #e28383;
-  position: fixed;
+  background-color: #f3c8c8d6;
+  border: 6px solid #c45c5c;
+  position: absolute;
   top: 50%;
   left: 50%;
   width: 30em;
   max-width: 65vw;
   height: 30vh;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -65%);
   display: grid;
   place-items: center;
 }
 .errorContainer div {
-  margin: -1em 0 1em 0 0;
+  margin: -1em 0 1.5em 0;
 }
 .errorContainer h2 {
   margin: 0;
   font-size: 1.8em;;
+}
+
+.errorButton {
+  background-color: #c45c5c60 !important;
+  border-color: #c45c5c !important;
+  width: 65%;
+  margin-bottom: -1em;
+}
+.errorButton:hover,
+.errorButton:focus,
+.errorButton:active {
+  background-color: #c45c5c !important;
 }

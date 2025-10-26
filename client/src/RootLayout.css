@@ -43,3 +43,39 @@
   max-height: 110vw;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+.button,
+a.button {
+  color: black;
+  background-color: #BA8F9E80;
+  border-color: #6F2F5D;
+  display: inline-block;
+  font-size: 1.1em;
+  font-weight: 600;
+  text-decoration: none;
+  border-width: 3px 6px 7px 3px;
+  border-style: solid;
+  border-radius: 12px;
+  padding: 0.7em 1.6em;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+.button:hover,
+a.button:hover,
+.button:focus,
+a.button:focus,
+.button:active,
+a.button:active {
+  color: white;
+  background-color: #6F2F5D;
+  text-decoration: underline;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+.button:disabled,
+a.button:disabled {
+  background-color: #6F2F5D40;
+  border-color: #6F2F5D20;
+  cursor: not-allowed;
+  box-shadow: none;
+}

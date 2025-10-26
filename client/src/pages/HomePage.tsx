@@ -10,12 +10,12 @@ const HomePage = () => {
     return (
         <div className={`cardsContainer`} >
             <div className={`contentCard ${style.createNewCard}`} >
-                <h2>Create new poll</h2>
-                <Link to='/create'> Create </Link>
+                <img src="./../LogoCreate.png" alt="Create Poll" className={style.createNewLogo}/>
+                <Link className={`button ${style.createNewButton}`} to='/create'> Create a new poll </Link>
             </div>
             <div className={`contentCard ${style.participateCard}`} >
-                <h2>Participate in a poll</h2>
-                <Link to='/participate'> Participate </Link>
+                <img src="./../LogoParticipate.png" alt="Participate Poll" className={style.participateLogo}/>
+                <Link className={`button ${style.participateButton}`} to='/participate'> Participate in a poll </Link>
             </div>
         </div>
     );

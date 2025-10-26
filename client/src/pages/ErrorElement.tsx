@@ -26,12 +26,16 @@ const ErrorPage = () => {
       </div>
       <Link
         to={window.location.pathname}
+        className={`button ${styles.errorButton}`}
         onClick={(e) => {
           e.preventDefault();
           window.location.reload();
         }}
       >Reload page</Link>
-      <Link to='/'>Go to home page</Link>
+      <Link
+        className={`button ${styles.errorButton}`}
+        to='/'
+      >Go to home page</Link>
     </div>
   );
 }
