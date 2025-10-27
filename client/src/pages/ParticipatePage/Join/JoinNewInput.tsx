@@ -1,5 +1,6 @@
 import { useState, type JSX } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import styles from './JoinPage.module.css';
 
 
 /**
@@ -10,16 +11,30 @@ import { Link } from 'react-router-dom';
 const JoinNewInput = (): JSX.Element => {
 
   const [joinPollId, setJoinPollId] = useState<string>('');
+  const navigate = useNavigate();
+  
   return(
-    <>
+    <form
+      className={styles.joinNewInputContainer}
+      onSubmit={(e) => {
+        e.preventDefault();
+        navigate('/participate/'+joinPollId);
+      }}
+    >
       <input
         type='number'
         value={joinPollId}
         min='1'
+        placeholder="Type poll's ID"
+        className={`inputField ${styles.pollIdInput}`}
         onChange={(e) => setJoinPollId(e.target.value)}
       />
-      <Link to={'/participate/'+joinPollId} >Join</Link>
-    </>
+      <button
+        type='submit'
+        disabled={joinPollId === ''}
+        className={`button ${styles.joinButton}`}
+      >Open</button>
+    </form>
   );
 }
 export default JoinNewInput;

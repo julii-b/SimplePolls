@@ -1,6 +1,7 @@
 import type { JSX } from "react";
 import type { Poll } from "../../../types/poll";
 import { Link } from "react-router-dom";
+import styles from './JoinPage.module.css';
 
 /**
  * Renders an array of polls with links to the polls.
@@ -15,19 +16,23 @@ const PollList = ({polls}: {polls: Poll[]}): JSX.Element => {
 
   for (let poll of polls) {
     const pollJSX = (
-      <div key={poll.id}>
+      <>
         <Link
+          className={`button ${styles.pollListButton}`}
+          key={poll.id}
           to={'/participate/'+poll.id}
-        >{poll.questionText}</Link><br />
-      </div>
+        ><span>
+          {poll.questionText}
+        </span></Link><br />
+      </>
     );
     pollsJSX.push(pollJSX);
   }
 
   return (
-    <>
+    <div className={styles.pollListContainer}>
      {pollsJSX}
-    </>
+    </div>
   );
 }
 export default PollList;
