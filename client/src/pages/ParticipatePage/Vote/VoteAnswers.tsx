@@ -54,6 +54,12 @@ const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: 
         </div>
         <div className={styles.answerResult}>
           {answer.votes.length === 0 ? ' 0%' : (answer.votes.length/totalVotes*100).toFixed(0)+'%'}
+          <div className={styles.progressBarContainer}>
+            <div
+              className={styles.progressBar}
+              style={{width: totalVotes === 0 ? '0%' : (answer.votes.length/totalVotes*100).toFixed(0)+'%'}}
+              />
+          </div>
         </div>
       </Form>
     );

@@ -136,11 +136,31 @@
   font-weight: 600;
   line-height: 1.2;
   overflow-wrap: anywhere;
-  padding-top: 0.5em;
+  padding: 0.5em 0;
   flex-grow: 1;
 }
 
 .answerResult {
-  padding-top: 0.5em;
+  padding-top: 0;
   font-weight: 600;
+}
+.progressBarContainer {
+  width: 5em;
+  height: 0.5em;
+  border-color: #6F372E;
+  border-style: solid;
+  border-width: 2px 4px 4px 2px;
+  background-color: #BA8F9E80;
+  border-radius: 100px;
+  margin-top: 0;
+}
+@media (max-width: 600px) {
+  .progressBarContainer {
+    width: 3em;
+  }
+}
+.progressBar {
+  width: 100%;
+  height: 100%;
+  background-color: #6F372E;
 }
