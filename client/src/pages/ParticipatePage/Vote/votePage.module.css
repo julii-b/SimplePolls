@@ -1,0 +1,146 @@
+.button {
+  background-color: #BA8F9E80 !important;
+  border-color: #6F372E !important;
+}
+.button:not(:disabled):hover,
+.button:not(:disabled):focus,
+.button:not(:disabled):active {
+  background-color: #6F372E !important;
+}
+
+.votePageContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding-right: 10px;
+  scrollbar-color: #BA8F9E #ffffff00;
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 0.8em;
+  min-height: 4em;
+  padding-bottom: 1.5em;
+  border-bottom: 3px solid #6F2F2F;
+}
+@media (max-width: 600px) {
+  .headerContainer {
+    min-height:fit-content;
+  }
+}
+
+.questionText {
+  display: block;
+  text-align: left;
+  min-width: 4em;
+  max-height: 7em;
+  padding: 1.1em 1em;
+  font-size: 1.1em;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+  line-height: 1.2;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+@media (max-width: 600px) {
+  .questionText {
+    padding: 0.6em 0.1em 0.6em 0.1em;
+  }
+}
+
+.headerContainer .button {
+  min-width: 3.4em !important;
+  max-width: 3.4em !important;
+  min-height: 3.4em !important;
+  max-height: 3.4em !important;
+  padding: 0;
+}
+@media (max-width: 600px) {
+  .headerContainer .button {
+    min-width: 2.5em !important;
+    max-width: 2.5em !important;
+    min-height: 2.5em !important;
+    max-height: 2.5em !important;
+  }
+  
+}
+
+.headerRightContainer {
+  display: flex;
+  flex-wrap: nowrap;
+  align-content: flex-start;
+  gap: 0.8em;
+}
+@media (max-width: 600px) {
+  .headerRightContainer {
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    width: 2.5em;
+    gap: 0.3em;
+  }
+}
+
+.pollId {
+  text-align: right;
+  font-style: italic;
+  margin: 0;
+  font-size: 1em;
+}
+
+.answersContainer {
+  overflow-y: auto;
+}
+
+.answerContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  padding: 0.8em;
+  border-bottom: 2px solid #BA8F9E80;
+}
+.answerContainer:last-child {
+  border-bottom: none;
+}
+
+.checkBox {
+  color: #6F372E;
+  width: 2.5em;
+  height: 2.5em;
+  min-width: 2.5em;
+  min-height: 2.5em;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+  padding: 0;
+}
+.checkBox:hover,
+.checkBox:focus,
+.checkBox:active {
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.checkMark {
+  scale: 1.7;
+}
+
+.answerText {
+  display: block;
+  text-align: left;
+  font-size: 1.1em;
+  font-weight: 600;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  padding-top: 0.5em;
+  flex-grow: 1;
+}
+
+.answerResult {
+  padding-top: 0.5em;
+  font-weight: 600;
+}

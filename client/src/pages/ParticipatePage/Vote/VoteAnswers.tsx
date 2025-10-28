@@ -1,6 +1,9 @@
 import type { JSX } from "react";
 import type { Answer } from "../../../types/answer";
 import { Form } from "react-router-dom";
+import styles from './votePage.module.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 
 /**
@@ -24,32 +27,43 @@ const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: 
   let answersJSX: JSX.Element[] = [];
   for (const answer of answers) {
     const answerJSX: JSX.Element = (
-      <div key={'answer'+answer.id}>
-        <Form method='post'>
-          <input // store answer id in form
-            type='hidden'
-            name='answerId'
-            value={answer.id}
-          />
-          {votedAnswers.includes(answer.id) ?
-          (<button // button if user voted for the answer
-            type='submit'
-            name='action'
-            value={'removeVote'}
-          >☑</button>) :
-          (<button // Button of user didn't vote for the answer
-            type='submit'
-            name='action'
-            value={'castVote'}
-          >☐</button>)}
+      <Form method='post'
+        key={'answer'+answer.id}
+        className={styles.answerContainer}
+      >
+        <input // store answer id in form
+          type='hidden'
+          name='answerId'
+          value={answer.id}
+        />
+        {votedAnswers.includes(answer.id) ?
+        (<button // button if user voted for the answer
+          type='submit'
+          name='action'
+          className={`${styles.checkBox} ${styles.button} button`}
+          value={'removeVote'}
+        ><FontAwesomeIcon className={styles.checkMark} icon={faCheck} /></button>) :
+        (<button // Button of user didn't vote for the answer
+          type='submit'
+          name='action'
+          className={`${styles.checkBox} ${styles.button} button`}
+          value={'castVote'}
+        > </button>)}
+        <div className={styles.answerText}>
           {answer.answerText}
-          {answer.votes.length === 0 ? ' - 0%' : ' - '+(answer.votes.length/totalVotes*100)+'%'}
-        </Form>
-      </div>
+        </div>
+        <div className={styles.answerResult}>
+          {answer.votes.length === 0 ? ' 0%' : (answer.votes.length/totalVotes*100).toFixed(0)+'%'}
+        </div>
+      </Form>
     );
     answersJSX.push(answerJSX);
   }
 
-  return <>{answersJSX}</>;
+  return (
+    <div className={styles.answersContainer}>
+      {answersJSX}
+    </div>
+  );
 }
 export default VoteAnswers;
