@@ -2,6 +2,9 @@ import { Form } from 'react-router-dom';
 import type { Poll } from '../../types/poll';
 import { useState } from 'react';
 import EditAnswers from './CreateAnswers';
+import styles from './CreatePage.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 
 
 /**
@@ -17,7 +20,10 @@ const EditPoll = ({poll}: {poll?: Poll|undefined}) => {
   const [questionText, setQuestionText] = useState(poll? poll.questionText : '')
 
   return (
-    <Form method='post' >
+    <Form
+      method='post'
+      className={styles.votePageContainer}
+    >
       {poll && ( // store pollId as hidden input if poll was passed
         <input 
           type='hidden'
@@ -25,20 +31,27 @@ const EditPoll = ({poll}: {poll?: Poll|undefined}) => {
           value={poll.id}
         />
       )}
-      <input
-        name={poll ? 'existingQuestion-'+poll.id : 'newQuestion'} // 'existingQuestion-<id>' or 'newQuestion', so action function knows what to do
-        placeholder="Type you poll's question..."
-        value={questionText}
-        onChange={(e)=>{setQuestionText(e.target.value)}}
-      /><br/>
+      <div className={styles.headerContainer}>
+
+        <textarea
+          name={poll ? 'existingQuestion-'+poll.id : 'newQuestion'} // 'existingQuestion-<id>' or 'newQuestion', so action function knows what to do
+          placeholder="Type your poll's question..."
+          className={`inputField ${styles.questionInput}`}
+          value={questionText}
+          onChange={(e)=>{setQuestionText(e.target.value)}}
+        />
+
+        <button
+          type='submit'
+          className={`button ${styles.button} ${styles.saveButton}`}
+          name='action' // action: save - can later be used to determine if form was submitted using save button
+          value='save'
+        ><FontAwesomeIcon icon={faFloppyDisk} /></button>
+
+      </div>
 
       <EditAnswers answers={poll? poll.answers : []} />
 
-      <button
-        type='submit'
-        name='action' // action: save - can later be used to determine if form was submitted using save button
-        value='save'
-      >Save</button>
     </Form>
   );
 }

@@ -1,5 +1,8 @@
 import { useEffect, useState, type JSX } from "react";
 import type { Answer } from "../../types/answer";
+import styles from './CreatePage.module.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 type NewAnswer = { // Type declaration for a new answer, which will be later stored in the db
   newAnswerIndex: number; // Index of the new answer
@@ -13,7 +16,7 @@ type NewAnswer = { // Type declaration for a new answer, which will be later sto
  * @param { Answer[] } props.answers - Array of all already existing answers.
  * @returns { JSX.Element[] }
  */
-const EditAnswers = ({answers}: {answers: (Answer|NewAnswer)[]}): JSX.Element[] => {
+const EditAnswers = ({answers}: {answers: (Answer|NewAnswer)[]}): JSX.Element => {
 
   const [answersToRender, setAnswersToRender] = useState<(Answer|NewAnswer)[]>(answers); // Array of all answers, old and new
 
@@ -38,12 +41,26 @@ const EditAnswers = ({answers}: {answers: (Answer|NewAnswer)[]}): JSX.Element[] 
   let answersJSX: JSX.Element[] = [];
   for (const answer of answersToRender){
     if (!('newAnswerIndex' in answer)){ // If answer is an answer from the db
-      answersJSX.push(<EditExistingAnswer key={'existingAnswer-'+answer.id} answer={answer}/>);
+      answersJSX.push(
+        <EditExistingAnswer
+          key={'existingAnswer-'+answer.id}
+          answer={answer}
+        />
+      );
     } else { // If answer is a new answer
-      answersJSX.push(<EditNewAnswer key={'newAnswer-'+answer.newAnswerIndex} answer={answer}/>);
+      answersJSX.push( 
+        <EditNewAnswer
+          key={'newAnswer-'+answer.newAnswerIndex}
+          answer={answer}
+        />
+      );
     }
   }
-  return answersJSX;
+  return (
+    <div
+      className={styles.answersContainer}
+    >{answersJSX}</div>
+  );
 }
 export default EditAnswers;
 
@@ -60,20 +77,22 @@ const EditExistingAnswer = ({answer}: {answer: Answer}): JSX.Element => {
   const [answerText, setAnswerText] = useState(answer.answerText);
 
   return (
-    <>
-      <input
+    <div className={`${styles.answerContainer}`} >
+      <textarea
+        className={`inputField ${styles.answerInput}`}
         name={'existingAnswer-'+answer.id} // 'existingAnswer-<id>', so action function knows what to do
         value={answerText}
         onChange={(e) => {setAnswerText(e.target.value)}}
       />
       <button
         type='submit'
+        className={`button ${styles.button} ${styles.deleteAnswerButton}`}
         name='action' // action: delete - can later be used to determine if form was submitted using delete button
         value={'delete-'+answer.id} // 'delete-<id>', so action function knows which answer to delete
       >
-        Delete
-      </button> <br />
-    </>
+        <FontAwesomeIcon icon={faTrashCan} />
+      </button>
+    </div>
   );
 }
 
@@ -90,17 +109,18 @@ const EditNewAnswer = ({answer}: {answer: NewAnswer}): JSX.Element => {
   const [answerText, setAnswerText] = useState('');
   const [firstChange, setFirstChange] = useState(true); // is initially true, and false after the user typed in the input field
   return (
-    <>
-      <input
+    <div className={`${styles.answerContainer}`} >
+      <textarea
+        className={`inputField ${styles.answerInput}`}
         name={'newAnswer-'+answer.newAnswerIndex} // 'newAnswer', so action function knows what to do
-        placeholder='Type to add a new answer to your poll...'
+        placeholder='Type to add a new answer...'
         value={answerText}
         onChange={(e) => {
           if (firstChange) answer.onNewAnswer(); // If the current change is the first change, create new answer input field
           setFirstChange(false);
           setAnswerText(e.target.value)
         }}
-      /><br />
-    </>
+      />
+    </div>
   );
 }
