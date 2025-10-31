@@ -1,10 +1,9 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import type { Poll } from "../../../types/poll";
 import type { JSX } from "react";
-import VoteAnswers from "./VoteAnswers";
+import VotePageAnswers from "./Answers";
+import VotePageHeader from "./Header";
 import styles from './votePage.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShare, faPencil, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 
 /**
@@ -18,35 +17,18 @@ const VotePageContainer = (): JSX.Element	 => {
 
   return (
     <div className={styles.votePageContainer}>
-      <div className={styles.headerContainer}>
 
-        <Link
-          to='/participate'
-          className={`button ${styles.button}`}
-        > <FontAwesomeIcon icon={faChevronLeft} /> </Link>
+      <VotePageHeader
+        questionText={poll.questionText}
+        userIsOwner={createdPolls.includes(poll.id)}
+        pollId={poll.id}
+      />
 
-        <div className={styles.questionText}>
-          {poll.questionText}<br />
-        </div>
+      <VotePageAnswers 
+        answers={poll.answers}
+        votedAnswers={votedAnswers}
+      />
 
-        <div className={styles.headerRightContainer}>
-          <button
-            className={`button ${styles.button}`}
-          > <FontAwesomeIcon icon={faShare} /> </button>
-          
-          {createdPolls.includes(poll.id) && //Link to edit for owner of poll
-            <Link
-              to={'/create/'+poll.id}
-              className={`button ${styles.button}`}
-            > <FontAwesomeIcon icon={faPencil} /> </Link>
-          }
-        </div>
-        
-      </div>
-      <div className={styles.pollId}>
-        Poll ID: {poll.id} <br />
-      </div>
-      <VoteAnswers answers={poll.answers} votedAnswers={votedAnswers} />
     </div>
   );
 

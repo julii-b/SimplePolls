@@ -14,17 +14,15 @@ const PollList = ({polls}: {polls: Poll[]}): JSX.Element => {
 
   let pollsJSX: JSX.Element[] = [];
 
-  for (let poll of polls) {
+  for (let poll of polls) { // create array with one link per poll
     const pollJSX = (
-      <>
-        <Link
-          className={`button ${styles.pollListButton}`}
-          key={poll.id}
-          to={'/participate/'+poll.id}
-        ><span>
-          {poll.questionText}
-        </span></Link><br />
-      </>
+      <Link
+        className={`button ${styles.pollListButton}`}
+        key={poll.id}
+        to={'/participate/'+poll.id}
+      ><span>
+        {poll.questionText}
+      </span></Link>
     );
     pollsJSX.push(pollJSX);
   }

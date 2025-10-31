@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import type { Poll } from "../../../types/poll";
-import JoinNewInput from './JoinNewInput';
+import OpenPollForm from './OpenPollForm';
 import PollList from "./PollList";
 import styles from './JoinPage.module.css';
 
@@ -16,7 +16,7 @@ const JoinPageContainer = () => {
   return (
     <>
       <div className={styles.joinPageContainer}>
-        <JoinNewInput />
+        <OpenPollForm />
         <PollList polls={polls} />
       </div>
     </>

@@ -16,12 +16,12 @@ const JoinNewInput = (): JSX.Element => {
   return(
     <form
       className={styles.joinNewInputContainer}
-      onSubmit={(e) => {
+      onSubmit={(e) => { // on submit navigate to the poll page
         e.preventDefault();
         navigate('/participate/'+joinPollId);
       }}
     >
-      <input
+      <input // input field for poll id
         type='number'
         value={joinPollId}
         min='1'
@@ -29,7 +29,7 @@ const JoinNewInput = (): JSX.Element => {
         className={`inputField ${styles.pollIdInput}`}
         onChange={(e) => setJoinPollId(e.target.value)}
       />
-      <button
+      <button // button to open poll
         type='submit'
         disabled={joinPollId === ''}
         className={`button ${styles.joinButton}`}

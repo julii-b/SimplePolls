@@ -28,31 +28,44 @@ const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: 
   for (const answer of answers) {
     const answerJSX: JSX.Element = (
       <Form method='post'
-        key={'answer'+answer.id}
-        className={styles.answerContainer}
+      key={'answer'+answer.id}
+      className={styles.answerContainer}
       >
         <input // store answer id in form
-          type='hidden'
-          name='answerId'
-          value={answer.id}
+        type='hidden'
+        name='answerId'
+        value={answer.id}
         />
-        {votedAnswers.includes(answer.id) ?
-        (<button // button if user voted for the answer
+
+        {votedAnswers.includes(answer.id)
+        ? (
+          <button // button if user voted for the answer
           type='submit'
           name='action'
           className={`${styles.checkBox} ${styles.button} button`}
           value={'removeVote'}
-        ><FontAwesomeIcon className={styles.checkMark} icon={faCheck} /></button>) :
-        (<button // Button of user didn't vote for the answer
+          >
+            <FontAwesomeIcon className={styles.checkMark} icon={faCheck} />
+          </button>
+        ) : (
+          <button // Button if user didn't vote for the answer
           type='submit'
           name='action'
           className={`${styles.checkBox} ${styles.button} button`}
           value={'castVote'}
-        > </button>)}
-        <div className={styles.answerText}>
+          >
+          </button>
+        )}
+
+        <div // answer text
+        className={styles.answerText}
+        >
           {answer.answerText}
         </div>
-        <div className={styles.answerResult}>
+
+        <div // answer result (percentage and progress bar)
+        className={styles.answerResult}
+        >
           {answer.votes.length === 0 ? ' 0%' : (answer.votes.length/totalVotes*100).toFixed(0)+'%'}
           <div className={styles.progressBarContainer}>
             <div
@@ -61,6 +74,7 @@ const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: 
               />
           </div>
         </div>
+        
       </Form>
     );
     answersJSX.push(answerJSX);

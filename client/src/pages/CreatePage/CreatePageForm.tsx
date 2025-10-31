@@ -1,7 +1,7 @@
 import { Form } from 'react-router-dom';
 import type { Poll } from '../../types/poll';
 import { useState } from 'react';
-import EditAnswers from './CreateAnswers';
+import InputsAnswers from './InputsAnswers/InputsAnswersContainer';
 import styles from './CreatePage.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
@@ -50,7 +50,7 @@ const EditPoll = ({poll}: {poll?: Poll|undefined}) => {
 
       </div>
 
-      <EditAnswers answers={poll? poll.answers : []} />
+      <InputsAnswers answers={poll? poll.answers : []} />
 
     </Form>
   );
