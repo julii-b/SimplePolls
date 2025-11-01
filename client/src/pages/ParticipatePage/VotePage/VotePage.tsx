@@ -11,7 +11,7 @@ import styles from './votePage.module.css';
  * 
  * @returns { JSX.Element }
  */
-const VotePageContainer = (): JSX.Element	 => {
+const VotePage = (): JSX.Element	 => {
 
   let { poll, votedAnswers, createdPolls }: {poll: Poll, votedAnswers: number[], createdPolls: number[]} = useLoaderData();
 
@@ -33,4 +33,8 @@ const VotePageContainer = (): JSX.Element	 => {
   );
 
 };
-export default VotePageContainer;
+
+
+export default VotePage;
+export { loader } from "./loader";
+export { action } from "./action";

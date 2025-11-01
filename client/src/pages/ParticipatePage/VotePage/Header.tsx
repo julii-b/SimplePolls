@@ -1,5 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom";
-import type { Poll } from "../../../types/poll";
+import { Link } from "react-router-dom";
 import type { JSX } from "react";
 import styles from './votePage.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

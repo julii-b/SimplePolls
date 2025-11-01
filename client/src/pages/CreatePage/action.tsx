@@ -15,7 +15,7 @@ import * as answerService from '../../services/answerService';
  * @param { { request: Request } } param - Request object
  * @returns { Promise<void> }
  */
-async function action({request}: {request: Request}): Promise<void|Response> {
+export async function action({request}: {request: Request}): Promise<void|Response> {
 
   const formData: FormData = await request.formData();
 
@@ -85,4 +85,3 @@ async function action({request}: {request: Request}): Promise<void|Response> {
   else if (performedAction === 'pollChanged') return redirect(`/participate/${pollId}`);
   else if (performedAction === 'answerDeleted') return redirect(`/create/${pollId}`);
 }
-export default action;

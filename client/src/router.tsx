@@ -3,15 +3,10 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from './RootLayout.tsx';
 
 import HomePage from './pages/HomePage.tsx';
-import CreatePage from './pages/CreatePage/CreatePageContainer.tsx';
-import createPageLoader from './pages/CreatePage/createPageLoader.tsx';
-import createPageAction from './pages/CreatePage/createPageAction.tsx';
+import CreatePage, {loader as createLoader, action as createAction} from './pages/CreatePage/CreatePage.tsx';
 import ParticipatePage from './pages/ParticipatePage/ParticipatePageContainer.tsx';
-import JoinPage from './pages/ParticipatePage/Join/JoinPageContainer.tsx';
-import { loader as joinPageLoader } from './pages/ParticipatePage/Join/joinPageLoader.tsx';
-import VotePage from './pages/ParticipatePage/Vote/VotePageContainer.tsx';
-import { loader as votePageLoader } from './pages/ParticipatePage/Vote/votePageLoader.tsx';
-import { action as votePageAction } from './pages/ParticipatePage/Vote/votePageAction.tsx';
+import JoinPage, { loader as joinLoader } from './pages/ParticipatePage/JoinPage/JoinPage.tsx';
+import VotePage, { loader as voteLoader, action as voteAction } from './pages/ParticipatePage/VotePage/VotePage.tsx';
 import ErrorElement from './pages/ErrorElement.tsx';
 
 const router = createBrowserRouter([
@@ -30,15 +25,15 @@ const router = createBrowserRouter([
             children: [
                 {
                     index: true, // '/create'
-                    loader: createPageLoader,
-                    action: createPageAction,
+                    loader: createLoader,
+                    action: createAction,
                     element: <CreatePage />,
                     errorElement: <ErrorElement />
                 },
                 {
                     path: ':pollId', // '/create/:pollId'
-                    loader: createPageLoader,
-                    action: createPageAction,
+                    loader: createLoader,
+                    action: createAction,
                     element: <CreatePage />,
                     errorElement: <ErrorElement />
                 }
@@ -51,14 +46,14 @@ const router = createBrowserRouter([
             children: [
                 {
                     index: true, // '/participate'
-                    loader: joinPageLoader, // load list of all polls of user
+                    loader: joinLoader, // load list of all polls of user
                     element: <JoinPage />,
                     errorElement: <ErrorElement />
                 },
                 {
                     path: ':pollId', // '/participate/:pollId'
-                    loader: votePageLoader, // load poll and answers
-                    action: votePageAction, // submit vote/change poll/change answer/add answer/remove answer
+                    loader: voteLoader, // load poll and answers
+                    action: voteAction, // submit vote/change poll/change answer/add answer/remove answer
                     element: <VotePage />,
                     errorElement: <ErrorElement />
                 }

@@ -8,7 +8,7 @@ import * as pollService from "../../services/pollService";
  * @param { { [pollId] } } param.params - Parameters from the route
  * @returns { { poll } }
  */
-async function loader ( { params }: { params: { pollId?: string } }): Promise<{ poll: Poll|undefined }> {
+export async function loader ( { params }: { params: { pollId?: string } }): Promise<{ poll: Poll|undefined }> {
 
   const pollId: string|undefined = params.pollId;
 
@@ -20,4 +20,3 @@ async function loader ( { params }: { params: { pollId?: string } }): Promise<{ 
 
   return { poll: poll };
 }
-export default loader;

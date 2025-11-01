@@ -9,7 +9,7 @@ import style from './CreatePage.module.css';
  * 
  * @returns 
  */
-const CreateContainer = (): JSX.Element => {
+const CreatePage = (): JSX.Element => {
 
   const loaderData = useLoaderData();
   let poll: Poll|undefined = loaderData.poll;
@@ -25,4 +25,7 @@ const CreateContainer = (): JSX.Element => {
     </div>
   );
 };
-export default CreateContainer;
+
+export default CreatePage;
+export { loader } from "./loader";
+export { action } from "./action";

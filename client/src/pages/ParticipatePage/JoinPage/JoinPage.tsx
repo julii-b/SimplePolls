@@ -9,7 +9,7 @@ import styles from './JoinPage.module.css';
  * 
  * @returns { JSX.Element }
  */
-const JoinPageContainer = () => {
+const JoinPage = () => {
     
   const { polls }: { polls: Poll[]} = useLoaderData();
 
@@ -22,4 +22,6 @@ const JoinPageContainer = () => {
     </>
   );
 }
-export default JoinPageContainer;
+
+export default JoinPage;
+export { loader } from "./loader";
