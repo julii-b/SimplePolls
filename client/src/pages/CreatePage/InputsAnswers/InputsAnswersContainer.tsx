@@ -1,6 +1,6 @@
 import { useEffect, useState, type JSX } from "react";
 import type { Answer } from "../../../types/answer";
-import styles from './../CreatePage.module.css';
+import stylesInpAnsws from './InputsAnswers.module.css';
 import InputExistingAnswer from "./InputExistingAnswer";
 import InputNewAnswer from "./InputNewAnswer";
 
@@ -62,7 +62,7 @@ const EditAnswers = ({answers}: {answers: (Answer|NewAnswer)[]}): JSX.Element =>
 
   return (
     <div
-    className={styles.answersContainer}
+    className={stylesInpAnsws.answersContainer}
     >{answersJSX}</div>
   );
 }

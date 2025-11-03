@@ -1,0 +1,25 @@
+.openPollFormContainer {
+  display: flex;
+  gap: 0.8em;
+  height: 4em;
+  padding-bottom: 1.5em;
+  border-bottom: 3px solid var(--participate-color);
+}
+
+.pollIdInput {
+  flex-grow: 3;
+  width: 50px;
+  border-color: var(--participate-color);
+}
+.joinButton {
+  flex-grow: 1;
+  width: 50px;
+  background-color: var(--participate-bg-color) !important;
+  border-color: var(--participate-color) !important;
+  box-sizing: border-box;
+}
+.joinButton:not(:disabled):hover,
+.joinButton:not(:disabled):focus,
+.joinButton:not(:disabled):active {
+  background-color: var(--participate-color) !important;
+}

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import type { JSX } from "react";
-import styles from './votePage.module.css';
+import stylesHeader from './Header.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShare, faPencil, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,25 +18,25 @@ const VotePageHeader = (
 
   return (
     <>
-      <div className={styles.headerContainer}>
+      <div className={stylesHeader.headerContainer}>
 
         <Link // back-button that leads to join-page
         to='/participate'
-        className={`button ${styles.button}`}
+        className={`button ${stylesHeader.button}`}
         >
           <FontAwesomeIcon icon={faChevronLeft} />
         </Link>
 
         <div // question text
-        className={styles.questionText}
+        className={stylesHeader.questionText}
         >
           {questionText}
         </div>
 
-        <div className={styles.headerRightContainer}>
+        <div className={stylesHeader.headerRightContainer}>
 
           <button // share-button (to be implemented)
-          className={`button ${styles.button}`}
+          className={`button ${stylesHeader.button}`}
           >
             <FontAwesomeIcon icon={faShare} />
           </button>
@@ -44,7 +44,7 @@ const VotePageHeader = (
           {userIsOwner && //Link to edit for owner of poll
             <Link
             to={'/create/'+pollId}
-            className={`button ${styles.button}`}
+            className={`button ${stylesHeader.button}`}
             >
               <FontAwesomeIcon icon={faPencil} />
             </Link>
@@ -52,7 +52,7 @@ const VotePageHeader = (
         </div>
       </div>
 
-      <div className={styles.pollId}>
+      <div className={stylesHeader.pollId}>
         Poll ID: {pollId}
       </div>
 

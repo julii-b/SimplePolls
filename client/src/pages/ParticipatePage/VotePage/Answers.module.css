@@ -1,0 +1,75 @@
+.answersContainer {
+  overflow-y: auto;
+}
+
+.answerContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  padding: 0.8em;
+  border-bottom: 2px solid #BA8F9E80;
+}
+.answerContainer:last-child {
+  border-bottom: none;
+}
+
+.checkBox {
+  color: var(--participate-color);
+  background-color: var(--participate-bg-color);
+  border-color: var(--participate-color);
+  width: 2.5em;
+  height: 2.5em;
+  min-width: 2.5em;
+  min-height: 2.5em;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+  padding: 0;
+}
+.checkBox:hover,
+.checkBox:focus,
+.checkBox:active {
+  width: 2.5em;
+  height: 2.5em;
+  background-color: var(--participate-color) !important;
+}
+
+.checkMark {
+  scale: 1.7;
+}
+
+.answerText {
+  display: block;
+  text-align: left;
+  font-size: 1.1em;
+  font-weight: 600;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  padding: 0.5em 0;
+  flex-grow: 1;
+}
+
+.answerResult {
+  padding-top: 0;
+  font-weight: 600;
+}
+.progressBarContainer {
+  width: 5em;
+  height: 0.5em;
+  border-color: var(--participate-color);
+  border-style: solid;
+  border-width: 2px 4px 4px 2px;
+  background-color: var(--participate-bg-color);
+  border-radius: 100px;
+  margin-top: 0;
+}
+@media (max-width: 600px) {
+  .progressBarContainer {
+    width: 3em;
+  }
+}
+.progressBar {
+  width: 100%;
+  height: 100%;
+  background-color: var(--participate-color);
+}

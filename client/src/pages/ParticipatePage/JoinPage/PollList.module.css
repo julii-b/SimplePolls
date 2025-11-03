@@ -1,0 +1,47 @@
+.pollListContainer {
+  display: flex;
+  flex-flow: wrap;
+  overflow-y: auto;
+  margin-top: 1.5em;
+  gap: 1em;
+  column-gap: 0;
+}
+.pollListButton {
+  width: 100%;
+  margin: 0;
+  border-color: var(--participate-color) !important;
+  background-color: var(--participate-bg-color) !important;
+  justify-content: flex-start !important;
+  height: 2.5em;
+}
+.pollListButton:hover,
+.pollListButton:focus,
+.pollListButton:active {
+  background-color: var(--participate-color) !important;
+  text-decoration: none !important;
+}
+.pollListButton::before {
+  content: "➤";
+  color: var(--participate-color);
+  font-weight: bold;
+  position: relative;
+  font-size: 1.3em;
+  width: 1em;
+  text-decoration: none;
+  padding-left: 0;
+  padding-right: 0.7em;
+}
+.pollListButton:hover::before,
+.pollListButton:focus::before,
+.pollListButton:active::before {
+  text-decoration: none;
+  color: white !important;
+  padding-left: 0.4em;
+  padding-right: 0.3em;
+}
+.pollListButton span {
+  margin-left: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+} 

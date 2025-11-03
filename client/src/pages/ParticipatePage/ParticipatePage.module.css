@@ -1,4 +1,4 @@
 .participatePageCard {
-  background-color: #BA8C8C50;
-  border: 6px solid #6F2F2F;
+  background-color: var(--participate-bg-color);
+  border: 6px solid var(--participate-color);
 }

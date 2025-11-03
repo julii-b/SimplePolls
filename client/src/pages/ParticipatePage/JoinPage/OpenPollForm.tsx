@@ -1,6 +1,6 @@
 import { useState, type JSX } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styles from './JoinPage.module.css';
+import { Form, useNavigate } from 'react-router-dom';
+import stylesOpenPollForm from './OpenPollForm.module.css';
 
 
 /**
@@ -8,14 +8,14 @@ import styles from './JoinPage.module.css';
  * 
  * @returns { JSX.Element }
  */
-const JoinNewInput = (): JSX.Element => {
+const OpenPollForm = (): JSX.Element => {
 
   const [joinPollId, setJoinPollId] = useState<string>('');
   const navigate = useNavigate();
   
   return(
-    <form
-      className={styles.joinNewInputContainer}
+    <Form
+      className={stylesOpenPollForm.openPollFormContainer}
       onSubmit={(e) => { // on submit navigate to the poll page
         e.preventDefault();
         navigate('/participate/'+joinPollId);
@@ -26,15 +26,15 @@ const JoinNewInput = (): JSX.Element => {
         value={joinPollId}
         min='1'
         placeholder="Type poll's ID"
-        className={`inputField ${styles.pollIdInput}`}
+        className={`inputField ${stylesOpenPollForm.pollIdInput}`}
         onChange={(e) => setJoinPollId(e.target.value)}
       />
       <button // button to open poll
         type='submit'
         disabled={joinPollId === ''}
-        className={`button ${styles.joinButton}`}
+        className={`button ${stylesOpenPollForm.joinButton}`}
       >Open</button>
-    </form>
+    </Form>
   );
 }
-export default JoinNewInput;
+export default OpenPollForm;

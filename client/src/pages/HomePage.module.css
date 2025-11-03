@@ -1,25 +1,19 @@
-.createNewCard {
-  background-color: #8C90BA50;
-  border: 6px solid #452F6F;
-  display: grid;
-  place-items: center;
-}
-
-.participateCard {
-  background-color: #B98E9B50;
-  border: 6px solid #6F372E;
-  display: grid;
-  place-items: center;
-}
-
 .createNewLogo, .participateLogo {
   width: 80%;
   max-width: 40vh;
 }
 
+
+.createNewCard {
+  background-color: var(--create-bg-color);
+  border: 6px solid var(--create-color);
+  display: grid;
+  place-items: center;
+}
+
 .createNewButton {
-  background-color: #8E92BAC0 !important;
-  border-color: #452F6F !important;
+  background-color: var(--create-bg-color) !important;
+  border-color: var(--create-color) !important;
   width: 70%;
   height: 4em;
   margin-bottom: -1em;
@@ -27,12 +21,20 @@
 .createNewButton:hover,
 .createNewButton:focus,
 .createNewButton:active {
-  background-color: #452F6F !important;
+  background-color: var(--create-color) !important;
+}
+
+
+.participateCard {
+  background-color: var(--participate-bg-color);
+  border: 6px solid var(--participate-color);
+  display: grid;
+  place-items: center;
 }
 
 .participateButton {
-  background-color: #BA8F9E80 !important;
-  border-color: #6F372E !important;
+  background-color: var(--participate-bg-color) !important;
+  border-color: var(--participate-color) !important;
   width: 70%;
   height: 4em;
   margin-bottom: -1em;
@@ -40,5 +42,5 @@
 .participateButton:hover,
 .participateButton:focus,
 .participateButton:active {
-  background-color: #6F372E !important;
+  background-color: var(--participate-color) !important;
 }

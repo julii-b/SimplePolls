@@ -14,6 +14,21 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem 1.5rem;
+  text-align: center;
+
+  --default-color: #6F2F5D;
+  --default-bg-color: #B38EBB50;
+  --create-color: #452F6F;
+  --create-bg-color: #8C90BA50;
+  --participate-color: #6F2F2F;
+  --participate-bg-color: #BA8F9E80;
+}
+
 a {
   font-weight: 500;
   color: #646cff;

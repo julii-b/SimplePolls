@@ -1,5 +1,5 @@
 import { Link, Outlet, useNavigation } from 'react-router-dom';
-import './RootLayout.css'
+import stylesRootLayout from './RootLayout.module.css'
 import LoadingPage from './pages/LoadingPage.tsx';
 
 
@@ -10,10 +10,10 @@ const RootLayout = () => {
   return (
     <>
       <Link to='/'>
-        <h1 className='simplePollsTitle'>
-          <span className='simpleTitle'>Simple</span>
+        <h1 className={stylesRootLayout.simplePollsTitle}>
+          <span className={stylesRootLayout.simpleTitle}>Simple</span>
           <wbr />
-          <span className='pollsTitle'>Polls</span>
+          <span className={stylesRootLayout.pollsTitle}>Polls</span>
         </h1>
       </Link>
       { navigation.state === 'loading' || navigation.state === 'submitting'

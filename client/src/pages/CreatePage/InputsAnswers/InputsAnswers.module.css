@@ -1,0 +1,49 @@
+.answersContainer {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 100%;
+  margin-top: 1.5em;
+}
+
+.answerContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 0.8em;
+  align-items: center;
+}
+.answerContainer > .answerInput {
+  width: 100px;
+  flex-grow: 1;
+  border-color: var(--create-color) !important;
+  height: 3.2em;
+  min-height: 3.2em;
+  max-height: 10em;
+}
+.answerContainer > .answerInput::placeholder {
+  color: var(--create-color);
+}
+.answerContainer > .deleteAnswerButton {
+  aspect-ratio: 1;
+  height: 3.2em;
+  width: 3.2em;
+  background-color: var(--create-bg-color);
+  border-color: var(--create-color);
+}
+.answerContainer > .deleteAnswerButton:hover,
+.answerContainer > .deleteAnswerButton:focus,
+.answerContainer > .deleteAnswerButton:active {
+  background-color: var(--create-color);
+  color: var(--create-color);
+}
+@media (max-width: 600px) {
+  .answerContainer > .answerInput {
+    min-height: 3.2em;
+    height: 3.2em;
+  }
+  .answerContainer > .deleteAnswerButton {
+    height: 3.2em;
+    width: 2.5em;
+  }
+}

@@ -1,5 +1,5 @@
 import { useState, type JSX } from "react";
-import styles from '../CreatePage.module.css';
+import stylesInpAnsws from './InputsAnswers.module.css';
 import type { NewAnswer } from "./InputsAnswersContainer";
 
 /**
@@ -17,10 +17,10 @@ const InputNewAnswer = ({answer}: {answer: NewAnswer}): JSX.Element => {
   
   return (
 
-    <div className={`${styles.answerContainer}`} >
+    <div className={`${stylesInpAnsws.answerContainer}`} >
 
       <textarea // Input field for new answer, creates another answer input on first change
-        className={`inputField ${styles.answerInput}`}
+        className={`inputField ${stylesInpAnsws.answerInput}`}
         name={'newAnswer-'+answer.newAnswerIndex} // 'newAnswer', so action function knows what to do
         placeholder='Type to add a new answer...'
         value={answerText}

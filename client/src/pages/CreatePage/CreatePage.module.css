@@ -1,16 +1,6 @@
-.button {
-  background-color: #8C90BA50 !important;
-  border-color: #452F6F !important;
-}
-.button:not(:disabled):hover,
-.button:not(:disabled):focus,
-.button:not(:disabled):active {
-  background-color: #452F6F !important;
-}
-
 .createPageCard {
-  background-color: #8C90BA50;
-    border: 6px solid #452F6F;
+  background-color: var(--create-bg-color);
+    border: 6px solid var(--create-color);
 }
 
 .votePageContainer {
@@ -24,80 +14,4 @@
   scrollbar-color: #a293c1 #ffffff00;
 }
 
-.headerContainer {
-  display: flex;
-  flex-direction: row;
-  gap: 0.8em;
-  padding-bottom: 1.5em;
-  border-bottom: 3px solid #452F6F;
-}
 
-.questionInput {
-  flex-grow: 1;
-  width: 100px;
-  font-family: inherit;
-  border-color: #452F6F !important;
-  min-height: 4em;
-  height: 4em;
-  max-height: 10em;
-}
-@media (max-width: 600px) {
-  .questionInput {
-    min-height: 5.3em;
-    height: 5.3em;
-  }
-}
-
-.saveButton {
-  aspect-ratio: 1;
-  height: 4em;
-  width: 4em;
-}
-@media (max-width: 600px) {
-  .saveButton {
-    height: 5.3em;
-    width: 2.5em;
-  }
-}
-
-.answersContainer {
-  overflow-y: auto;
-}
-
-.answersContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  width: 100%;
-  margin-top: 1.5em;
-}
-
-.answerContainer {
-  display: flex;
-  flex-direction: row;
-  gap: 0.8em;
-  align-items: center;
-}
-.answerContainer > .answerInput {
-  width: 100px;
-  flex-grow: 1;
-  border-color: #452F6F !important;
-  height: 3.2em;
-  min-height: 3.2em;
-  max-height: 10em;
-}
-.answerContainer > .deleteAnswerButton {
-  aspect-ratio: 1;
-  height: 3.2em;
-  width: 3.2em;
-}
-@media (max-width: 600px) {
-  .answerContainer > .answerInput {
-    min-height: 3.2em;
-    height: 3.2em;
-  }
-  .answerContainer > .deleteAnswerButton {
-    height: 3.2em;
-    width: 2.5em;
-  }
-}

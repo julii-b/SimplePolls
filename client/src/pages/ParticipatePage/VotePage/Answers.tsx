@@ -1,7 +1,7 @@
 import type { JSX } from "react";
 import type { Answer } from "../../../types/answer";
 import { Form } from "react-router-dom";
-import styles from './votePage.module.css';
+import stylesAnswers from './Answers.module.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
@@ -29,7 +29,7 @@ const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: 
     const answerJSX: JSX.Element = (
       <Form method='post'
       key={'answer'+answer.id}
-      className={styles.answerContainer}
+      className={stylesAnswers.answerContainer}
       >
         <input // store answer id in form
         type='hidden'
@@ -42,34 +42,34 @@ const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: 
           <button // button if user voted for the answer
           type='submit'
           name='action'
-          className={`${styles.checkBox} ${styles.button} button`}
+          className={`${stylesAnswers.checkBox} ${stylesAnswers.button} button`}
           value={'removeVote'}
           >
-            <FontAwesomeIcon className={styles.checkMark} icon={faCheck} />
+            <FontAwesomeIcon className={stylesAnswers.checkMark} icon={faCheck} />
           </button>
         ) : (
           <button // Button if user didn't vote for the answer
           type='submit'
           name='action'
-          className={`${styles.checkBox} ${styles.button} button`}
+          className={`${stylesAnswers.checkBox} ${stylesAnswers.button} button`}
           value={'castVote'}
           >
           </button>
         )}
 
         <div // answer text
-        className={styles.answerText}
+        className={stylesAnswers.answerText}
         >
           {answer.answerText}
         </div>
 
         <div // answer result (percentage and progress bar)
-        className={styles.answerResult}
+        className={stylesAnswers.answerResult}
         >
           {answer.votes.length === 0 ? ' 0%' : (answer.votes.length/totalVotes*100).toFixed(0)+'%'}
-          <div className={styles.progressBarContainer}>
+          <div className={stylesAnswers.progressBarContainer}>
             <div
-              className={styles.progressBar}
+              className={stylesAnswers.progressBar}
               style={{width: totalVotes === 0 ? '0%' : (answer.votes.length/totalVotes*100).toFixed(0)+'%'}}
               />
           </div>
@@ -81,7 +81,7 @@ const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: 
   }
 
   return (
-    <div className={styles.answersContainer}>
+    <div className={stylesAnswers.answersContainer}>
       {answersJSX}
     </div>
   );

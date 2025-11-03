@@ -1,0 +1,46 @@
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 0.8em;
+  padding-bottom: 1.5em;
+  border-bottom: 3px solid var(--create-color);
+}
+
+.questionInput {
+  flex-grow: 1;
+  width: 100px;
+  font-family: inherit;
+  border-color: var(--create-color) !important;
+  min-height: 4em;
+  height: 4em;
+  max-height: 10em;
+}
+.questionInput::placeholder {
+  color: var(--create-color);
+}
+@media (max-width: 600px) {
+  .questionInput {
+    min-height: 5.3em;
+    height: 5.3em;
+  }
+}
+
+.saveButton {
+  aspect-ratio: 1;
+  height: 4em;
+  width: 4em;
+  color: var(--create-color);
+  background-color: var(--create-bg-color);
+  border-color: var(--create-color) !important;
+}
+.saveButton:not(:disabled):hover,
+.saveButton:not(:disabled):focus,
+.saveButton:not(:disabled):active {
+  background-color: var(--create-color);
+}
+@media (max-width: 600px) {
+  .saveButton {
+    height: 5.3em;
+    width: 2.5em;
+  }
+}

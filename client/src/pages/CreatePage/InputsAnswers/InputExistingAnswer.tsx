@@ -1,6 +1,6 @@
 import { useState, type JSX } from "react";
 import type { Answer } from "../../../types/answer";
-import styles from '../CreatePage.module.css';
+import stylesInpAnsws from './InputsAnswers.module.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
@@ -18,10 +18,10 @@ const InputExistingAnswer = ({answer}: {answer: Answer}): JSX.Element => {
 
   return (
 
-    <div className={`${styles.answerContainer}`} >
+    <div className={`${stylesInpAnsws.answerContainer}`} >
 
       <textarea // Input field for answer text
-      className={`inputField ${styles.answerInput}`}
+      className={`inputField ${stylesInpAnsws.answerInput}`}
       name={'existingAnswer-'+answer.id} // 'existingAnswer-<id>', so action function knows what to do
       value={answerText}
       onChange={(e) => {setAnswerText(e.target.value)}}
@@ -29,7 +29,7 @@ const InputExistingAnswer = ({answer}: {answer: Answer}): JSX.Element => {
 
       <button // delete button for this answer
       type='submit'
-      className={`button ${styles.button} ${styles.deleteAnswerButton}`}
+      className={`button ${stylesInpAnsws.deleteAnswerButton}`}
       name='action' // action: delete - can later be used to determine if form was submitted using delete button
       value={'delete-'+answer.id} // 'delete-<id>', so action function knows which answer to delete
       >
