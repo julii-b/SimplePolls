@@ -1,6 +1,6 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useRevalidator } from "react-router-dom";
 import type { Poll } from "../../../types/poll";
-import type { JSX } from "react";
+import { useEffect, type JSX } from "react";
 import VotePageAnswers from "./Answers";
 import VotePageHeader from "./Header";
 import styles from './votePage.module.css';
@@ -14,6 +14,17 @@ import styles from './votePage.module.css';
 const VotePage = (): JSX.Element	 => {
 
   let { poll, votedAnswers, createdPolls }: {poll: Poll, votedAnswers: number[], createdPolls: number[]} = useLoaderData();
+
+  // Use revalidator to periodically refresh the loader data:
+  const revalidator = useRevalidator();
+  useEffect(() => {
+    const interval = 10000; // 10 seconds
+    const id = setInterval(() => {
+      if (document.visibilityState === "visible") revalidator.revalidate();
+    }, interval)
+
+    return () => clearInterval(id);
+  }, [revalidator]);
 
   return (
     <div className={styles.votePageContainer}>
