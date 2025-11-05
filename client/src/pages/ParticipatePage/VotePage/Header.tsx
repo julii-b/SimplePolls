@@ -11,8 +11,8 @@ import { faShare, faPencil, faChevronLeft } from '@fortawesome/free-solid-svg-ic
  * @returns { JSX.Element }
  */
 const VotePageHeader = (
-  {questionText, userIsOwner, pollId}
-  : {questionText: string, userIsOwner: boolean, pollId: number}
+  {questionText, userIsOwner, pollId, showShareWindow}
+  : {questionText: string, userIsOwner: boolean, pollId: number, showShareWindow: ()=>void}
 ): JSX.Element	 => {
 
 
@@ -37,6 +37,7 @@ const VotePageHeader = (
 
           <button // share-button (to be implemented)
           className={`button ${stylesHeader.button}`}
+          onClick={showShareWindow}
           >
             <FontAwesomeIcon icon={faShare} />
           </button>

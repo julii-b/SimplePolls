@@ -1,7 +1,7 @@
 .errorContainer {
   background-color: #f3c8c8d6;
   border: 6px solid #c45c5c;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   width: 30em;

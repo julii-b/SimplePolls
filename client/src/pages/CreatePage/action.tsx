@@ -81,7 +81,7 @@ export async function action({request}: {request: Request}): Promise<void|Respon
 
   await Promise.all(promises);
 
-  if (performedAction === 'pollCreated') return redirect(`/participate/${pollId}`);
+  if (performedAction === 'pollCreated') return redirect(`/participate/${pollId}?showShare`);
   else if (performedAction === 'pollChanged') return redirect(`/participate/${pollId}`);
   else if (performedAction === 'answerDeleted') return redirect(`/create/${pollId}`);
 }

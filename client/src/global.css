@@ -1,6 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
+  --default-color: #6F2F5D;
+  --default-bg-color: #B38EBB50;
+  --create-color: #452F6F;
+  --create-bg-color: #8C90BA50;
+  --participate-color: #6F2F2F;
+  --participate-bg-color: #BA8F9E80;
+  
   font-family: Inter, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -18,15 +25,8 @@
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 0 1.5rem 3rem 1.5rem;
+  padding: 0 1.5rem 0.5rem 1.5rem;
   text-align: center;
-
-  --default-color: #6F2F5D;
-  --default-bg-color: #B38EBB50;
-  --create-color: #452F6F;
-  --create-bg-color: #8C90BA50;
-  --participate-color: #6F2F2F;
-  --participate-bg-color: #BA8F9E80;
 }
 
 a {

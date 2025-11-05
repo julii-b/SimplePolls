@@ -1,9 +1,10 @@
-import { useLoaderData, useRevalidator } from "react-router-dom";
+import { useLoaderData, useRevalidator, useSearchParams } from "react-router-dom";
 import type { Poll } from "../../../types/poll";
-import { useEffect, type JSX } from "react";
+import { useEffect, useState, type JSX } from "react";
 import VotePageAnswers from "./Answers";
 import VotePageHeader from "./Header";
 import styles from './votePage.module.css';
+import ShareWindow from "./ShareWindow/ShareWindow";
 
 
 /**
@@ -14,6 +15,10 @@ import styles from './votePage.module.css';
 const VotePage = (): JSX.Element	 => {
 
   let { poll, votedAnswers, createdPolls }: {poll: Poll, votedAnswers: number[], createdPolls: number[]} = useLoaderData();
+  
+  let [searchParams ] = useSearchParams();
+
+  const [showShareWindow, setShowShareWindow] = useState<boolean>(() => searchParams.has('showShare'));
 
   // Use revalidator to periodically refresh the loader data:
   const revalidator = useRevalidator();
@@ -27,20 +32,36 @@ const VotePage = (): JSX.Element	 => {
   }, [revalidator]);
 
   return (
-    <div className={styles.votePageContainer}>
-
-      <VotePageHeader
-        questionText={poll.questionText}
-        userIsOwner={createdPolls.includes(poll.id)}
+    <>
+      {showShareWindow && ( // Show ShareWindow if showShareWindow is true
+        <ShareWindow
         pollId={poll.id}
+        toggleVisibility={() => {
+          setShowShareWindow(false);
+          // Remove ?showShare from URL:
+          const url = new URL(window.location.href);
+          url.searchParams.delete('showShare');
+          window.history.replaceState(window.history.state, '', url);
+        }}
       />
+    )}
+ 
+      <div className={styles.votePageContainer}>
 
-      <VotePageAnswers 
-        answers={poll.answers}
-        votedAnswers={votedAnswers}
-      />
+        <VotePageHeader
+          questionText={poll.questionText}
+          userIsOwner={createdPolls.includes(poll.id)}
+          pollId={poll.id}
+          showShareWindow={() => setShowShareWindow(true)}
+        />
 
-    </div>
+        <VotePageAnswers 
+          answers={poll.answers}
+          votedAnswers={votedAnswers}
+        />
+
+      </div>
+    </>
   );
 
 };
