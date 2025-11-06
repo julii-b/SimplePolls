@@ -1,0 +1,26 @@
+.loadingCard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.spinner {
+  width: 7em;
+  height: 7em;
+  margin: auto;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingText {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: var(--default-color);
+  transition: all 0.2s linear;
+}
