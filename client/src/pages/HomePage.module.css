@@ -2,6 +2,12 @@
   width: 80%;
   max-width: 40vh;
 }
+@media (max-width: 600px) {
+  .createNewLogo, .participateLogo {
+    max-width: fit-content;
+    height: 16vh;
+  }
+}
 
 
 .createNewCard {
@@ -10,12 +16,19 @@
   display: grid;
   place-items: center;
 }
+@media (max-width: 600px) {
+  .createNewCard {
+    width: 100%;
+    height: 30vh;
+  }
+}
 
 .createNewButton {
   background-color: var(--create-bg-color) !important;
   border-color: var(--create-color) !important;
   width: 70%;
   height: 4em;
+  max-height: 10vh;
   margin-bottom: -1em;
 }
 .createNewButton:hover,
@@ -30,12 +43,19 @@
   display: grid;
   place-items: center;
 }
+@media (max-width: 600px) {
+  .participateCard {
+    width: 100%;
+    height: 30vh;
+  }
+}
 
 .participateButton {
   background-color: var(--participate-bg-color) !important;
   border-color: var(--participate-color) !important;
   width: 70%;
   height: 4em;
+  max-height: 10vh;
   margin-bottom: -1em;
 }
 .participateButton:hover,

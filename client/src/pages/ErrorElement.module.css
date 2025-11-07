@@ -7,6 +7,7 @@
   width: 30em;
   max-width: 65vw;
   height: 45vh;
+  min-height: fit-content;
   transform: translate(-50%, -65%);
   display: grid;
   place-items: center;
@@ -23,7 +24,7 @@
   background-color: #c45c5c60 !important;
   border-color: #c45c5c !important;
   width: 65%;
-  margin-bottom: -1em;
+  margin: 2px;
 }
 .errorButton:hover,
 .errorButton:active {

@@ -1,10 +1,19 @@
 .cardsContainer {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row;
   justify-content: center;
   gap: 2rem;
   margin: 2rem 0rem 0 0rem;
   width: 100%;
+  height: 70vh;
+}
+@media (max-width: 600px) {
+  .cardsContainer {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 .contentCard {
@@ -15,9 +24,14 @@
   border-radius: 25px;
   padding: 1.5em;
   width: 200px;
-  height: 60vh;
-  max-height: 110vw;
+  height: 70vh;
+  box-sizing: border-box;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 600px) {
+  .contentCard {
+    width: 100%;
+  }
 }
 
 .button {
@@ -50,10 +64,7 @@
 }
 .button:not(:disabled):focus-visible {
   border-style: ridge;
-  outline: 2px solid #ffffff;
-}
-.closeButton:not(:disabled)[data-auto-focused="true"]:focus {
-  outline: none;
+  outline: 3px solid #ffffff;
 }
 .button:disabled {
   color: rgba(0, 0, 0, 0.4);
