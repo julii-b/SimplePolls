@@ -15,10 +15,13 @@
   height: 2.5em;
 }
 .pollListButton:hover,
-.pollListButton:focus,
 .pollListButton:active {
   background-color: var(--participate-color) !important;
   text-decoration: none !important;
+}
+.pollListButton:focus {
+  color:white !important;
+  background-color: var(--participate-color) !important;
 }
 .pollListButton::before {
   content: "➤";

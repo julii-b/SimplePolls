@@ -24,6 +24,7 @@ const CreatePageHeader = ({poll}: {poll?: Poll|undefined}) => {
         className={`inputField ${stylesHeader.questionInput}`}
         value={questionText}
         onChange={(e)=>{setQuestionText(e.target.value)}}
+        aria-label='Poll question'
       />
 
       <button
@@ -31,6 +32,8 @@ const CreatePageHeader = ({poll}: {poll?: Poll|undefined}) => {
         className={`button ${stylesHeader.button} ${stylesHeader.saveButton}`}
         name='action' // action: save - can later be used to determine if form was submitted using save button
         value='save'
+        title='Save poll' // for tooltip
+        aria-label='Save poll'
       ><FontAwesomeIcon icon={faFloppyDisk} /></button>
 
     </div>

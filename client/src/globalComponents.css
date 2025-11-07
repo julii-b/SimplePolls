@@ -40,7 +40,6 @@
   box-sizing: border-box;
 }
 .button:not(:disabled):hover,
-.button:not(:disabled):focus,
 .button:not(:disabled):active {
   color: white;
   background-color: var(--default-color);
@@ -48,6 +47,13 @@
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
   padding: calc(0.7em + 1.5px) calc(1em - 1.5px) calc(0.7em - 1.5px) calc(1em + 1.5px);
   
+}
+.button:not(:disabled):focus-visible {
+  border-style: ridge;
+  outline: 2px solid #ffffff;
+}
+.closeButton:not(:disabled)[data-auto-focused="true"]:focus {
+  outline: none;
 }
 .button:disabled {
   color: rgba(0, 0, 0, 0.4);

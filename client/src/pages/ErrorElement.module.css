@@ -6,7 +6,7 @@
   left: 50%;
   width: 30em;
   max-width: 65vw;
-  height: 30vh;
+  height: 45vh;
   transform: translate(-50%, -65%);
   display: grid;
   place-items: center;
@@ -26,7 +26,6 @@
   margin-bottom: -1em;
 }
 .errorButton:hover,
-.errorButton:focus,
 .errorButton:active {
   background-color: #c45c5c !important;
 }

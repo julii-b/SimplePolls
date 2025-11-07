@@ -63,6 +63,7 @@ const EditAnswers = ({answers}: {answers: (Answer|NewAnswer)[]}): JSX.Element =>
   return (
     <div
     className={stylesInpAnsws.answersContainer}
+    aria-live='polite' // so screen readers announce changes
     >{answersJSX}</div>
   );
 }

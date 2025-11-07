@@ -19,7 +19,6 @@
   margin-bottom: -1em;
 }
 .createNewButton:hover,
-.createNewButton:focus,
 .createNewButton:active {
   background-color: var(--create-color) !important;
 }
@@ -40,7 +39,6 @@
   margin-bottom: -1em;
 }
 .participateButton:hover,
-.participateButton:focus,
 .participateButton:active {
   background-color: var(--participate-color) !important;
 }

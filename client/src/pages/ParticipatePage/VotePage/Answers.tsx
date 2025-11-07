@@ -35,6 +35,7 @@ const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: 
         type='hidden'
         name='answerId'
         value={answer.id}
+        aria-hidden='true'
         />
 
         {votedAnswers.includes(answer.id)
@@ -44,6 +45,8 @@ const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: 
           name='action'
           className={`${stylesAnswers.checkBox} ${stylesAnswers.button} button`}
           value={'removeVote'}
+          aria-label={`Remove vote for answer ${answer.id}`}
+          title='Remove vote' // tooltip
           >
             <FontAwesomeIcon className={stylesAnswers.checkMark} icon={faCheck} />
           </button>
@@ -53,6 +56,8 @@ const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: 
           name='action'
           className={`${stylesAnswers.checkBox} ${stylesAnswers.button} button`}
           value={'castVote'}
+          aria-label={`Vote for answer ${answer.id}`}
+          title='Vote' // tooltip
           >
           </button>
         )}
@@ -67,11 +72,14 @@ const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: 
         className={stylesAnswers.answerResult}
         >
           {answer.votes.length === 0 ? ' 0%' : (answer.votes.length/totalVotes*100).toFixed(0)+'%'}
-          <div className={stylesAnswers.progressBarContainer}>
+          <div
+          className={stylesAnswers.progressBarContainer}
+          aria-hidden='true'
+          >
             <div
-              className={stylesAnswers.progressBar}
-              style={{width: totalVotes === 0 ? '0%' : (answer.votes.length/totalVotes*100).toFixed(0)+'%'}}
-              />
+            className={stylesAnswers.progressBar}
+            style={{width: totalVotes === 0 ? '0%' : (answer.votes.length/totalVotes*100).toFixed(0)+'%'}}
+            />
           </div>
         </div>
         

@@ -1,4 +1,4 @@
-import { type JSX } from "react";
+import { useEffect, useRef, type JSX } from "react";
 import QRCode from "react-qr-code";
 import config from "../../../../config/config.ts";
 import stylesShareW from './ShareWindow.module.css';
@@ -11,6 +11,21 @@ const ShareWindow = ({ pollId, toggleVisibility }: { pollId: number, toggleVisib
 
   const pollUrl = `${config.clientUrl}/participate/${pollId}`;
   const encodedPollUrl = encodeURIComponent(pollUrl);
+  const closeButtonRef = useRef<HTMLButtonElement|null>(null);
+
+  // After mount, focus close button and add escape key listener to close window:
+  useEffect(() => {
+    closeButtonRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        toggleVisibility();
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [toggleVisibility]);
+  
 
   const shareWindowEl = (
 
@@ -22,6 +37,9 @@ const ShareWindow = ({ pollId, toggleVisibility }: { pollId: number, toggleVisib
           <button // Close button
           className={`button ${stylesShareW.closeButton}`}
           onClick={toggleVisibility}
+          ref={closeButtonRef}
+          title='Close' // tooltip
+          aria-label='Close share window'
           >
             <FontAwesomeIcon icon={faXmark} />
           </button>
@@ -56,6 +74,8 @@ const ShareWindow = ({ pollId, toggleVisibility }: { pollId: number, toggleVisib
             onClick={()=>{
               window.open(`https://wa.me/?text=${encodedPollUrl}`, '_blank', 'noopener,noreferrer');
             }}
+            title='Share on WhatsApp' // tooltip
+            aria-label='Share on WhatsApp'
             >
               <FontAwesomeIcon icon={faWhatsapp} />
             </button>
@@ -65,6 +85,8 @@ const ShareWindow = ({ pollId, toggleVisibility }: { pollId: number, toggleVisib
             onClick={()=>{
               window.open(`https://t.me/share/url?url=${encodedPollUrl}`, '_blank', 'noopener,noreferrer')
             }}
+            title='Share on Telegram' // tooltip
+            aria-label='Share on Telegram'
             >
               <FontAwesomeIcon icon={faTelegram} />
             </button>
@@ -74,6 +96,8 @@ const ShareWindow = ({ pollId, toggleVisibility }: { pollId: number, toggleVisib
             onClick={()=>{
               window.location.href = `mailto:?subject=${encodeURIComponent('Participate in this poll')}&body=${encodedPollUrl}`;
             }}
+            title='Share via Email' // tooltip
+            aria-label='Share via Email'
             >
               <FontAwesomeIcon icon={faEnvelope} />
             </button>
@@ -83,6 +107,8 @@ const ShareWindow = ({ pollId, toggleVisibility }: { pollId: number, toggleVisib
             onClick={()=>{
               window.location.href = `sms:?body=${encodedPollUrl}`;
             }}
+            title='Share via SMS' // tooltip
+            aria-label='Share via SMS'
             >
               <FontAwesomeIcon icon={faCommentSms} />
             </button>
@@ -96,6 +122,8 @@ const ShareWindow = ({ pollId, toggleVisibility }: { pollId: number, toggleVisib
                 url: pollUrl
               })
             }}
+            title='Share via other apps' // tooltip
+            aria-label='Share via other apps'
             >
               <FontAwesomeIcon icon={faEllipsis} />
             </button> }
@@ -113,6 +141,7 @@ const ShareWindow = ({ pollId, toggleVisibility }: { pollId: number, toggleVisib
           readOnly
           value={pollUrl}
           onFocus={(e) => e.target.select()}
+          aria-label='Poll link'
           />
 
 

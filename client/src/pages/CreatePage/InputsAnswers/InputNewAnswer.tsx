@@ -29,6 +29,7 @@ const InputNewAnswer = ({answer}: {answer: NewAnswer}): JSX.Element => {
           setFirstChange(false);
           setAnswerText(e.target.value)
         }}
+        aria-label={'Type here to add a new answer to your poll'}
       />
 
     </div>

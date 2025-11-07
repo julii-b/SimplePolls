@@ -18,17 +18,22 @@ const CreatePage = () => {
   let poll: Poll|undefined = loaderData.poll;
 
   return (
-    <div className={`cardsContainer`} >
+    <div
+    className={`cardsContainer`}
+    role='main'
+    >
       <div className={`contentCard ${styles.createPageCard}`} >
         <Form
           method='post'
           className={styles.votePageContainer}
+          aria-label="Create new poll or edit existing poll"
         >
           {poll && ( // store pollId as hidden input if poll was passed
             <input 
               type='hidden'
               name='pollId'
               value={poll.id}
+              aria-hidden="true"
             />
           )}
 

@@ -28,6 +28,7 @@ const OpenPollForm = (): JSX.Element => {
         placeholder="Type poll's ID"
         className={`inputField ${stylesOpenPollForm.pollIdInput}`}
         onChange={(e) => setJoinPollId(e.target.value)}
+        aria-label='Input ID of the poll to open'
       />
       <button // button to open poll
         type='submit'

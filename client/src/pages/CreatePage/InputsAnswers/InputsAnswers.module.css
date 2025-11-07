@@ -32,7 +32,6 @@
   border-color: var(--create-color);
 }
 .answerContainer > .deleteAnswerButton:hover,
-.answerContainer > .deleteAnswerButton:focus,
 .answerContainer > .deleteAnswerButton:active {
   background-color: var(--create-color);
   color: var(--create-color);

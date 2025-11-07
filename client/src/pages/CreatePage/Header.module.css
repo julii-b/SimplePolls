@@ -34,7 +34,6 @@
   border-color: var(--create-color) !important;
 }
 .saveButton:not(:disabled):hover,
-.saveButton:not(:disabled):focus,
 .saveButton:not(:disabled):active {
   background-color: var(--create-color);
 }

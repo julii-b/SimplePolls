@@ -36,7 +36,6 @@
   border-color: var(--participate-color);
 }
 .closeButton:hover,
-.closeButton:focus,
 .closeButton:active {
   background-color: var(--participate-color) !important;
 }
@@ -87,7 +86,6 @@
   border-color: var(--participate-color);
 }
 .socialButton:not(:disabled):hover,
-.socialButton:not(:disabled):focus,
 .socialButton:not(:disabled):active {
   background-color: var(--participate-color) !important;
 }

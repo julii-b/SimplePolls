@@ -46,7 +46,10 @@ const VotePage = (): JSX.Element	 => {
       />
     )}
  
-      <div className={styles.votePageContainer}>
+      <div
+      className={styles.votePageContainer}
+      aria-hidden={showShareWindow} //hide for screen readers if share window is open
+      >
 
         <VotePageHeader
           questionText={poll.questionText}

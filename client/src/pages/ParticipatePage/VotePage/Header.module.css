@@ -17,7 +17,6 @@
   border-color: var(--participate-color) !important;
 }
 .button:not(:disabled):hover,
-.button:not(:disabled):focus,
 .button:not(:disabled):active {
   background-color: var(--participate-color) !important;
 }

@@ -23,12 +23,15 @@ const VotePageHeader = (
         <Link // back-button that leads to join-page
         to='/participate'
         className={`button ${stylesHeader.button}`}
+        title='Back' // tooltip
+        aria-label="Go back to the poll list"
         >
           <FontAwesomeIcon icon={faChevronLeft} />
         </Link>
 
         <div // question text
         className={stylesHeader.questionText}
+        aria-label={`Text of poll ${pollId} question`}
         >
           {questionText}
         </div>
@@ -38,6 +41,8 @@ const VotePageHeader = (
           <button // share-button (to be implemented)
           className={`button ${stylesHeader.button}`}
           onClick={showShareWindow}
+          aria-label={`Share poll ${pollId}`}
+          title='Share' // tooltip
           >
             <FontAwesomeIcon icon={faShare} />
           </button>
@@ -46,6 +51,8 @@ const VotePageHeader = (
             <Link
             to={'/create/'+pollId}
             className={`button ${stylesHeader.button}`}
+            aria-label={`Edit poll ${pollId}`}
+            title='Edit' // tooltip
             >
               <FontAwesomeIcon icon={faPencil} />
             </Link>
@@ -53,7 +60,10 @@ const VotePageHeader = (
         </div>
       </div>
 
-      <div className={stylesHeader.pollId}>
+      <div
+      className={stylesHeader.pollId}
+      aria-hidden='true'
+      >
         Poll ID: {pollId}
       </div>
 

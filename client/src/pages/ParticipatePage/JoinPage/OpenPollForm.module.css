@@ -19,7 +19,6 @@
   box-sizing: border-box;
 }
 .joinButton:not(:disabled):hover,
-.joinButton:not(:disabled):focus,
 .joinButton:not(:disabled):active {
   background-color: var(--participate-color) !important;
 }
