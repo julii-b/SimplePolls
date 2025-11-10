@@ -6,6 +6,9 @@ import app from '../../src/app.js';
 vi.mock('../../src/repositories/pollRepository.js'); // mock pollRepository
 import * as pollRepository from '../../src/repositories/pollRepository.js';
 
+vi.mock('../../src/services/pollService.js'); // mock pollService
+import * as pollService from '../../src/services/pollService.js';
+
 describe('pollsRouter', () => {
   let examplePoll;
 
@@ -22,6 +25,7 @@ describe('pollsRouter', () => {
     vi.mocked(pollRepository.getPollsByOwner).mockResolvedValue([examplePoll]);
     vi.mocked(pollRepository.updatePollText).mockResolvedValue(examplePoll);
     vi.mocked(pollRepository.deletePoll).mockResolvedValue(true);
+    vi.mocked(pollService.getPollWithAnswers).mockResolvedValue(examplePoll);
   });
 
   test('POST /polls works', async () => {
@@ -46,7 +50,7 @@ describe('pollsRouter', () => {
     expect(result.body).toEqual(examplePoll);
     expect(result.status).toBe(200);
     // get poll that doesn't exist:
-    vi.mocked(pollRepository.getPollById).mockResolvedValue(null);
+    vi.mocked(pollService.getPollWithAnswers).mockResolvedValue(null);
     result = await request(app).get('/polls/1').send();
     expect(result.status).toBe(404);
   });
