@@ -30,7 +30,8 @@ model answers_given_by_users {
 }
 
 model polls {
-  id            Int       @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
+  publicId     String    @unique
   ownerId      Int
   questionText String
   createdAt    DateTime  @default(now()) @db.Timestamptz(6)

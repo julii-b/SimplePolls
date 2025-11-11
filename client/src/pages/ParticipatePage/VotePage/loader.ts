@@ -8,18 +8,18 @@ import type { Poll } from '../../../types/poll';
  * 
  * @param param
  * @param { { pollId } }param.params - Id of the poll that should be retreived
- * @returns { { poll: Poll, votedAnswers: number[], createdPolls: number[] } }
+ * @returns { { poll: Poll, votedAnswers: string[], createdPolls: string[] } }
  */
-export async function loader ( { params }: { params: { pollId?: string } }): Promise<{ poll: Poll, votedAnswers: number[], createdPolls: number[] }> {
+export async function loader ( { params }: { params: { pollId?: string } }): Promise<{ poll: Poll, votedAnswers: number[], createdPolls: string[] }> {
   // Load poll:
-  const pollId: number = Number(params.pollId);
+  const pollId: string = String(params.pollId);
   const poll: Poll = await pollService.getPoll(pollId);
   console.log(poll)
   //Load votedAnswers:
   const votedAnswers = await voteService.getAllUsersVotes();
   //load createdPolls and extract ids:
   const createdPolls: Poll[] = await pollService.getUsersCreatedPolls();
-  let createdPollIds: number[] = [];
+  let createdPollIds: string[] = [];
   for (const poll of createdPolls) createdPollIds.push(poll.id);
 
   return { poll, votedAnswers, createdPolls: createdPollIds };

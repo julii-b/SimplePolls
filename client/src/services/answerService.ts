@@ -4,11 +4,11 @@ import * as backendApi from './backendApi';
 /**
  * Call the API to create a new answer for a poll.
  * 
- * @param { number } pollId - Id of the poll to create the answer for
+ * @param { string } pollId - Id of the poll to create the answer for
  * @param { string } answerText - Text of the new answer
  * @returns { Promise<Answer> } The newly created Answer object
  */
-export async function createAnswer (pollId: number, answerText: string): Promise<Answer> {
+export async function createAnswer (pollId: string, answerText: string): Promise<Answer> {
   // create request body:
   const requestBody = {
     answerText: answerText,

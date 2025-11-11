@@ -12,9 +12,10 @@ import { faShare, faPencil, faChevronLeft } from '@fortawesome/free-solid-svg-ic
  */
 const VotePageHeader = (
   {questionText, userIsOwner, pollId, showShareWindow}
-  : {questionText: string, userIsOwner: boolean, pollId: number, showShareWindow: ()=>void}
+  : {questionText: string, userIsOwner: boolean, pollId: string, showShareWindow: ()=>void}
 ): JSX.Element	 => {
 
+  const formattedPollId: string = (`${pollId.slice(0, 3)}-${pollId.slice(3,6)}-${pollId.slice(6)}`).toUpperCase();
 
   return (
     <>
@@ -64,7 +65,7 @@ const VotePageHeader = (
       className={stylesHeader.pollId}
       aria-hidden='true'
       >
-        Poll ID: {pollId}
+        ID: {formattedPollId}
       </div>
 
     </>

@@ -22,8 +22,8 @@
  *       type: object
  *       properties:
  *         id:
- *           type: integer
- *           example: 1
+ *           type: string
+ *           example: "1b3d5f7h9"
  *         ownerId:
  *           type: integer
  *           example: 1

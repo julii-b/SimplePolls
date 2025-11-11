@@ -75,7 +75,8 @@
 
 .pollId {
   text-align: right;
-  font-style: italic;
+  font-family: 'Atkinson Hyperlegible Next', monospace;
+  font-style: normal;
   margin: 0;
   font-size: 1em;
 }

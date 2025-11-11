@@ -15,7 +15,7 @@ export async function loader ( { params }: { params: { pollId?: string } }): Pro
   let poll: Poll|undefined;
   
   if (pollId) {
-    poll = await pollService.getPoll(Number(pollId))
+    poll = await pollService.getPoll(pollId)
   }
 
   return { poll: poll };

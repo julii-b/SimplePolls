@@ -1,7 +1,7 @@
 .openPollFormContainer {
   display: flex;
   gap: 0.8em;
-  height: 4em;
+  min-height: 4em;
   padding-bottom: 1.5em;
   border-bottom: 3px solid var(--participate-color);
 }

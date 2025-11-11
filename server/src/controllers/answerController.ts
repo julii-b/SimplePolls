@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 import * as HttpError from '../types/httpError.js';
+import * as pollRepository from './../repositories/pollRepository.js';
 import * as answerRepository from './../repositories/answerRepository.js';
 import * as voteRepository from './../repositories/voteRepository.js';
 import type { Answer } from '../types/answer.js';
@@ -10,7 +11,7 @@ import * as answerService from '../services/answerService.js'
  * 
  * @param {Request} req
  * @param {number} req.userId - userId assigned by the middleware
- * @param {number}req.params.pollId - pollId of the poll to create the answer for, sent by the client as a parameter in the route
+ * @param {string} req.params.pollId - public pollId of the poll to create the answer for, sent by the client as a parameter in the route
  * @param {string} req.body.answerText - text of the answer, sent by the client in the request body
  * 
  * @param {Response} res
@@ -28,14 +29,17 @@ export const createNewAnswer = async (
   if (!req.userId)
     throw HttpError.serverError("middleware couldn't assign userId");
   // check if the client sent pollId and answerText:
-  const pollId = Number(req.params.pollId);
+  const publicPollId = req.params.pollId;
   const answerText = req.body?.answerText;
-  if (!Number.isInteger(pollId) || pollId <= 0) {
-    throw HttpError.badRequest('pollId must be an integer');
+  if (typeof publicPollId !== 'string' || publicPollId.trim().length === 0) {
+    throw HttpError.badRequest('pollId must be a string');
   }
   if (typeof answerText !== 'string' || answerText.trim().length === 0) {
     throw HttpError.badRequest('answerText must be a string');
   }
+  // get pollId from publicPollId:
+  const pollId: number | null = await pollRepository.getPrivateID(publicPollId);
+  if (!pollId) throw HttpError.notFound('poll not found');
   // create new answer:
   const newAnswer: answerRepository.Answer | null =
     await answerRepository.createAnswer(req.userId, pollId, answerText.trim());
@@ -54,7 +58,7 @@ export const createNewAnswer = async (
  * Get all answers for a poll by pollId
  * 
  * @param {Request} req
- * @param {number}req.params.pollId - pollId of the poll to get the answers of, sent by the client as a parameter in the route
+ * @param {string}req.params.pollId - pollId of the poll to get the answers of, sent by the client as a parameter in the route
  * 
  * @param {Response} res
  * 
@@ -68,10 +72,13 @@ export const getAnswers = async (
   res: Response,
 ) => {
   // check if the client sent pollId:
-  const pollId = Number(req.params.pollId);
-  if (!Number.isInteger(pollId) || pollId <= 0) {
-    throw HttpError.badRequest('pollId must be an integer');
+  const publicPollId = req.params.pollId;
+  if (typeof publicPollId !== 'string' || publicPollId.trim().length === 0) {
+    throw HttpError.badRequest('pollId must be a string');
   }
+  // get pollId from publicPollId:
+  const pollId: number | null = await pollRepository.getPrivateID(publicPollId);
+  if (!pollId) throw HttpError.notFound('poll not found');
   // get answers:
   const answers: answerRepository.Answer[] =
     await answerRepository.getAnswersForPoll(pollId);

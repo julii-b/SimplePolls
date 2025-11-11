@@ -22,11 +22,11 @@ export async function createPoll (questionText: string): Promise<Poll> {
 /**
  * Change the text of a poll through the API.
  * 
- * @param { number } pollId - Id of the poll to change
+ * @param { string } pollId - Id of the poll to change
  * @param { string } questionText - New text of the poll
  * @returns { Poll } the changed Poll object
  */
-export async function changePollText (pollId: number, questionText: string): Promise<Poll> {
+export async function changePollText (pollId: string, questionText: string): Promise<Poll> {
   // create request body:
   const requestBody = {
     questionText: questionText,
@@ -39,10 +39,10 @@ export async function changePollText (pollId: number, questionText: string): Pro
 /**
  * Get a poll from the API
  * 
- * @param { number } pollId - Id of the poll to get
+ * @param { string } pollId - Id of the poll to get
  * @returns { Poll } The retrieved Poll object
  */
-export async function getPoll (pollId: number): Promise<Poll> {
+export async function getPoll (pollId: string): Promise<Poll> {
   // make request:
   const poll: Poll = await backendApi.get<Poll>(`/polls/${pollId}`);
   return poll;

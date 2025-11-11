@@ -18,7 +18,7 @@ export async function getPollWithAnswers(pollId: number): Promise<Poll | null> {
   }
 
   let poll: Poll = {
-    id: dbPoll.id,
+    id: dbPoll.publicId,
     ownerId: dbPoll.ownerId,
     questionText: dbPoll.questionText,
     answers: answers

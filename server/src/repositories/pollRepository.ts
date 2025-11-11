@@ -2,9 +2,11 @@ import { Prisma } from '@prisma/client';
 import config from '../config/config.js';
 import { pool } from '../db/pool.js';
 import { prismaClient } from '../db/prismaClient.js';
+import { customAlphabet } from 'nanoid';
 
 export interface Poll {
   id: number;
+  publicId: string;
   ownerId: number;
   questionText: string;
   createdAt: string; // ISO from timestamptz
@@ -15,9 +17,22 @@ export async function createPoll(
   questionText: string,
 ): Promise<Poll | null> {
 
+  let publicId: string = '';
+
+  // generate publicId:
+  while (true) {
+    const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz', 9)
+    publicId = nanoid()
+    const existingPoll = await getPollByPublicId(publicId);
+    if (!existingPoll) {
+      break; // unique publicId found
+    }
+  }
+
   //create poll:
   const result: any | null = await prismaClient.polls.create({
     data: {
+      publicId: publicId,
       ownerId: ownerId,
       questionText: questionText,
     },
@@ -28,6 +43,7 @@ export async function createPoll(
   // return created poll:
   const poll: Poll = {
     id: result.id,
+    publicId: result.publicId,
     ownerId: result.ownerId,
     questionText: result.questionText,
     createdAt: result.createdAt.toISOString(),
@@ -47,11 +63,39 @@ export async function getPollById(id: number): Promise<Poll | null> {
   // return retrieved poll:
   const poll: Poll = {
     id: result.id,
+    publicId: result.publicId,
     ownerId: result.ownerId,
     questionText: result.questionText,
     createdAt: result.createdAt.toISOString(),
   };
   return poll;
+}
+
+export async function getPollByPublicId(publicId: string): Promise<Poll | null> {
+
+  // find poll by publicId:
+  const result: any | null = await prismaClient.polls.findUnique({
+    where: { publicId: publicId },
+  });
+
+  if (!result) return null;
+
+  // return retrieved poll:
+  const poll: Poll = {
+    id: result.id,
+    ownerId: result.ownerId,
+    publicId: result.publicId,
+    questionText: result.questionText,
+    createdAt: result.createdAt.toISOString(),
+  };
+  return poll;
+}
+
+export async function getPrivateID(publicId: string): Promise<number | null> {
+  //get private poll ID from public ID:
+  const poll: Poll | null = await getPollByPublicId(publicId);
+  if (!poll) return null;
+  return poll.id;
 }
 
 export async function getPollsByOwner(ownerId: number): Promise<Poll[]> {
@@ -66,6 +110,7 @@ export async function getPollsByOwner(ownerId: number): Promise<Poll[]> {
   // return retrieved polls:
   const polls: Poll[] = results.map((result) => ({
     id: result.id,
+    publicId: result.publicId,
     ownerId: result.ownerId,
     questionText: result.questionText,
     createdAt: result.createdAt.toISOString(),
@@ -87,6 +132,7 @@ export async function updatePollText(
     });
     const poll: Poll = {
       id: result.id,
+      publicId: result.publicId,
       ownerId: result.ownerId,
       questionText: result.questionText,
       createdAt: result.createdAt.toISOString(),

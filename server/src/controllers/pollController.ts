@@ -47,10 +47,10 @@ export const createNewPoll = async (
 };
 
 /**
- * Get a poll by pollId
+ * Get a poll by public pollId
  * 
  * @param {Request} req
- * @param {number}req.params.pollId - pollId of the poll to get, sent by the client as a parameter in the route
+ * @param {string}req.params.pollId - public pollId of the poll to get, sent by the client as a parameter in the route
  * 
  * @param {Response} res
  * 
@@ -63,12 +63,15 @@ export const getPoll = async (
   req: Request,
   res: Response,
 ) => {
-  // parse and validate pollId:
-  const pollId = Number(req.params.pollId);
-  if (!Number.isInteger(pollId) || pollId <= 0)
-    throw HttpError.badRequest('pollId must be an integer');
+  // parse and validate public pollId:
+  const publicId = req.params.pollId;
+  if (typeof publicId !== 'string' || publicId.trim().length === 0)
+    throw HttpError.badRequest('pollId must be a string');
+  // get private poll ID:
+  const privateId = await pollRepository.getPrivateID(publicId);
+  if (!privateId) throw HttpError.notFound('poll not found');
   // get poll:
-  const poll: Poll|null = await pollService.getPollWithAnswers(pollId)
+  const poll: Poll|null = await pollService.getPollWithAnswers(privateId)
   if (!poll) throw HttpError.notFound('poll not found');
 
   res.json(poll);
@@ -96,10 +99,13 @@ export const changePollText = async (
   // check if userId was assigned by the middleware:
   if (!req.userId)
     throw HttpError.serverError("middleware couldn't assign userId");
-  // parse ad validate pollId:
-  const pollId = Number(req.params.pollId);
-  if (!Number.isInteger(pollId) || pollId <= 0)
-    throw HttpError.badRequest('pollId must be an integer');
+  // parse and validate public pollId:
+  const publicId = req.params.pollId;
+  if (typeof publicId !== 'string' || publicId.trim().length === 0)
+    throw HttpError.badRequest('pollId must be a string');
+  // get private poll ID:
+  const privateId = await pollRepository.getPrivateID(publicId);
+  if (!privateId) throw HttpError.notFound('poll not found');
   // check if client sent questionText:
   const questionText = req.body?.questionText;
   if (typeof questionText !== 'string' || questionText.trim().length === 0) {
@@ -108,7 +114,7 @@ export const changePollText = async (
   // update poll:
   const poll: pollRepository.Poll | null = await pollRepository.updatePollText(
     req.userId,
-    pollId,
+    privateId,
     questionText.trim(),
   );
   if (!poll) throw HttpError.notFound('poll not found');
@@ -140,12 +146,15 @@ export const deletePoll = async (
   // check if userId was assigned by the middleware:
   if (!req.userId)
     throw HttpError.serverError("middleware couldn't assign userId");
-  // parse and validate pollId:
-  const pollId = Number(req.params.pollId);
-  if (!Number.isInteger(pollId))
-    throw HttpError.badRequest('pollId must be an integer');
+  // parse and validate publicId:
+  const publicId = req.params.pollId;
+  if (typeof publicId !== 'string' || publicId.trim().length === 0)
+    throw HttpError.badRequest('pollId must be a string');
+  // get private poll ID:
+  const privateId = await pollRepository.getPrivateID(publicId);
+  if (!privateId) throw HttpError.notFound('poll not found');
   // delete poll:
-  const result: boolean = await pollRepository.deletePoll(req.userId, pollId);
+  const result: boolean = await pollRepository.deletePoll(req.userId, privateId);
 
   if (!result) throw HttpError.notFound('poll not found');
   else res.status(204).end();

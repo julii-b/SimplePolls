@@ -40,7 +40,7 @@ export async function action({request}: {request: Request}): Promise<void|Respon
   // Everything else is saved, regardless if request was caused by save or delete button:
 
   // Create new poll, or get existing pollId:
-  let pollId: number|undefined;
+  let pollId: string|undefined;
   const newQuestionText: FormDataEntryValue|null = formData.get('newQuestion');
   if(newQuestionText && String(newQuestionText).length > 0){  // Create new poll if necessary and store pollId
     const newPoll: Poll = await pollService.createPoll(String(newQuestionText));
@@ -49,7 +49,7 @@ export async function action({request}: {request: Request}): Promise<void|Respon
   } else if (newQuestionText && String(newQuestionText).length === 0) {
     throw new Error("The question text can't be empty.");
   } else { // Get pollId if poll already exists
-    pollId = Number(formData.get('pollId')!);
+    pollId = String(formData.get('pollId')!);
   }
 
   // Change question texts and answer texts, and create new answers:
