@@ -1,5 +1,7 @@
+import { Prisma } from '@prisma/client';
 import config from '../config/config.js';
 import { pool } from '../db/pool.js';
+import { prismaClient } from '../db/prismaClient.js';
 
 export interface Poll {
   id: number;
@@ -12,35 +14,63 @@ export async function createPoll(
   ownerId: number,
   questionText: string,
 ): Promise<Poll | null> {
-  const { rows } = await pool.query<Poll>(
-    `INSERT INTO polls (owner_id, question_text)
-      VALUES ($1, $2)
-      RETURNING id, owner_id AS "ownerId", question_text AS "questionText", created_at AS "createdAt"`,
-    [ownerId, questionText],
-  );
-  return rows[0] ?? null;
+
+  //create poll:
+  const result: any | null = await prismaClient.polls.create({
+    data: {
+      ownerId: ownerId,
+      questionText: questionText,
+    },
+  });
+
+  if (!result) return null;
+  
+  // return created poll:
+  const poll: Poll = {
+    id: result.id,
+    ownerId: result.ownerId,
+    questionText: result.questionText,
+    createdAt: result.createdAt.toISOString(),
+  };
+  return poll;
 }
 
 export async function getPollById(id: number): Promise<Poll | null> {
-  const { rows } = await pool.query<Poll>(
-    `SELECT id, owner_id AS "ownerId", question_text AS "questionText", created_at AS "createdAt"
-      FROM polls WHERE id = $1
-      ORDER BY created_at DESC
-      LIMIT $2`,
-    [id, config.dbQueryLimit],
-  );
-  return rows[0] ?? null;
+
+  // find poll by id:
+  const result: any | null = await prismaClient.polls.findUnique({
+    where: { id: id },
+  });
+
+  if (!result) return null;
+
+  // return retrieved poll:
+  const poll: Poll = {
+    id: result.id,
+    ownerId: result.ownerId,
+    questionText: result.questionText,
+    createdAt: result.createdAt.toISOString(),
+  };
+  return poll;
 }
 
 export async function getPollsByOwner(ownerId: number): Promise<Poll[]> {
-  const { rows } = await pool.query<Poll>(
-    `SELECT id, owner_id AS "ownerId", question_text AS "questionText", created_at AS "createdAt"
-      FROM polls WHERE owner_id = $1
-      ORDER BY created_at DESC
-      LIMIT $2`,
-    [ownerId, config.dbQueryLimit],
-  );
-  return rows;
+
+  // find polls by ownerId:
+  const results: any[] = await prismaClient.polls.findMany({
+    where: { ownerId: ownerId },
+    orderBy: { createdAt: 'desc' },
+    take: config.dbQueryLimit,
+  });
+
+  // return retrieved polls:
+  const polls: Poll[] = results.map((result) => ({
+    id: result.id,
+    ownerId: result.ownerId,
+    questionText: result.questionText,
+    createdAt: result.createdAt.toISOString(),
+  }));
+  return polls;
 }
 
 export async function updatePollText(
@@ -48,24 +78,55 @@ export async function updatePollText(
   pollId: number,
   questionText: string,
 ): Promise<Poll | null> {
-  const { rows } = await pool.query<Poll>(
-    `UPDATE polls
-      SET question_text = $3
-      WHERE id = $2 AND owner_id = $1
-      RETURNING id, owner_id AS "ownerId", question_text AS "questionText", created_at AS "createdAt"`,
-    [userId, pollId, questionText],
-  );
-  return rows[0] ?? null;
+
+  try {
+    // update poll text:
+    const result: any = await prismaClient.polls.update({
+      where: { id: pollId, ownerId: userId },
+      data: { questionText: questionText },
+    });
+    const poll: Poll = {
+      id: result.id,
+      ownerId: result.ownerId,
+      questionText: result.questionText,
+      createdAt: result.createdAt.toISOString(),
+    };
+    return poll;
+  } catch (e) {
+    if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2025') return null;
+    else throw e;
+  }
 }
 
 export async function deletePoll(
   userId: number,
   pollId: number,
 ): Promise<boolean> {
-  let { rowCount } = await pool.query(
-    `DELETE FROM polls WHERE id = $2 AND owner_id = $1`,
-    [userId, pollId],
-  );
-  rowCount = rowCount ?? 0;
-  return rowCount > 0;
+
+  try {
+    // delete poll:
+    await prismaClient.polls.deleteMany({
+      where: {
+        id: pollId,
+        ownerId: userId,
+      },
+    });
+    return true;
+  } catch (e) {
+    if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2025') return false;
+    else throw e;
+  }
+}
+
+export async function deletePollsOlderThan(days: number): Promise<number> {
+  // delete polls older than specified days:
+  const cutoff = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
+  const result = await prismaClient.polls.deleteMany({
+    where: {
+      createdAt: {
+        lt: cutoff,
+      },
+    },
+  });
+  return result.count;
 }

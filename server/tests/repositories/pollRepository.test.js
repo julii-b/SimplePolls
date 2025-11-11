@@ -27,7 +27,7 @@ describe('Polls Repository', async () => {
     expect(poll1.questionText).toBe('What do I ask?');
     // create new poll for nonexistant user:
     let poll2 = pollRepository.createPoll(-1, 'What do I ask?');
-    await expect(poll2).rejects.toMatchObject({ code: '23503' }); // foreign key violation
+    await expect(poll2).rejects.toMatchObject({ code: 'P2003' }); // foreign key violation
   });
 
   test('getPollById works', async () => {

@@ -42,10 +42,10 @@ describe('Votes Repository', () => {
     expect(vote2.answerId).toBe(answer1.id);
     // vote as a user that doesn't exist:
     const vote3 = voteRepository.vote(-1, answer1.id);
-    await expect(vote3).rejects.toMatchObject({ code: '23503' }); // foreign key violation
+    await expect(vote3).rejects.toMatchObject({ code: 'P2003' }); // foreign key violation
     // vote for an answer that doesn't exist:
     const vote4 = voteRepository.vote(user1.id, -1);
-    await expect(vote4).rejects.toMatchObject({ code: '23503' }); // foreign key violation
+    await expect(vote4).rejects.toMatchObject({ code: 'P2003' }); // foreign key violation
   });
 
   test('getVotesByUser works', async () => {

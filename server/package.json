@@ -4,11 +4,19 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "build": "tsc",
+
+    "generate-env-db-url": "node scripts/generate-env-db-url.ts",
+    "setup-prisma": "npx prisma generate && npx prisma migrate deploy",
+    "postinstall": "npm run generate-env-db-url && npm run setup-prisma",
+
+    "build": "npm run postinstall && tsc",
     "start": "node dist/server.js",
+
     "dev": "nodemon --watch \"src/**/*.ts\" --exec tsx src/server.ts",
+
     "test": "DOTENV_CONFIG_PATH=.env.test vitest run",
     "test:watch": "DOTENV_CONFIG_PATH=.env.test vitest",
+
     "lint": "eslint 'src/**/*.ts'",
     "format": "prettier --write ."
   },
@@ -31,6 +39,7 @@
     "jiti": "^2.6.0",
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
+    "prisma": "^6.19.0",
     "supertest": "^7.1.4",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.6",
@@ -39,6 +48,7 @@
     "vitest": "^3.2.4"
   },
   "dependencies": {
+    "@prisma/client": "^6.19.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",

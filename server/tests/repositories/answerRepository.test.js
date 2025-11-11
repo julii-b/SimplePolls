@@ -33,7 +33,7 @@ describe('Answers Repository', () => {
   test('getAnswersForPoll works', async () => {
     // get answers from poll without answers:
     await pollRepository.deletePoll(user.id);
-    poll = pollRepository.createPoll(user.id, 'Am I stupid?');
+    poll = await pollRepository.createPoll(user.id, 'Am I stupid?');
     const answers0 = await answerRepository.getAnswersForPoll(poll.id);
     expect(answers0).toEqual([]);
     // get answers from poll with 1 answer:
@@ -62,7 +62,7 @@ describe('Answers Repository', () => {
     expect(answers1.length).toBe(0);
 
     // delete answer that doesn't exist:
-    const answer3 = await answerRepository.deleteAnswer(-1);
+    const answer3 = await answerRepository.deleteAnswer(user.id, -1);
     expect(answer3).toBe(false);
   });
 });
