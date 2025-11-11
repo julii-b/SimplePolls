@@ -18,7 +18,7 @@ const OpenPollForm = (): JSX.Element => {
       className={stylesOpenPollForm.openPollFormContainer}
       onSubmit={(e) => { // on submit navigate to the poll page
         e.preventDefault();
-        navigate('/participate/'+joinPollId.toLowerCase().trim());
+        navigate('/participate/'+joinPollId.toLowerCase().trim().replace(/-/g,''));
       }}
     >
       <input // input field for poll id
