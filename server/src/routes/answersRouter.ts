@@ -16,7 +16,7 @@ const answersRouter = Router({ mergeParams: true });
  *         name: pollId
  *         required: true
  *         schema:
- *           type: integer
+ *           type: sting
  *     requestBody:
  *       required: true
  *       content:
@@ -49,7 +49,7 @@ answersRouter.post('/', answerController.createNewAnswer); // create new answer
  *         name: pollId
  *         required: true
  *         schema:
- *           type: integer
+ *           type: string
  *     responses:
  *       200:
  *         description: List of answers including their votes

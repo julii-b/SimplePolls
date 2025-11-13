@@ -14,7 +14,7 @@ import ShareWindow from "./ShareWindow/ShareWindow";
  */
 const VotePage = (): JSX.Element	 => {
 
-  let { poll, votedAnswers, createdPolls }: {poll: Poll, votedAnswers: number[], createdPolls: number[]} = useLoaderData();
+  let { poll, votedAnswers, createdPolls }: {poll: Poll, votedAnswers: number[], createdPolls: string[]} = useLoaderData();
   
   let [searchParams ] = useSearchParams();
 

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentSms, faEllipsis, faEnvelope, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faTelegram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 
-const ShareWindow = ({ pollId, toggleVisibility }: { pollId: number, toggleVisibility: ()=>void }): JSX.Element	 => {
+const ShareWindow = ({ pollId, toggleVisibility }: { pollId: string, toggleVisibility: ()=>void }): JSX.Element	 => {
 
   const pollUrl = `${config.clientUrl}/participate/${pollId}`;
   const encodedPollUrl = encodeURIComponent(pollUrl);

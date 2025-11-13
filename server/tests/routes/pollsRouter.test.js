@@ -14,7 +14,7 @@ describe('pollsRouter', () => {
 
   beforeEach(() => {
     examplePoll = {
-      id: 1,
+      id: 'abc',
       ownerId: 2,
       questionText: 'Whill this test work?',
       answers: []
@@ -35,7 +35,7 @@ describe('pollsRouter', () => {
       .send({ questionText: 'Hello?' });
     expect(result.body).toEqual(examplePoll);
     expect(result.status).toBe(201);
-    expect(result.headers.location).toBe('/polls/1');
+    expect(result.headers.location).toBe('/polls/abc');
     // create poll without questionText:
     result = await request(app).post('/polls').send({});
     expect(result.status).toBe(400);
@@ -46,12 +46,12 @@ describe('pollsRouter', () => {
 
   test('GET /polls/:pollId works', async () => {
     // get poll that exists:
-    let result = await request(app).get('/polls/1').send();
+    let result = await request(app).get('/polls/abc').send();
     expect(result.body).toEqual(examplePoll);
     expect(result.status).toBe(200);
     // get poll that doesn't exist:
     vi.mocked(pollService.getPollWithAnswers).mockResolvedValue(null);
-    result = await request(app).get('/polls/1').send();
+    result = await request(app).get('/polls/abc').send();
     expect(result.status).toBe(404);
   });
 
@@ -72,11 +72,11 @@ describe('pollsRouter', () => {
 
   test('DELETE /polls/:pollId works', async () => {
     // delete poll:
-    let result = await request(app).delete('/polls/1').send();
+    let result = await request(app).delete('/polls/abc').send();
     expect(result.status).toBe(204);
     // delete other user's or non-existent poll:
     vi.mocked(pollRepository.deletePoll).mockResolvedValue(false);
-    result = await request(app).delete('/polls/1').send();
+    result = await request(app).delete('/polls/def').send();
     expect(result.status).toBe(404);
   });
 });

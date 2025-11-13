@@ -43,7 +43,7 @@ pollsRouter.post('/', pollController.createNewPoll);
  *         name: pollId
  *         required: true
  *         schema:
- *           type: integer
+ *           type: string
  *     responses:
  *       200:
  *         description: The poll
@@ -69,7 +69,7 @@ pollsRouter.get('/:pollId', pollController.getPoll);
  *         name: pollId
  *         required: true
  *         schema:
- *           type: integer
+ *           type: string
  *     responses:
  *       200:
  *         description: The changed poll
@@ -95,7 +95,7 @@ pollsRouter.patch('/:pollId', pollController.changePollText);
  *         name: pollId
  *         required: true
  *         schema:
- *           type: integer
+ *           type: string
  *     responses:
  *       204:
  *         description: poll deleted

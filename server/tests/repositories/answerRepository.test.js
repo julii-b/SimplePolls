@@ -25,8 +25,8 @@ describe('Answers Repository', () => {
 
   test('createAnswer works', async () => {
     // create a new answer:
-    const answer = await answerRepository.createAnswer(user.id, poll.id, '42');
-    expect(answer.pollId).toBe(poll.id);
+    const answer = await answerRepository.createAnswer(user.id, poll.publicId, '42');
+    expect(answer.pollId).toBe(poll.publicId);
     expect(answer.answerText).toBe('42');
   });
 
@@ -34,31 +34,31 @@ describe('Answers Repository', () => {
     // get answers from poll without answers:
     await pollRepository.deletePoll(user.id);
     poll = await pollRepository.createPoll(user.id, 'Am I stupid?');
-    const answers0 = await answerRepository.getAnswersForPoll(poll.id);
+    const answers0 = await answerRepository.getAnswersForPoll(poll.publicId);
     expect(answers0).toEqual([]);
     // get answers from poll with 1 answer:
     await pollRepository.deletePoll(user.id);
     poll = await pollRepository.createPoll(user.id, 'What is happening?');
-    await answerRepository.createAnswer(user.id, poll.id, '41');
-    const answers1 = await answerRepository.getAnswersForPoll(poll.id);
-    expect(answers1.every((row) => row.pollId === poll.id)).toBe(true);
+    await answerRepository.createAnswer(user.id, poll.publicId, '41');
+    const answers1 = await answerRepository.getAnswersForPoll(poll.publicId);
+    expect(answers1.every((row) => row.pollId === poll.publicId)).toBe(true);
     expect(answers1.length).toBe(1);
     // get answers from poll with 2 answers:
     await pollRepository.deletePoll(user.id);
     poll = await pollRepository.createPoll(user.id, 'What is happening?');
-    await answerRepository.createAnswer(user.id, poll.id, '41');
-    await answerRepository.createAnswer(user.id, poll.id, '42');
-    const answers2 = await answerRepository.getAnswersForPoll(poll.id);
-    expect(answers2.every((row) => row.pollId === poll.id)).toBe(true);
+    await answerRepository.createAnswer(user.id, poll.publicId, '41');
+    await answerRepository.createAnswer(user.id, poll.publicId, '42');
+    const answers2 = await answerRepository.getAnswersForPoll(poll.publicId);
+    expect(answers2.every((row) => row.pollId === poll.publicId)).toBe(true);
     expect(answers2.length).toBe(2);
   });
 
   test('deleteAnswer works', async () => {
     // delete answer that exists:
-    const answer1 = await answerRepository.createAnswer(user.id, poll.id, 'No');
+    const answer1 = await answerRepository.createAnswer(user.id, poll.publicId, 'No');
     const answer2 = await answerRepository.deleteAnswer(user.id, answer1.id);
     expect(answer2).toBe(true);
-    const answers1 = await answerRepository.getAnswersForPoll(poll.id);
+    const answers1 = await answerRepository.getAnswersForPoll(poll.publicId);
     expect(answers1.length).toBe(0);
 
     // delete answer that doesn't exist:

@@ -23,7 +23,7 @@ export async function createPoll(
   while (true) {
     const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz', 9)
     publicId = nanoid()
-    const existingPoll = await getPollByPublicId(publicId);
+    const existingPoll = await getPollById(publicId);
     if (!existingPoll) {
       break; // unique publicId found
     }
@@ -43,7 +43,7 @@ export async function createPoll(
   // return created poll:
   const poll: Poll = {
     id: result.id,
-    publicId: result.publicId,
+    publicId: publicId,
     ownerId: result.ownerId,
     questionText: result.questionText,
     createdAt: result.createdAt.toISOString(),
@@ -51,11 +51,11 @@ export async function createPoll(
   return poll;
 }
 
-export async function getPollById(id: number): Promise<Poll | null> {
+export async function getPollById(publicId: string): Promise<Poll | null> {
 
   // find poll by id:
   const result: any | null = await prismaClient.polls.findUnique({
-    where: { id: id },
+    where: { publicId: publicId },
   });
 
   if (!result) return null;
@@ -71,11 +71,11 @@ export async function getPollById(id: number): Promise<Poll | null> {
   return poll;
 }
 
-export async function getPollByPublicId(publicId: string): Promise<Poll | null> {
+export async function getPollByPrivateId(id: number): Promise<Poll | null> {
 
-  // find poll by publicId:
+  // find poll by privateId:
   const result: any | null = await prismaClient.polls.findUnique({
-    where: { publicId: publicId },
+    where: { id: id },
   });
 
   if (!result) return null;
@@ -93,7 +93,7 @@ export async function getPollByPublicId(publicId: string): Promise<Poll | null> 
 
 export async function getPrivateID(publicId: string): Promise<number | null> {
   //get private poll ID from public ID:
-  const poll: Poll | null = await getPollByPublicId(publicId);
+  const poll: Poll | null = await getPollById(publicId);
   if (!poll) return null;
   return poll.id;
 }
@@ -120,14 +120,14 @@ export async function getPollsByOwner(ownerId: number): Promise<Poll[]> {
 
 export async function updatePollText(
   userId: number,
-  pollId: number,
+  publicPollId: string,
   questionText: string,
 ): Promise<Poll | null> {
 
   try {
     // update poll text:
     const result: any = await prismaClient.polls.update({
-      where: { id: pollId, ownerId: userId },
+      where: { publicId: publicPollId, ownerId: userId },
       data: { questionText: questionText },
     });
     const poll: Poll = {
@@ -146,14 +146,14 @@ export async function updatePollText(
 
 export async function deletePoll(
   userId: number,
-  pollId: number,
+  publicPollId: string,
 ): Promise<boolean> {
 
   try {
     // delete poll:
     await prismaClient.polls.deleteMany({
       where: {
-        id: pollId,
+        publicId: publicPollId,
         ownerId: userId,
       },
     });

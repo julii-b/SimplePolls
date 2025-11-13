@@ -41,8 +41,8 @@
  *           type: integer
  *           example: 1
  *         pollId:
- *           type: integer
- *           example: 1
+ *           type: string
+ *           example: "1b3d5f7h9"
  *         answerText:
  *           type: string
  *           example: "Yes"

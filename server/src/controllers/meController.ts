@@ -33,7 +33,7 @@ export const getUserInformation = async (
     await pollRepository.getPollsByOwner(req.userId);
   // get full created polls with answers from pollService:
   const createdPollsPromise: Promise<Poll|null>[] = [];
-  for (const poll of createdPollsDb) createdPollsPromise.push(pollService.getPollWithAnswers(poll.id));
+  for (const poll of createdPollsDb) createdPollsPromise.push(pollService.getPollWithAnswers(poll.publicId));
   // filter created polls for null values:
   const createdPolls: Poll[] = (await Promise.all(createdPollsPromise)).filter(poll=>poll!=null);
   
@@ -42,7 +42,7 @@ export const getUserInformation = async (
     req.userId,
   );
   // get poll ids for polls where votes were casted:
-  const participatedPollsIds: number[] = [];
+  const participatedPollsIds: string[] = [];
   for (const vote of votes) {
     const answer: answerRepository.Answer | null =
       await answerRepository.getAnswerById(vote.answerId);

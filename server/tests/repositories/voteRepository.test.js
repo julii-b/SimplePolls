@@ -23,8 +23,8 @@ describe('Votes Repository', () => {
     user1 = await userRepository.createUser('testtoken-voteRepository-1');
     user2 = await userRepository.createUser('testtoken-voteRepository-2');
     poll = await pollRepository.createPoll(user1.id, 'How are you?');
-    answer1 = await answerRepository.createAnswer(user1.id, poll.id, 'good');
-    answer2 = await answerRepository.createAnswer(user1.id, poll.id, 'bad');
+    answer1 = await answerRepository.createAnswer(user1.id, poll.publicId, 'good');
+    answer2 = await answerRepository.createAnswer(user1.id, poll.publicId, 'bad');
   });
   afterEach(async () => {
     await userRepository.deleteUser(user1.id);

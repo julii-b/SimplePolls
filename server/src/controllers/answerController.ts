@@ -37,12 +37,9 @@ export const createNewAnswer = async (
   if (typeof answerText !== 'string' || answerText.trim().length === 0) {
     throw HttpError.badRequest('answerText must be a string');
   }
-  // get pollId from publicPollId:
-  const pollId: number | null = await pollRepository.getPrivateID(publicPollId);
-  if (!pollId) throw HttpError.notFound('poll not found');
   // create new answer:
   const newAnswer: answerRepository.Answer | null =
-    await answerRepository.createAnswer(req.userId, pollId, answerText.trim());
+    await answerRepository.createAnswer(req.userId, publicPollId, answerText.trim());
   if (!newAnswer) throw HttpError.serverError('failed to create answer');
   // get full answer object:
   const answerWithVotes: Answer|null = await answerService.getAnswerWithVotes(newAnswer.id);
@@ -50,7 +47,7 @@ export const createNewAnswer = async (
 
   res
     .status(201)
-    .location('/polls/' + pollId + '/answers/' + newAnswer.id)
+    .location('/polls/' + publicPollId + '/answers/' + newAnswer.id)
     .json(answerWithVotes);
 };
 
@@ -58,7 +55,7 @@ export const createNewAnswer = async (
  * Get all answers for a poll by pollId
  * 
  * @param {Request} req
- * @param {string}req.params.pollId - pollId of the poll to get the answers of, sent by the client as a parameter in the route
+ * @param {string}req.params.pollId - Public pollId of the poll to get the answers of, sent by the client as a parameter in the route
  * 
  * @param {Response} res
  * 
@@ -76,12 +73,9 @@ export const getAnswers = async (
   if (typeof publicPollId !== 'string' || publicPollId.trim().length === 0) {
     throw HttpError.badRequest('pollId must be a string');
   }
-  // get pollId from publicPollId:
-  const pollId: number | null = await pollRepository.getPrivateID(publicPollId);
-  if (!pollId) throw HttpError.notFound('poll not found');
   // get answers:
   const answers: answerRepository.Answer[] =
-    await answerRepository.getAnswersForPoll(pollId);
+    await answerRepository.getAnswersForPoll(publicPollId);
   // get votes for answers:
   const answersWithVotes: Answer[] = [];
   for (const answer of answers) {

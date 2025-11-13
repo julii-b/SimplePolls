@@ -7,7 +7,7 @@ import { Prisma } from '@prisma/client';
 
 export interface Answer {
   id: number;
-  pollId: number;
+  pollId: string;
   answerText: string;
   createdAt: string; // ISO from timestamptz
 }
@@ -28,19 +28,19 @@ async function verifyAnswerOwnership(
 
 export async function createAnswer(
   userId: number,
-  pollId: number,
+  publicPollId: string,
   answerText: string,
 ): Promise<Answer | null> {
 
   // check if user is poll owner:
   const poll: pollRepository.Poll | null =
-    await pollRepository.getPollById(pollId);
+    await pollRepository.getPollById(publicPollId);
   if (!poll || poll.ownerId != userId) return null;
 
   // create answer:
   const result: any | null = await prismaClient.answers.create({
     data: {
-      pollId: pollId,
+      pollId: publicPollId,
       answerText: answerText,
     },
   });
@@ -57,12 +57,12 @@ export async function createAnswer(
   return answer;
 }
 
-export async function getAnswersForPoll(pollId: number): Promise<Answer[]> {  
+export async function getAnswersForPoll(publicPollId: string): Promise<Answer[]> {  
 
   // find answers for pollId:
   const results: any[] = await prismaClient.answers.findMany({
     where: {
-      pollId: pollId,
+      pollId: publicPollId,
     },
     orderBy: {
       createdAt: 'asc',

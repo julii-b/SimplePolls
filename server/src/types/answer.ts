@@ -2,7 +2,7 @@ import type { Vote } from './vote.js';
 
 export interface Answer {
   id: number;
-  pollId: number;
+  pollId: string;
   answerText: string;
   votes: Vote[]
 }

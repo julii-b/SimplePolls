@@ -4,12 +4,12 @@ import * as answerService from './answerService.js'
 import type { Poll } from '../types/poll.js';
 import type { Answer } from '../types/answer.js';
 
-export async function getPollWithAnswers(pollId: number): Promise<Poll | null> {
+export async function getPollWithAnswers(pollId: string): Promise<Poll | null> {
 
   const dbPoll: pollRepository.Poll|null = await pollRepository.getPollById(pollId);
   if (!dbPoll) return null;
 
-  const dbAnswers: answerRepository.Answer[] = await answerRepository.getAnswersForPoll(dbPoll.id);
+  const dbAnswers: answerRepository.Answer[] = await answerRepository.getAnswersForPoll(dbPoll.publicId);
 
   let answers: Answer[] = [];
   for (const dbAnswer of dbAnswers) {

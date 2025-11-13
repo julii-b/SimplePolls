@@ -33,10 +33,10 @@ describe('Polls Repository', async () => {
   test('getPollById works', async () => {
     // get poll that exists:
     const poll1 = await pollRepository.createPoll(user.id, 'Where is Waldo?');
-    const poll2 = await pollRepository.getPollById(poll1.id);
+    const poll2 = await pollRepository.getPollById(poll1.publicId);
     expect(poll2).toEqual(poll1);
     // get poll that doesn't exist:
-    let poll3 = await pollRepository.getPollById(-1);
+    let poll3 = await pollRepository.getPollById('cde');
     expect(poll3).toBe(null);
   });
 
@@ -76,7 +76,7 @@ describe('Polls Repository', async () => {
     // update poll that doesn't exist:
     const poll1 = await pollRepository.updatePollText(
       1,
-      -1,
+      'cde',
       'Can you change this?',
     );
     expect(poll1).toBe(null);
@@ -85,12 +85,12 @@ describe('Polls Repository', async () => {
       user.id,
       'Does anyone read this?',
     );
-    const poll3 = await pollRepository.updatePollText(-1, poll2.id);
+    const poll3 = await pollRepository.updatePollText(-1, poll2.publicId);
     expect(poll1).toBe(null);
     // update poll correctly:
     const poll4 = await pollRepository.updatePollText(
       user.id,
-      poll2.id,
+      poll2.publicId,
       'Is this the new text?',
     );
     expect(poll4.id).toBe(poll2.id);
@@ -103,8 +103,8 @@ describe('Polls Repository', async () => {
       user.id,
       'Are ther no dumb questions?',
     );
-    await pollRepository.deletePoll(user.id, poll1.id);
-    poll1 = await pollRepository.getPollById(poll1.id);
+    await pollRepository.deletePoll(user.id, poll1.publicId);
+    poll1 = await pollRepository.getPollById(poll1.publicId);
     expect(poll1).toBe(null);
   });
 });
