@@ -1,5 +1,9 @@
 # Work in progress, not finished! Setup guide not applicable!
 
+## Documentation
+
+- [Localization System](docs/LOCALIZATION.md) - Guide to the internationalization (i18n) system
+
 ## Project Structure
 
 ```yaml
