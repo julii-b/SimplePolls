@@ -1,8 +1,10 @@
 import { isRouteErrorResponse, Link, useRouteError } from "react-router-dom";
 import styles from './ErrorElement.module.css';
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 const ErrorPage = () => {
+  const {t} = useTranslation();
   const error = useRouteError();
 
   let errorTitle:string = '';
@@ -47,11 +49,15 @@ const ErrorPage = () => {
         window.location.reload();
       }}
       ref={reloadRef}
-      >Reload page</Link>
+      >
+        {t('error.reloadButtonText')}
+      </Link>
       <Link
         className={`button ${styles.errorButton}`}
         to='/'
-      >Go to home page</Link>
+      >
+        {t('error.goHomeButtonText')}
+      </Link>
     </div>
   );
 }

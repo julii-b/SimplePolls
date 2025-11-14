@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import stylesLoadingPage from './LoadingPage.module.css';
+import { useTranslation } from 'react-i18next';
 
 const LoadingPage = () => {
+  const { t } = useTranslation();
 
   // State for animated dots and effect to update them:
   const [ dots, setDots ] = useState<string>('');
@@ -34,7 +36,7 @@ const LoadingPage = () => {
       className={stylesLoadingPage.loadingText}
       aria-hidden="true"
       >
-        Loading{dots}
+        {t('common.loadingText')}{dots}
       </p>
 
     </div>

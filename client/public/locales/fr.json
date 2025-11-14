@@ -1,0 +1,60 @@
+{
+  "common": {
+    "goBackButtonAriaLabel": "Revenir à la page précédente",
+    "goBackButtonTitle": "Retour",
+
+    "closeWindowAriaLabel": "Fermer la fenêtre",
+    "closeWindowTitle": "Fermer"
+  },
+  "home": {
+    "createButton": "Créer un nouveau sondage",
+    "participateButton": "Participer à un sondage",
+    "loadingText": "Chargement"
+  },
+  "error": {
+    "reloadButtonText": "Recharger la page",
+    "goHomeButtonText": "Aller à la page d'accueil"
+  },
+  "create": {
+    "formAriaLabel": "Créer un nouveau sondage ou modifier un sondage existant",
+
+    "questionPlaceholder": "Saisissez la question de votre sondage...",
+    "questionAriaLabel": "Champ de saisie de la question",
+
+    "saveButtonAriaLabel": "Enregistrer le sondage",
+
+    "answerInputAriaLabel": "Champ de saisie de la réponse {{index}}",
+    "answerDeleteAriaLabel": "Supprimer la réponse {{index}}",
+    "answerDeleteTitle": "Supprimer la réponse",
+    "newAnswerPlaceholder": "Tapez pour ajouter une nouvelle réponse..."
+  },
+  "participate": {
+    "openPollInputPlaceholder": "Saisissez l'ID du sondage...",
+    "openPollInputAriaLabel": "Champ de saisie de l'ID du sondage",
+
+    "openPollText": "Ouvrir",
+
+    "shareButtonAriaLabel": "Partager le sondage",
+    "shareButtonTitle": "Partager",
+
+    "editButtonAriaLabel": "Modifier le sondage",
+    "editButtonTitle": "Modifier le sondage",
+
+    "removeVoteAriaLabel": "Retirer le vote pour la réponse {{index}}",
+    "removeVoteTitle": "Retirer le vote",
+
+    "castVoteAriaLabel": "Voter pour la réponse {{index}}",
+    "castVoteTitle": "Voter",
+
+    "sharePollTitle": "Partager ce sondage",
+    "qrCodeText": "Scannez le code QR :",
+    "shareLinkText": "Ou partagez le lien :",
+    "copyLinkText": "Ou copiez le lien :",
+
+    "shareWhatsappAriaLabel": "Partager le sondage via WhatsApp",
+    "shareTelegramAriaLabel": "Partager le sondage via Telegram",
+    "shareEmailAriaLabel": "Partager le sondage par e-mail",
+    "shareSmsAriaLabel": "Partager le sondage par SMS",
+    "shareOtherAriaLabel": "Partager le sondage via d'autres applications"
+  }
+}

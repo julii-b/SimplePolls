@@ -3,6 +3,7 @@ import type { JSX } from "react";
 import stylesHeader from './Header.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShare, faPencil, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from "react-i18next";
 
 
 /**
@@ -14,6 +15,7 @@ const VotePageHeader = (
   {questionText, userIsOwner, pollId, showShareWindow}
   : {questionText: string, userIsOwner: boolean, pollId: string, showShareWindow: ()=>void}
 ): JSX.Element	 => {
+  const { t } = useTranslation();
 
   const formattedPollId: string = (`${pollId.slice(0, 3)}-${pollId.slice(3,6)}-${pollId.slice(6)}`).toUpperCase();
 
@@ -24,15 +26,14 @@ const VotePageHeader = (
         <Link // back-button that leads to join-page
         to='/participate'
         className={`button ${stylesHeader.button}`}
-        title='Back' // tooltip
-        aria-label="Go back to the poll list"
+        title={t('common.goBackButtonTitle')} // tooltip
+        aria-label={t('common.goBackButtonAriaLabel')}
         >
           <FontAwesomeIcon icon={faChevronLeft} />
         </Link>
 
         <div // question text
         className={stylesHeader.questionText}
-        aria-label={`Text of poll ${pollId} question`}
         >
           {questionText}
         </div>
@@ -42,8 +43,8 @@ const VotePageHeader = (
           <button // share-button (to be implemented)
           className={`button ${stylesHeader.button}`}
           onClick={showShareWindow}
-          aria-label={`Share poll ${pollId}`}
-          title='Share' // tooltip
+          aria-label={t('participate.shareButtonAriaLabel')}
+          title={t('participate.shareButtonTitle')}
           >
             <FontAwesomeIcon icon={faShare} />
           </button>
@@ -52,8 +53,8 @@ const VotePageHeader = (
             <Link
             to={'/create/'+pollId}
             className={`button ${stylesHeader.button}`}
-            aria-label={`Edit poll ${pollId}`}
-            title='Edit' // tooltip
+            aria-label={t('participate.editButtonAriaLabel')}
+            title={t('participate.editButtonTitle')}
             >
               <FontAwesomeIcon icon={faPencil} />
             </Link>

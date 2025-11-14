@@ -1,6 +1,7 @@
 import { useState, type JSX } from 'react';
 import { Form, useNavigate } from 'react-router-dom';
 import stylesOpenPollForm from './OpenPollForm.module.css';
+import { t } from 'i18next';
 
 
 /**
@@ -23,7 +24,7 @@ const OpenPollForm = (): JSX.Element => {
     >
       <input // input field for poll id
         value={joinPollId}
-        placeholder="Type poll's ID"
+        placeholder={t('participate.openPollInputPlaceholder')}
         className={`inputField ${stylesOpenPollForm.pollIdInput}`}
         onChange={(e) =>{
           let newValue: string = e.target.value;
@@ -36,13 +37,15 @@ const OpenPollForm = (): JSX.Element => {
           }
           setJoinPollId(newValue);
         }}
-        aria-label='Input ID of the poll to open'
+        aria-label={t('participate.openPollInputAriaLabel')}
       />
       <button // button to open poll
-        type='submit'
-        disabled={joinPollId === ''}
-        className={`button ${stylesOpenPollForm.joinButton}`}
-      >Open</button>      
+      type='submit'
+      disabled={joinPollId === ''}
+      className={`button ${stylesOpenPollForm.joinButton}`}
+      >
+        {t('participate.openPollText')}
+      </button>
     </Form>
   );
 }

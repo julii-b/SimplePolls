@@ -1,0 +1,60 @@
+{
+  "common": {
+    "goBackButtonAriaLabel": "Go back to previous page",
+    "goBackButtonTitle": "Back",
+
+    "closeWindowAriaLabel": "Close window",
+    "closeWindowTitle": "Close"
+  },
+  "home": {
+    "createButton": "Create a new poll",
+    "participateButton": "Participate in a poll",
+    "loadingText": "Loading"
+  },
+  "error": {
+    "reloadButtonText": "Reload page",
+    "goHomeButtonText": "Go to home page"
+  },
+  "create": {
+    "formAriaLabel": "Create new poll or edit existing poll",
+
+    "questionPlaceholder": "Type your poll's question...",
+    "questionAriaLabel": "Question input field",
+
+    "saveButtonAriaLabel": "Save poll",
+
+    "answerInputAriaLabel": "Answer {{index}} input field",
+    "answerDeleteAriaLabel": "Delete answer {{index}}",
+    "answerDeleteTitle": "Delete answer",
+    "newAnswerPlaceholder": "Type to add a new answer..."
+  },
+  "participate": {
+    "openPollInputPlaceholder": "Type poll's ID...",
+    "openPollInputAriaLabel": "Input field to type poll ID",
+
+    "openPollText": "Open",
+
+    "shareButtonAriaLabel": "Share poll",
+    "shareButtonTitle": "Share",
+
+    "editButtonAriaLabel": "Edit poll",
+    "editButtonTitle": "Edit poll",
+
+    "removeVoteAriaLabel": "Remove vote for answer {{index}}",
+    "removeVoteTitle": "Remove vote",
+
+    "castVoteAriaLabel": "Vote for answer {{index}}",
+    "castVoteTitle": "Cast vote",
+
+    "sharePollTitle": "Share this poll",
+    "qrCodeText": "Scan the QR code:",
+    "shareLinkText": "Or share the link:",
+    "copyLinkText": "Or copy the link:",
+
+    "shareWhatsappAriaLabel": "Share poll via WhatsApp",
+    "shareTelegramAriaLabel": "Share poll via Telegram",
+    "shareEmailAriaLabel": "Share poll via Email",
+    "shareSmsAriaLabel": "Share poll via SMS",
+    "shareOtherAriaLabel": "Share poll via other apps"
+  }
+}

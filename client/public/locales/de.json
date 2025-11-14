@@ -1,0 +1,60 @@
+{
+  "common": {
+    "goBackButtonAriaLabel": "Zur vorherigen Seite zurückkehren",
+    "goBackButtonTitle": "Zurück",
+
+    "closeWindowAriaLabel": "Fenster schließen",
+    "closeWindowTitle": "Schließen"
+  },
+  "home": {
+    "createButton": "Neue Umfrage erstellen",
+    "participateButton": "An einer Umfrage teilnehmen",
+    "loadingText": "Laden"
+  },
+  "error": {
+    "reloadButtonText": "Seite neu laden",
+    "goHomeButtonText": "Zur Startseite"
+  },
+  "create": {
+    "formAriaLabel": "Neue Umfrage erstellen oder bestehende Umfrage bearbeiten",
+
+    "questionPlaceholder": "Gib die Frage deiner Umfrage ein...",
+    "questionAriaLabel": "Eingabefeld für die Frage",
+
+    "saveButtonAriaLabel": "Umfrage speichern",
+
+    "answerInputAriaLabel": "Eingabefeld für Antwort {{index}}",
+    "answerDeleteAriaLabel": "Antwort {{index}} löschen",
+    "answerDeleteTitle": "Antwort löschen",
+    "newAnswerPlaceholder": "Tippe, um eine neue Antwort hinzuzufügen..."
+  },
+  "participate": {
+    "openPollInputPlaceholder": "Gib die ID der Umfrage ein...",
+    "openPollInputAriaLabel": "Eingabefeld für die Umfrage-ID",
+
+    "openPollText": "Öffnen",
+
+    "shareButtonAriaLabel": "Umfrage teilen",
+    "shareButtonTitle": "Teilen",
+
+    "editButtonAriaLabel": "Umfrage bearbeiten",
+    "editButtonTitle": "Umfrage bearbeiten",
+
+    "removeVoteAriaLabel": "Stimme für Antwort {{index}} entfernen",
+    "removeVoteTitle": "Stimme entfernen",
+
+    "castVoteAriaLabel": "Für Antwort {{index}} abstimmen",
+    "castVoteTitle": "Stimme abgeben",
+
+    "sharePollTitle": "Diese Umfrage teilen",
+    "qrCodeText": "QR-Code scannen:",
+    "shareLinkText": "Oder den Link teilen:",
+    "copyLinkText": "Oder den Link kopieren:",
+
+    "shareWhatsappAriaLabel": "Umfrage über WhatsApp teilen",
+    "shareTelegramAriaLabel": "Umfrage über Telegram teilen",
+    "shareEmailAriaLabel": "Umfrage per E-Mail teilen",
+    "shareSmsAriaLabel": "Umfrage per SMS teilen",
+    "shareOtherAriaLabel": "Umfrage über andere Apps teilen"
+  }
+}

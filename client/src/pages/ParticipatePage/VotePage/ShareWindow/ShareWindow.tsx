@@ -6,9 +6,11 @@ import { createPortal } from "react-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentSms, faEllipsis, faEnvelope, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faTelegram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { useTranslation } from "react-i18next";
 
 const ShareWindow = ({ pollId, toggleVisibility }: { pollId: string, toggleVisibility: ()=>void }): JSX.Element	 => {
-
+  const { t } = useTranslation();
+  
   const pollUrl = `${config.clientUrl}/participate/${pollId}`;
   const encodedPollUrl = encodeURIComponent(pollUrl);
   const closeButtonRef = useRef<HTMLButtonElement|null>(null);
@@ -38,20 +40,22 @@ const ShareWindow = ({ pollId, toggleVisibility }: { pollId: string, toggleVisib
           className={`button ${stylesShareW.closeButton}`}
           onClick={toggleVisibility}
           ref={closeButtonRef}
-          title='Close' // tooltip
-          aria-label='Close share window'
+          title={t('common.closeWindowTitle')} // tooltip
+          aria-label={t('common.closeWindowAriaLabel')}
           >
             <FontAwesomeIcon icon={faXmark} />
           </button>
 
           <h2
           className={stylesShareW.title}
-          >Share this poll</h2>
+          >
+            {t('participate.sharePollTitle')}
+          </h2>
 
           <p
           className={stylesShareW.instructions}
           >
-            Scan the QR-Code:
+            {t('participate.qrCodeText')}
           </p>
 
           <QRCode
@@ -62,7 +66,7 @@ const ShareWindow = ({ pollId, toggleVisibility }: { pollId: string, toggleVisib
           <p
           className={stylesShareW.instructions}
           >
-            Or share the link:
+            {t('participate.shareLinkText')}
           </p>
 
           <div
@@ -74,8 +78,8 @@ const ShareWindow = ({ pollId, toggleVisibility }: { pollId: string, toggleVisib
             onClick={()=>{
               window.open(`https://wa.me/?text=${encodedPollUrl}`, '_blank', 'noopener,noreferrer');
             }}
-            title='Share on WhatsApp' // tooltip
-            aria-label='Share on WhatsApp'
+            title={t('participate.shareWhatsappAriaLabel')} // tooltip
+            aria-label={t('participate.shareWhatsappAriaLabel')}
             >
               <FontAwesomeIcon icon={faWhatsapp} />
             </button>
@@ -85,8 +89,8 @@ const ShareWindow = ({ pollId, toggleVisibility }: { pollId: string, toggleVisib
             onClick={()=>{
               window.open(`https://t.me/share/url?url=${encodedPollUrl}`, '_blank', 'noopener,noreferrer')
             }}
-            title='Share on Telegram' // tooltip
-            aria-label='Share on Telegram'
+            title={t('participate.shareTelegramAriaLabel')} // tooltip
+            aria-label={t('participate.shareTelegramAriaLabel')}
             >
               <FontAwesomeIcon icon={faTelegram} />
             </button>
@@ -96,8 +100,8 @@ const ShareWindow = ({ pollId, toggleVisibility }: { pollId: string, toggleVisib
             onClick={()=>{
               window.location.href = `mailto:?subject=${encodeURIComponent('Participate in this poll')}&body=${encodedPollUrl}`;
             }}
-            title='Share via Email' // tooltip
-            aria-label='Share via Email'
+            title={t('participate.shareEmailAriaLabel')} // tooltip
+            aria-label={t('participate.shareEmailAriaLabel')}
             >
               <FontAwesomeIcon icon={faEnvelope} />
             </button>
@@ -107,8 +111,8 @@ const ShareWindow = ({ pollId, toggleVisibility }: { pollId: string, toggleVisib
             onClick={()=>{
               window.location.href = `sms:?body=${encodedPollUrl}`;
             }}
-            title='Share via SMS' // tooltip
-            aria-label='Share via SMS'
+            title={t('participate.shareSmsAriaLabel')} // tooltip
+            aria-label={t('participate.shareSmsAriaLabel')}
             >
               <FontAwesomeIcon icon={faCommentSms} />
             </button>
@@ -117,13 +121,11 @@ const ShareWindow = ({ pollId, toggleVisibility }: { pollId: string, toggleVisib
             className={`button ${stylesShareW.socialButton} ${stylesShareW.otherShareButton} `}
             onClick={() => {
               navigator.share({
-                title:'SimplePolls Poll',
-                text: 'Participate in this poll:',
                 url: pollUrl
               })
             }}
-            title='Share via other apps' // tooltip
-            aria-label='Share via other apps'
+            title={t('participate.shareOtherAriaLabel')} // tooltip
+            aria-label={t('participate.shareOtherAriaLabel')}
             >
               <FontAwesomeIcon icon={faEllipsis} />
             </button> }
@@ -133,7 +135,7 @@ const ShareWindow = ({ pollId, toggleVisibility }: { pollId: string, toggleVisib
           <p
           className={stylesShareW.instructions}
           >
-            Or copy the link:
+            {t('participate.copyLinkText')}
           </p>
           <input
           className={`inputField ${stylesShareW.linkInput}`}

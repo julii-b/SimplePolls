@@ -3,6 +3,7 @@ import type { Poll } from '../../types/poll';
 import InputsAnswers from './InputsAnswers/InputsAnswersContainer';
 import styles from './CreatePage.module.css';
 import CreatePageHeader from './Header';
+import { useTranslation } from 'react-i18next';
 
 
 /**
@@ -16,6 +17,7 @@ const CreatePage = () => {
 
   const loaderData = useLoaderData();
   let poll: Poll|undefined = loaderData.poll;
+  const { t } = useTranslation();
 
   return (
     <div
@@ -26,7 +28,7 @@ const CreatePage = () => {
         <Form
           method='post'
           className={styles.votePageContainer}
-          aria-label="Create new poll or edit existing poll"
+          aria-label={t('create.formAriaLabel')}
         >
           {poll && ( // store pollId as hidden input if poll was passed
             <input 
