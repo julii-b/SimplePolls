@@ -1,22 +1,24 @@
 import { isRouteErrorResponse, Link, useRouteError } from "react-router-dom";
 import styles from './ErrorElement.module.css';
 import { useEffect, useRef } from "react";
+import { useTranslation } from '../contexts/TranslationContext';
 
 const ErrorPage = () => {
   const error = useRouteError();
+  const { t } = useTranslation();
 
   let errorTitle:string = '';
   let errorMessage:string = '';
 
   if (isRouteErrorResponse(error)) {
-    errorTitle = 'Error ' + error.status;
+    errorTitle = t('Error') + ' ' + error.status;
     errorMessage = error.statusText;
   } else if (error instanceof Error) {
-    errorTitle = 'Error';
+    errorTitle = t('Error');
     errorMessage = error.message;
   } else {
-    errorTitle = 'Unknown Error';
-    errorMessage = 'An unknown error has occurred.';
+    errorTitle = t('Unknown Error');
+    errorMessage = t('An unknown error has occurred.');
   }
 
   // Focus the h2 when the component is mounted (relevant for screen readers):
@@ -47,11 +49,11 @@ const ErrorPage = () => {
         window.location.reload();
       }}
       ref={reloadRef}
-      >Reload page</Link>
+      >{t('Reload page')}</Link>
       <Link
         className={`button ${styles.errorButton}`}
         to='/'
-      >Go to home page</Link>
+      >{t('Go to home page')}</Link>
     </div>
   );
 }

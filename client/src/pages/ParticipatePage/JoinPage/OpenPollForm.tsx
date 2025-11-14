@@ -1,6 +1,7 @@
 import { useState, type JSX } from 'react';
 import { Form, useNavigate } from 'react-router-dom';
 import stylesOpenPollForm from './OpenPollForm.module.css';
+import { useTranslation } from '../../../contexts/TranslationContext';
 
 
 /**
@@ -9,7 +10,7 @@ import stylesOpenPollForm from './OpenPollForm.module.css';
  * @returns { JSX.Element }
  */
 const OpenPollForm = (): JSX.Element => {
-
+  const { t } = useTranslation();
   const [joinPollId, setJoinPollId] = useState<string>('');
   const navigate = useNavigate();
   
@@ -23,7 +24,7 @@ const OpenPollForm = (): JSX.Element => {
     >
       <input // input field for poll id
         value={joinPollId}
-        placeholder="Type poll's ID"
+        placeholder={t("Type poll's ID")}
         className={`inputField ${stylesOpenPollForm.pollIdInput}`}
         onChange={(e) =>{
           let newValue: string = e.target.value;
@@ -36,13 +37,13 @@ const OpenPollForm = (): JSX.Element => {
           }
           setJoinPollId(newValue);
         }}
-        aria-label='Input ID of the poll to open'
+        aria-label={t('Input ID of the poll to open')}
       />
       <button // button to open poll
         type='submit'
         disabled={joinPollId === ''}
         className={`button ${stylesOpenPollForm.joinButton}`}
-      >Open</button>      
+      >{t('Open')}</button>      
     </Form>
   );
 }

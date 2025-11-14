@@ -3,6 +3,7 @@ import { useState } from 'react';
 import stylesHeader from './Header.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from '../../contexts/TranslationContext';
 
 
 /**
@@ -13,6 +14,7 @@ import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
  * @returns 
  */
 const CreatePageHeader = ({poll}: {poll?: Poll|undefined}) => {
+  const { t } = useTranslation();
   const [questionText, setQuestionText] = useState(poll? poll.questionText : '')
 
   return (
@@ -20,11 +22,11 @@ const CreatePageHeader = ({poll}: {poll?: Poll|undefined}) => {
 
       <textarea
         name={poll ? 'existingQuestion-'+poll.id : 'newQuestion'} // 'existingQuestion-<id>' or 'newQuestion', so action function knows what to do
-        placeholder="Type your poll's question..."
+        placeholder={t("Type your poll's question...")}
         className={`inputField ${stylesHeader.questionInput}`}
         value={questionText}
         onChange={(e)=>{setQuestionText(e.target.value)}}
-        aria-label='Poll question'
+        aria-label={t('Poll question')}
       />
 
       <button
@@ -32,8 +34,8 @@ const CreatePageHeader = ({poll}: {poll?: Poll|undefined}) => {
         className={`button ${stylesHeader.button} ${stylesHeader.saveButton}`}
         name='action' // action: save - can later be used to determine if form was submitted using save button
         value='save'
-        title='Save poll' // for tooltip
-        aria-label='Save poll'
+        title={t('Save poll')} // for tooltip
+        aria-label={t('Save poll')}
       ><FontAwesomeIcon icon={faFloppyDisk} /></button>
 
     </div>

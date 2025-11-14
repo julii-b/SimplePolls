@@ -4,9 +4,12 @@ import './global.css';
 import './globalComponents.css';
 import router from './router.tsx'
 import { RouterProvider } from 'react-router-dom';
+import { TranslationProvider } from './contexts/TranslationContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <TranslationProvider>
+      <RouterProvider router={router} />
+    </TranslationProvider>
   </StrictMode>,
 )

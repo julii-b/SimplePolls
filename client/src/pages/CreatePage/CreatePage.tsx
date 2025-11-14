@@ -3,6 +3,7 @@ import type { Poll } from '../../types/poll';
 import InputsAnswers from './InputsAnswers/InputsAnswersContainer';
 import styles from './CreatePage.module.css';
 import CreatePageHeader from './Header';
+import { useTranslation } from '../../contexts/TranslationContext';
 
 
 /**
@@ -26,7 +27,7 @@ const CreatePage = () => {
         <Form
           method='post'
           className={styles.votePageContainer}
-          aria-label="Create new poll or edit existing poll"
+          aria-label={useTranslation().t('Create new poll or edit existing poll')}
         >
           {poll && ( // store pollId as hidden input if poll was passed
             <input 

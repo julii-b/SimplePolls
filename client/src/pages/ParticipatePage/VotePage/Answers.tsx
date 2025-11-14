@@ -4,6 +4,7 @@ import { Form } from "react-router-dom";
 import stylesAnswers from './Answers.module.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "../../../contexts/TranslationContext";
 
 
 /**
@@ -16,6 +17,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
  * @returns { JSX.Element }
  */
 const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: number[]}): JSX.Element => {
+  const { t } = useTranslation();
 
   // Count all votes to calculate percentages:
   let totalVotes: number = 0;
@@ -45,8 +47,8 @@ const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: 
           name='action'
           className={`${stylesAnswers.checkBox} ${stylesAnswers.button} button`}
           value={'removeVote'}
-          aria-label={`Remove vote for answer ${answer.id}`}
-          title='Remove vote' // tooltip
+          aria-label={`${t('Remove vote for answer')} ${answer.id}`}
+          title={t('Remove vote')} // tooltip
           >
             <FontAwesomeIcon className={stylesAnswers.checkMark} icon={faCheck} />
           </button>
@@ -56,8 +58,8 @@ const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: 
           name='action'
           className={`${stylesAnswers.checkBox} ${stylesAnswers.button} button`}
           value={'castVote'}
-          aria-label={`Vote for answer ${answer.id}`}
-          title='Vote' // tooltip
+          aria-label={`${t('Vote for answer')} ${answer.id}`}
+          title={t('Vote')} // tooltip
           >
           </button>
         )}

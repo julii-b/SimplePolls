@@ -1,6 +1,7 @@
 import { useState, type JSX } from "react";
 import stylesInpAnsws from './InputsAnswers.module.css';
 import type { NewAnswer } from "./InputsAnswersContainer";
+import { useTranslation } from "../../../contexts/TranslationContext";
 
 /**
  * Renders the elements needed in a form to create a new Answer object.
@@ -10,6 +11,7 @@ import type { NewAnswer } from "./InputsAnswersContainer";
  * @returns {JSX.Element}
  */
 const InputNewAnswer = ({answer}: {answer: NewAnswer}): JSX.Element => {
+  const { t } = useTranslation();
 
   // States to store form input value:
   const [answerText, setAnswerText] = useState('');
@@ -22,14 +24,14 @@ const InputNewAnswer = ({answer}: {answer: NewAnswer}): JSX.Element => {
       <textarea // Input field for new answer, creates another answer input on first change
         className={`inputField ${stylesInpAnsws.answerInput}`}
         name={'newAnswer-'+answer.newAnswerIndex} // 'newAnswer', so action function knows what to do
-        placeholder='Type to add a new answer...'
+        placeholder={t('Type to add a new answer...')}
         value={answerText}
         onChange={(e) => {
           if (firstChange) answer.onNewAnswer(); // If the current change is the first change, create new answer input field
           setFirstChange(false);
           setAnswerText(e.target.value)
         }}
-        aria-label={'Type here to add a new answer to your poll'}
+        aria-label={t('Type here to add a new answer to your poll')}
       />
 
     </div>

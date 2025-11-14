@@ -3,6 +3,7 @@ import type { Answer } from "../../../types/answer";
 import stylesInpAnsws from './InputsAnswers.module.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "../../../contexts/TranslationContext";
 
 /**
  * Renders the elements needed in a form to edit/delete an already existing Answer object.
@@ -12,6 +13,7 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
  * @returns {JSX.Element}
  */
 const InputExistingAnswer = ({answer}: {answer: Answer}): JSX.Element => {
+  const { t } = useTranslation();
 
   // State to store form input value:
   const [answerText, setAnswerText] = useState(answer.answerText);
@@ -25,7 +27,7 @@ const InputExistingAnswer = ({answer}: {answer: Answer}): JSX.Element => {
       name={'existingAnswer-'+answer.id} // 'existingAnswer-<id>', so action function knows what to do
       value={answerText}
       onChange={(e) => {setAnswerText(e.target.value)}}
-      aria-label={'Answer '+answer.id+' text'}
+      aria-label={`${t('Answer')} ${answer.id} ${t('text')}`}
       />
 
       <button // delete button for this answer
@@ -33,8 +35,8 @@ const InputExistingAnswer = ({answer}: {answer: Answer}): JSX.Element => {
       className={`button ${stylesInpAnsws.deleteAnswerButton}`}
       name='action' // action: delete - can later be used to determine if form was submitted using delete button
       value={'delete-'+answer.id} // 'delete-<id>', so action function knows which answer to delete
-      aria-label={'Delete answer '+answer.id}
-      title={'delete answer'} // for tooltip
+      aria-label={`${t('Delete answer')} ${answer.id}`}
+      title={t('delete answer')} // for tooltip
       >
         <FontAwesomeIcon icon={faTrashCan} />
       </button>

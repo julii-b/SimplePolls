@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import stylesLoadingPage from './LoadingPage.module.css';
+import { useTranslation } from '../contexts/TranslationContext';
 
 const LoadingPage = () => {
+  const { t } = useTranslation();
 
   // State for animated dots and effect to update them:
   const [ dots, setDots ] = useState<string>('');
@@ -25,8 +27,8 @@ const LoadingPage = () => {
           <img
           className={stylesLoadingPage.spinner} 
           src="/Logo.png"
-          alt="Loading"
-          aria-label="Loading"
+          alt={t('Loading')}
+          aria-label={t('Loading')}
           />
         </picture>
 
@@ -34,7 +36,7 @@ const LoadingPage = () => {
       className={stylesLoadingPage.loadingText}
       aria-hidden="true"
       >
-        Loading{dots}
+        {t('Loading')}{dots}
       </p>
 
     </div>
