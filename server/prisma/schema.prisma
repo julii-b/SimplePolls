@@ -51,3 +51,8 @@ model users {
 
   @@index([createdAt], map: "idx_users_created_at")
 }
+
+model translations {
+  key String @id
+  en  String
+}

@@ -6,6 +6,7 @@ import apiDocsRouter from './openapi/apiDocsRouter.js';
 import meRouter from './routes/meRouter.js';
 import pollsRouter from './routes/pollsRouter.js';
 import answersRouter from './routes/answersRouter.js';
+import translationsRouter from './routes/translationsRouter.js';
 import errorHandler from './middlewares/errorHandler.js';
 
 const app = express();
@@ -27,6 +28,7 @@ app.use('/', apiDocsRouter);
 app.use('/me', meRouter);
 app.use('/polls', pollsRouter);
 app.use('/answers', answersRouter);
+app.use('/translations', translationsRouter);
 
 // Global error handler:
 app.use(errorHandler);
