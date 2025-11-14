@@ -31,7 +31,13 @@ const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: 
       <Form method='post'
       key={'answer'+answer.id}
       className={stylesAnswers.answerContainer}
-      >
+  >
+        <input  // store poll id in form
+          type='hidden'
+          name='pollId'
+          value={answer.pollId}
+          aria-hidden="true"
+        />
         <input // store answer id in form
         type='hidden'
         name='answerId'
