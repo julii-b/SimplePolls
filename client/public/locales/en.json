@@ -6,7 +6,10 @@
     "closeWindowAriaLabel": "Close window",
     "closeWindowTitle": "Close",
 
-    "loadingText": "Loading"
+    "loadingText": "Loading",
+
+    "languageButtonAriaLabel": "Change language",
+    "languageButtonTitle": "Change language"
   },
   "home": {
     "createButton": "Create a new poll",

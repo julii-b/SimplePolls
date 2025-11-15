@@ -1,5 +1,5 @@
 .shareWindow {
-  background-color: #e2c1cdb5 !important;
+  background-color: var(--participate-bg-color) !important;
   border-color:  var(--participate-color) !important;
   scrollbar-color: #BA8F9E #ffffff00 !important;
 }

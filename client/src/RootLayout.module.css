@@ -1,4 +1,15 @@
-
+.buttonsContainer {
+  position: absolute;
+  right: 1.5em;
+  top: 1em;
+  display: flex;
+  gap: 0.7em;
+}
+@media (max-width: 600px) {
+  .buttonsContainer {
+    font-size: 0.8em;
+  }
+}
 
 .simplePollsTitle {
   font-size: 5em;

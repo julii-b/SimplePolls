@@ -6,7 +6,10 @@
     "closeWindowAriaLabel": "Fenster schließen",
     "closeWindowTitle": "Schließen",
 
-    "loadingText": "Lädt"
+    "loadingText": "Lädt",
+
+    "languageButtonAriaLabel": "Sprache ändern",
+    "languageButtonTitle": "Sprache ändern"
   },
   "home": {
     "createButton": "Neue Umfrage erstellen",

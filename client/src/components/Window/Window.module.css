@@ -16,11 +16,10 @@
   width: 30em;
   max-width: 85vw;
   height: inherit;
-  min-height: 20vh;
   padding: 3em 1em 2em 1em;
   align-items: center;
   text-align: center;
-  backdrop-filter: blur(20px);
+  backdrop-filter: brightness(1.5) blur(20px);
   background-color: var(--default-bg-color);
   border-color:  var(--default-color);
   scrollbar-color: var(--default-bg-color) #ffffff00;
