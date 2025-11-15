@@ -1,7 +1,7 @@
 import { useState, type JSX } from 'react';
 import { Form, useNavigate } from 'react-router-dom';
 import stylesOpenPollForm from './OpenPollForm.module.css';
-import { t } from 'i18next';
+import { useTranslation } from "react-i18next";
 
 
 /**
@@ -10,6 +10,7 @@ import { t } from 'i18next';
  * @returns { JSX.Element }
  */
 const OpenPollForm = (): JSX.Element => {
+  const { t } = useTranslation();
 
   const [joinPollId, setJoinPollId] = useState<string>('');
   const navigate = useNavigate();
