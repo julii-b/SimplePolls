@@ -1,0 +1,49 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+.shareWindowContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30em;
+  max-width: 85vw;
+  height: inherit;
+  min-height: 20vh;
+  padding: 3em 1em 2em 1em;
+  align-items: center;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  background-color: var(--default-bg-color);
+  border-color:  var(--default-color);
+  scrollbar-color: var(--default-bg-color) #ffffff00;
+  z-index: 1000;
+}
+.closeButton {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  width: 2.5em;
+  height: 2.5em;
+  font-size: 1em;
+  background-color: var(--default-bg-color);
+  border-color: var(--default-color);
+}
+.closeButton:hover,
+.closeButton:active {
+  background-color: var(--default-color);
+}
+
+.contentContainer {
+  height: 100%;
+  overflow: auto;
+  padding: 0;
+  max-height: 70vh;
+}

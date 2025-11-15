@@ -1,39 +1,11 @@
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 999;
-}
-
-.shareWindowContainer {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 30em;
-  max-width: 85vw;
-  height: inherit;
-  min-height: 30vh;
-  max-height: min(70vh, 50em);
-  padding: 3em 1em 0.5em 1em;
-  align-items: center;
-  text-align: center;
-  background-color: #e2c1cdb5;
-  border-color:  var(--participate-color);
-  z-index: 1000;
+.shareWindow {
+  background-color: #e2c1cdb5 !important;
+  border-color:  var(--participate-color) !important;
+  scrollbar-color: #BA8F9E #ffffff00 !important;
 }
 .closeButton {
-  position: absolute;
-  top: 0.5em;
-  right: 0.5em;
-  width: 2.5em;
-  height: 2.5em;
-  font-size: 1em;
-  background-color: var(--participate-bg-color);
-  border-color: var(--participate-color);
+  background-color: var(--participate-bg-color) !important;
+  border-color: var(--participate-color) !important;
 }
 .closeButton:hover,
 .closeButton:active {
@@ -49,7 +21,6 @@
   align-items: center;
   text-align: center;
   justify-content: space-evenly;
-  scrollbar-color: #BA8F9E #ffffff00;
 }
 
 .title{
