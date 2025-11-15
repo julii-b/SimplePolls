@@ -4,12 +4,13 @@
     "goBackButtonTitle": "Back",
 
     "closeWindowAriaLabel": "Close window",
-    "closeWindowTitle": "Close"
+    "closeWindowTitle": "Close",
+
+    "loadingText": "Loading"
   },
   "home": {
     "createButton": "Create a new poll",
-    "participateButton": "Participate in a poll",
-    "loadingText": "Loading"
+    "participateButton": "Participate in a poll"
   },
   "error": {
     "reloadButtonText": "Reload page",

@@ -4,12 +4,13 @@
     "goBackButtonTitle": "Zurück",
 
     "closeWindowAriaLabel": "Fenster schließen",
-    "closeWindowTitle": "Schließen"
+    "closeWindowTitle": "Schließen",
+
+    "loadingText": "Lädt"
   },
   "home": {
     "createButton": "Neue Umfrage erstellen",
-    "participateButton": "An einer Umfrage teilnehmen",
-    "loadingText": "Laden"
+    "participateButton": "An einer Umfrage teilnehmen"
   },
   "error": {
     "reloadButtonText": "Seite neu laden",

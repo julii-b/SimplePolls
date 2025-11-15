@@ -4,12 +4,13 @@
     "goBackButtonTitle": "Retour",
 
     "closeWindowAriaLabel": "Fermer la fenêtre",
-    "closeWindowTitle": "Fermer"
+    "closeWindowTitle": "Fermer",
+
+    "loadingText": "Chargement"
   },
   "home": {
     "createButton": "Créer un nouveau sondage",
-    "participateButton": "Participer à un sondage",
-    "loadingText": "Chargement"
+    "participateButton": "Participer à un sondage"
   },
   "error": {
     "reloadButtonText": "Recharger la page",
