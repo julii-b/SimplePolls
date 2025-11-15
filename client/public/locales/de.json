@@ -27,10 +27,10 @@
     "answerInputAriaLabel": "Eingabefeld für Antwort {{index}}",
     "answerDeleteAriaLabel": "Antwort {{index}} löschen",
     "answerDeleteTitle": "Antwort löschen",
-    "newAnswerPlaceholder": "Tippe, um eine neue Antwort hinzuzufügen..."
+    "newAnswerPlaceholder": "Neue Antwort hinzufügen..."
   },
   "participate": {
-    "openPollInputPlaceholder": "Gib die ID der Umfrage ein...",
+    "openPollInputPlaceholder": "ID eingeben...",
     "openPollInputAriaLabel": "Eingabefeld für die Umfrage-ID",
 
     "openPollText": "Öffnen",

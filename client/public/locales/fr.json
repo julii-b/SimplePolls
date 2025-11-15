@@ -27,10 +27,10 @@
     "answerInputAriaLabel": "Champ de saisie de la réponse {{index}}",
     "answerDeleteAriaLabel": "Supprimer la réponse {{index}}",
     "answerDeleteTitle": "Supprimer la réponse",
-    "newAnswerPlaceholder": "Tapez pour ajouter une nouvelle réponse..."
+    "newAnswerPlaceholder": "Ajouter une nouvelle réponse..."
   },
   "participate": {
-    "openPollInputPlaceholder": "Saisissez l'ID du sondage...",
+    "openPollInputPlaceholder": "Saisissez l'ID...",
     "openPollInputAriaLabel": "Champ de saisie de l'ID du sondage",
 
     "openPollText": "Ouvrir",
