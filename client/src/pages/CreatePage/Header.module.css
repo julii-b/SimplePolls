@@ -2,18 +2,26 @@
   display: flex;
   flex-direction: row;
   gap: 0.8em;
-  padding-bottom: 1.5em;
+  padding-bottom: 0.7em;
   border-bottom: 3px solid var(--create-color);
 }
 
-.questionInput {
+.questionInputContainer {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
-  width: 100px;
+}
+
+.questionInput {
+  width: 100%;
+  resize: none;
+  overflow: auto;
+  max-height: 10em;
   font-family: inherit;
   border-color: var(--create-color) !important;
   min-height: 4em;
   height: 4em;
-  max-height: 10em;
+  transition: none;
 }
 .questionInput::placeholder {
   color: var(--create-color);
@@ -23,6 +31,12 @@
     min-height: 5.3em;
     height: 5.3em;
   }
+}
+
+.charCount {
+  text-align: right;
+  font-style: italic;
+  font-size: 0.8em;
 }
 
 .saveButton {

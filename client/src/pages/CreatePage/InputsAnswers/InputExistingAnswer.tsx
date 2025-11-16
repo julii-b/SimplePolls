@@ -1,4 +1,4 @@
-import { useState, type JSX } from "react";
+import { useEffect, useRef, useState, type JSX } from "react";
 import type { Answer } from "../../../types/answer";
 import stylesInpAnsws from './InputsAnswers.module.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,17 +18,39 @@ const InputExistingAnswer = ({answer}: {answer: Answer}): JSX.Element => {
   // State to store form input value:
   const [answerText, setAnswerText] = useState(answer.answerText);
 
+  // auomatically resize textarea to fit content:
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  useEffect(() => {
+    if (textAreaRef.current) {
+      textAreaRef.current.style.height = 'auto';
+      const cs = getComputedStyle(textAreaRef.current);
+      const borderY = parseFloat(cs.borderTopWidth) + parseFloat(cs.borderBottomWidth);
+      textAreaRef.current.style.height = (textAreaRef.current.scrollHeight + borderY) + 'px';
+    }
+  }, [answerText]);
+
   return (
 
     <div className={`${stylesInpAnsws.answerContainer}`} >
+      <div className={stylesInpAnsws.answerInputContainer}>
+        <textarea // Input field for answer text
+        className={`inputField ${stylesInpAnsws.answerInput}`}
+        ref={textAreaRef}
+        name={'existingAnswer-'+answer.id} // 'existingAnswer-<id>', so action function knows what to do
+        value={answerText}
+        rows={1}
+        onChange={(e) => {
+          if (e.target.value.length <= 1000) {
+            setAnswerText(e.target.value);
+          }
+        }}
+        aria-label={t('create.answerInputAriaLabel', { index: answer.id })}
+        />
 
-      <textarea // Input field for answer text
-      className={`inputField ${stylesInpAnsws.answerInput}`}
-      name={'existingAnswer-'+answer.id} // 'existingAnswer-<id>', so action function knows what to do
-      value={answerText}
-      onChange={(e) => {setAnswerText(e.target.value)}}
-      aria-label={t('create.answerInputAriaLabel', { index: answer.id })}
-      />
+        <span className={stylesInpAnsws.charCount}>
+          {answerText.length} / 1000
+        </span>
+      </div>
 
       <button // delete button for this answer
       type='submit'

@@ -1,5 +1,5 @@
 import type { Poll } from '../../types/poll';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import stylesHeader from './Header.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
@@ -15,19 +15,43 @@ import { useTranslation } from 'react-i18next';
  */
 const CreatePageHeader = ({poll}: {poll?: Poll|undefined}) => {
   const { t } = useTranslation();
-  const [questionText, setQuestionText] = useState(poll? poll.questionText : '')
+  const [questionText, setQuestionText] = useState(poll? poll.questionText : '');
+
+  // auomatically resize textarea to fit content:
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  useEffect(() => {
+    if (textAreaRef.current) {
+      textAreaRef.current.style.height = 'auto';
+      const cs = getComputedStyle(textAreaRef.current);
+      const borderY = parseFloat(cs.borderTopWidth) + parseFloat(cs.borderBottomWidth);
+      textAreaRef.current.style.height = (textAreaRef.current.scrollHeight + borderY) + 'px';
+    }
+  }, [questionText]);
 
   return (
     <div className={stylesHeader.headerContainer}>
 
-      <textarea
-        name={poll ? 'existingQuestion-'+poll.id : 'newQuestion'} // 'existingQuestion-<id>' or 'newQuestion', so action function knows what to do
-        placeholder={t('create.questionPlaceholder')}
-        className={`inputField ${stylesHeader.questionInput}`}
-        value={questionText}
-        onChange={(e)=>{setQuestionText(e.target.value)}}
-        aria-label={t('create.questionAriaLabel')}
-      />
+      <div
+      className={`${stylesHeader.questionInputContainer}`}
+      >
+        <textarea
+          ref={textAreaRef}
+          name={poll ? 'existingQuestion-'+poll.id : 'newQuestion'} // 'existingQuestion-<id>' or 'newQuestion', so action function knows what to do
+          placeholder={t('create.questionPlaceholder')}
+          className={`inputField ${stylesHeader.questionInput}`}
+          value={questionText}
+          rows={1}
+          onChange={(e)=>{
+            if (e.target.value.length <= 1000) {
+              setQuestionText(e.target.value);
+            }
+          }}
+          aria-label={t('create.questionAriaLabel')}
+        />
+        <span className={stylesHeader.charCount}>
+          {questionText.length} / 1000
+        </span>
+      </div>
 
       <button
         type='submit'
