@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 import * as userRepository from '../repositories/userRepository.js';
+import * as examplePollService from '../services/examplePollService.js';
 import { HttpError } from '../types/httpError.js';
 import { randomBytes } from 'node:crypto';
 
@@ -34,6 +35,9 @@ const userMiddleware = async (
     userToken = 'token_' + randomBytes(32).toString('base64url');
     const user: userRepository.User | null = await userRepository.createUser(userToken);
     userId = user?.id;
+    // Create example poll for new user:
+    await examplePollService.createExamplePoll(userId!);
+    // Send new token to client:
     res.setHeader('X-New-Token', userToken);
   }
   // Store user id in Request.userId:
