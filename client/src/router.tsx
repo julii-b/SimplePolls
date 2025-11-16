@@ -7,7 +7,7 @@ import CreatePage, {loader as createLoader, action as createAction} from './page
 import ParticipatePage from './pages/ParticipatePage/ParticipatePageContainer.tsx';
 import JoinPage, { loader as joinLoader } from './pages/ParticipatePage/JoinPage/JoinPage.tsx';
 import VotePage, { loader as voteLoader, action as voteAction } from './pages/ParticipatePage/VotePage/VotePage.tsx';
-import ErrorElement from './pages/ErrorElement.tsx';
+import ErrorElement from './components/ErrorElement/ErrorElement.tsx';
 
 const router = createBrowserRouter([
 {
