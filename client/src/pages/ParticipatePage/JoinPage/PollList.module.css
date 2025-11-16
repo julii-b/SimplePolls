@@ -12,7 +12,7 @@
   border-color: var(--participate-color) !important;
   background-color: var(--participate-bg-color) !important;
   justify-content: flex-start !important;
-  height: 2.5em;
+  height: 3.4em;
 }
 .pollListButton:hover,
 .pollListButton:active {
