@@ -28,7 +28,7 @@
   border-color: var(--create-color) !important;
   width: 70%;
   height: 4em;
-  max-height: 10vh;
+  max-height: 15vh;
   margin-bottom: -1em;
 }
 .createNewButton:hover,
@@ -55,7 +55,7 @@
   border-color: var(--participate-color) !important;
   width: 70%;
   height: 4em;
-  max-height: 10vh;
+  max-height: 15vh;
   margin-bottom: -1em;
 }
 .participateButton:hover,
