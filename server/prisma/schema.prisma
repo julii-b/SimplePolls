@@ -44,7 +44,7 @@ model polls {
 
 model users {
   id                     Int                      @id @default(autoincrement())
-  userToken              String                   @unique
+  hashedUserToken        String                   @unique
   createdAt              DateTime                 @default(now()) @db.Timestamptz(6)
   answers_given_by_users answers_given_by_users[]
   polls                  polls[]

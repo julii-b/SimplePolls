@@ -7,6 +7,7 @@ interface Config {
   // Server config:
   port: number;
   nodeEnv: 'production' | 'development';
+  sha256Secret: string;
   // PostgreSQL config:
   dbHost: string;
   dbPort: number;
@@ -21,7 +22,8 @@ const config: Config = {
   // Server config:
   port: Number(process.env.PORT) || 3000,
   nodeEnv: process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'development' ?
-    process.env.NODE_ENV : 'development',
+  process.env.NODE_ENV : 'development',
+  sha256Secret: process.env.SHA256_SECRET || 'defaultsecret',
   // PostgreSQL config:
   dbHost: process.env.DB_HOST || 'localhost',
   dbPort: Number(process.env.DB_PORT) || 5432,

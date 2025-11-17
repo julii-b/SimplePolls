@@ -38,7 +38,7 @@ types/ # Type extention for Express types
 cp server/.env.example server/.env
 ```
 
-Then open `server/.env` and set your own values for `DB_USER` and `DB_PASSWORD`.
+Then open `server/.env` and set your own values for `SHA256_SECRET`, `DB_USER` and `DB_PASSWORD`.
 
 ### 1.2 Start and initialize the database
 Start the database:

@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
-import { pool } from '../db/pool.js';
+import * as hashService from '../services/hashService.js';
 import { prismaClient } from '../db/prismaClient.js';
 
 export interface User {
@@ -12,9 +12,9 @@ export async function createUser(userToken: string): Promise<User | null> {
 
   // create/update user:
   const result: any | null = await prismaClient.users.upsert({
-    where: { userToken: userToken },
+    where: { hashedUserToken: hashService.sha256(userToken) },
     update: {},
-    create: { userToken: userToken },
+    create: { hashedUserToken: hashService.sha256(userToken) },
   });
 
   if (!result) return null;
@@ -22,7 +22,7 @@ export async function createUser(userToken: string): Promise<User | null> {
   // return user:
   const user: User = {
     id: result.id,
-    userToken: result.userToken,
+    userToken: userToken,
     createdAt: result.createdAt.toISOString(),
   };
   return user;
@@ -52,7 +52,7 @@ export async function getUserByUserToken(
 
   // find user by userToken:
   const result: any | null = await prismaClient.users.findUnique({
-    where: { userToken: userToken },
+    where: { hashedUserToken: hashService.sha256(userToken) },
   });
 
   if (!result) return null;

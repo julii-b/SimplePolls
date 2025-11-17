@@ -6,6 +6,7 @@
   "scripts": {
 
     "generate-env-db-url": "node scripts/generate-env-db-url.ts",
+    "generate-env-sha256-secret": "node scripts/generate-env-sha256-secret.ts",
     "setup-prisma": "npx prisma generate && npx prisma migrate deploy",
     "postinstall": "npm run generate-env-db-url && npm run setup-prisma",
 
