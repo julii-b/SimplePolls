@@ -4,8 +4,8 @@
 }
 @media (max-width: 600px) {
   .createNewLogo, .participateLogo {
-    max-width: fit-content;
-    height: 16vh;
+    width: auto;
+    height: 14vh;
   }
 }
 
@@ -28,7 +28,7 @@
   border-color: var(--create-color) !important;
   width: 70%;
   min-height: 4.5em;
-  max-height: min(15vh, 6em);
+  max-height: min(10vh, 6em);
   margin-bottom: -1em;
 }
 .createNewButton:hover,
@@ -55,7 +55,7 @@
   border-color: var(--participate-color) !important;
   width: 70%;
   min-height: 4.5em;
-  max-height: min(15vh, 6em);
+  max-height: min(10vh, 6em);
   margin-bottom: -1em;
 }
 .participateButton:hover,
