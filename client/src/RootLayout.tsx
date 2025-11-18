@@ -2,6 +2,8 @@ import { Link, Outlet, useNavigation } from 'react-router-dom';
 import stylesRootLayout from './RootLayout.module.css'
 import LoadingPage from './pages/LoadingPage.tsx';
 import ChangeLanguageButton from './components/ChangeLanguageButton/ChangeLanguagButton.tsx';
+import DownloadButton from './components/DownloadButton/DownloadButton.tsx';
+import InfoButton from './components/InfoButton/InfoButton.tsx';
 
 
 const RootLayout = () => {
@@ -11,6 +13,8 @@ const RootLayout = () => {
   return (
     <>
       <div className={stylesRootLayout.buttonsContainer}>
+        <InfoButton />
+        <DownloadButton />
         <ChangeLanguageButton />
       </div>
       

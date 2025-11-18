@@ -27,7 +27,7 @@
   background-color: var(--create-bg-color) !important;
   border-color: var(--create-color) !important;
   width: 70%;
-  min-height: 4.5em;
+  min-height: min(4.5em, 8vh);;
   max-height: min(10vh, 6em);
   margin-bottom: -1em;
 }
@@ -54,7 +54,7 @@
   background-color: var(--participate-bg-color) !important;
   border-color: var(--participate-color) !important;
   width: 70%;
-  min-height: 4.5em;
+  min-height: min(4.5em, 8vh);
   max-height: min(10vh, 6em);
   margin-bottom: -1em;
 }

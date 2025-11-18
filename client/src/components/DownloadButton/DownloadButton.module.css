@@ -1,0 +1,13 @@
+.openButton {
+  width: 2.5em;
+  height: 2.5em;
+  font-size: 1.2em;
+  backdrop-filter: blur(10px);
+}
+
+.contentContainer {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}

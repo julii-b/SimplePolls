@@ -3,11 +3,20 @@
   right: 1.5em;
   top: 1em;
   display: flex;
+  flex-direction: row;
   gap: 0.7em;
 }
-@media (max-width: 600px) {
+@media (max-width: 750px) {
   .buttonsContainer {
     font-size: 0.9em;
+  }
+}
+@media (max-width: 650px) {
+  .buttonsContainer {
+    top: 0.5em;
+    font-size: 0.7em;
+    /*flex-direction: column;*/
+    gap: 0.5em;
   }
 }
 
