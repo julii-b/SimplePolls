@@ -59,6 +59,7 @@ const CreatePageHeader = ({poll}: {poll?: Poll|undefined}) => {
         name='action' // action: save - can later be used to determine if form was submitted using save button
         value='save'
         title={t('create.saveButtonAriaLabel')} // for tooltip
+        disabled={questionText.trim().length === 0} // disable button if question is empty
         aria-label={t('create.saveButtonAriaLabel')}
       ><FontAwesomeIcon icon={faFloppyDisk} /></button>
 

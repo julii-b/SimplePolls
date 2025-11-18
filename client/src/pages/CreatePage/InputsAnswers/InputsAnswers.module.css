@@ -39,14 +39,14 @@
 .answerContainer .deleteAnswerButton:hover,
 .answerContainer .deleteAnswerButton:active {
   background-color: var(--create-color);
-  color: var(--create-color);
+  color: white;
 }
 @media (max-width: 600px) {
   .answerContainer .answerInput {
     min-height: 4.45em;
   }
   .answerContainer .deleteAnswerButton {
-    height: 4.45em;
+    height: 2.5em;
     width: 2.5em;
   }
 }

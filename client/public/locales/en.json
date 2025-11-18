@@ -38,6 +38,8 @@
 
     "openPollText": "Open",
 
+    "pollRetrievalErrorMessage": "Poll could not be retrieved. Please check the poll ID and try again.",
+
     "shareButtonAriaLabel": "Share poll",
     "shareButtonTitle": "Share",
 

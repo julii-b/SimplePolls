@@ -1,9 +1,13 @@
+.HeaderContainer {
+  min-height: 4em;
+  padding: 0;
+  border-bottom: 3px solid var(--participate-color);
+}
 .openPollFormContainer {
+  height: 4em;
   display: flex;
   gap: 0.8em;
-  min-height: 4em;
-  padding-bottom: 1.5em;
-  border-bottom: 3px solid var(--participate-color);
+  padding: 0;
 }
 
 .pollIdInput {
@@ -21,4 +25,17 @@
 .joinButton:not(:disabled):hover,
 .joinButton:not(:disabled):active {
   background-color: var(--participate-color) !important;
+}
+
+.errorMessage {
+  color: red;
+  min-height: 0.7em;
+  display: block;
+  text-align: left;
+  line-height: 1;
+  padding: 0.4em 0;
+}
+
+.errorMessageIcon {
+  margin-right: 0.1em;
 }

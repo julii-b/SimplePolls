@@ -38,6 +38,8 @@
 
     "openPollText": "Öffnen",
 
+    "pollRetrievalErrorMessage": "Die Umfrage konnte nicht geladen werden. Bitte überprüfe die ID der Umfrage und versuche es erneut.",
+
     "shareButtonAriaLabel": "Umfrage teilen",
     "shareButtonTitle": "Teilen",
 

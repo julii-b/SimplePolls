@@ -1,3 +1,4 @@
+import { redirect } from 'react-router-dom';
 import * as pollService from '../../../services/pollService';
 import * as voteService from '../../../services/voteService';
 import type { Poll } from '../../../types/poll';
@@ -10,17 +11,23 @@ import type { Poll } from '../../../types/poll';
  * @param { { pollId } }param.params - Id of the poll that should be retreived
  * @returns { { poll: Poll, votedAnswers: string[], createdPolls: string[] } }
  */
-export async function loader ( { params }: { params: { pollId?: string } }): Promise<{ poll: Poll, votedAnswers: number[], createdPolls: string[] }> {
-  // Load poll:
-  const pollId: string = String(params.pollId);
-  const poll: Poll = await pollService.getPoll(pollId);
-  console.log(poll)
-  //Load votedAnswers:
-  const votedAnswers = await voteService.getAllUsersVotes();
-  //load createdPolls and extract ids:
-  const createdPolls: Poll[] = await pollService.getUsersCreatedPolls();
-  let createdPollIds: string[] = [];
-  for (const poll of createdPolls) createdPollIds.push(poll.id);
+export async function loader ( { params }: { params: { pollId?: string } }):
+Promise<{ poll: Poll, votedAnswers: number[], createdPolls: string[] } | Response> {
+  try {
+    // Load poll:
+    const pollId: string = String(params.pollId);
+    const poll: Poll = await pollService.getPoll(pollId);
+    console.log(poll)
+    //Load votedAnswers:
+    const votedAnswers = await voteService.getAllUsersVotes();
+    //load createdPolls and extract ids:
+    const createdPolls: Poll[] = await pollService.getUsersCreatedPolls();
+    let createdPollIds: string[] = [];
+    for (const poll of createdPolls) createdPollIds.push(poll.id);
 
-  return { poll, votedAnswers, createdPolls: createdPollIds };
+    return { poll, votedAnswers, createdPolls: createdPollIds };
+
+  } catch (error) { // if error occurs, go back to participate page which will show an error message:
+    return redirect(`/participate?error=poll-retrieval&pollId=${encodeURIComponent(params.pollId ?? "")}`);
+  }
 }

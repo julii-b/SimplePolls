@@ -38,6 +38,8 @@
 
     "openPollText": "Ouvrir",
 
+    "pollRetrievalErrorMessage": "Le sondage n’a pas pu être récupéré. Veuillez vérifier l’ID du sondage et réessayer.",
+
     "shareButtonAriaLabel": "Partager le sondage",
     "shareButtonTitle": "Partager",
 
