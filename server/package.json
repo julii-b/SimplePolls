@@ -5,10 +5,10 @@
   "main": "dist/server.js",
   "scripts": {
 
-    "generate-env-db-url": "node scripts/generate-env-db-url.ts",
-    "generate-env-sha256-secret": "node scripts/generate-env-sha256-secret.ts",
+    "generate-env-db-url": "node scripts/generate-env-db-url.js",
+    "generate-env-sha256-secret": "node scripts/generate-env-sha256-secret.js",
     "setup-prisma": "npx prisma generate && npx prisma migrate deploy",
-    "postinstall": "npm run generate-env-db-url && npm run setup-prisma",
+    "postinstall": "npm run generate-env-db-url && npm run generate-env-sha256-secret",
 
     "build": "npm run postinstall && tsc",
     "start": "node dist/server.js",

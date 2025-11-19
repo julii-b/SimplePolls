@@ -9,7 +9,13 @@
     "loadingText": "Loading",
 
     "languageButtonAriaLabel": "Change language",
-    "languageButtonTitle": "Change language"
+    "languageButtonTitle": "Change language",
+
+    "downloadButtonAriaLabel": "Download as an app",
+    "downloadButtonTitle": "Download",
+
+    "infoButtonAriaLabel": "Show information about Simple Polls",
+    "infoButtonTitle": "Info"
   },
   "home": {
     "createButton": "Create a new poll",

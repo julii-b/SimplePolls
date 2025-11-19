@@ -9,7 +9,13 @@
     "loadingText": "Chargement",
 
     "languageButtonAriaLabel": "Changer la langue",
-    "languageButtonTitle": "Changer la langue"
+    "languageButtonTitle": "Changer la langue",
+
+    "downloadButtonAriaLabel": "Télécharger en tant qu'application",
+    "downloadButtonTitle": "Télécharger",
+
+    "infoButtonAriaLabel": "Afficher les informations sur Simple Polls",
+    "infoButtonTitle": "Info"
   },
   "home": {
     "createButton": "Créer un nouveau sondage",

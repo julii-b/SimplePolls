@@ -9,7 +9,13 @@
     "loadingText": "Lädt",
 
     "languageButtonAriaLabel": "Sprache ändern",
-    "languageButtonTitle": "Sprache ändern"
+    "languageButtonTitle": "Sprache ändern",
+
+    "downloadButtonAriaLabel": "Als App herunterladen",
+    "downloadButtonTitle": "Herunterladen",
+
+    "infoButtonAriaLabel": "Informationen über Simple Polls anzeigen",
+    "infoButtonTitle": "Info"
   },
   "home": {
     "createButton": "Neue Umfrage erstellen",
