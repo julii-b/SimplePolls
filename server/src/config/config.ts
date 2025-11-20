@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
 
-dotenv.config();
+//Load .env file:
+const envPath = process.env.DOTENV_CONFIG_PATH || '.env';
+dotenv.config({ path: envPath, override: true });
 
 // Define types of .env variables:
 interface Config {

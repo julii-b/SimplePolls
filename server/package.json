@@ -14,6 +14,7 @@
     "start": "node dist/server.js",
 
     "dev": "nodemon --watch \"src/**/*.ts\" --exec tsx src/server.ts",
+    "dev2": "DOTENV_CONFIG_PATH=.env.development nodemon --watch \"src/**/*.ts\" --exec tsx src/server.ts",
 
     "test": "DOTENV_CONFIG_PATH=.env.test vitest run",
     "test:watch": "DOTENV_CONFIG_PATH=.env.test vitest",
