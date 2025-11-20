@@ -32,11 +32,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--default-color);
   text-decoration: inherit;
 }
 a:hover {
-  color: #747bff;
+  text-decoration: underline;
 }
 
 body {

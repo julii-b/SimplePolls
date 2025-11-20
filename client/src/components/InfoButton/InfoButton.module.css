@@ -6,8 +6,24 @@
 }
 
 .contentContainer {
-  margin-top: 1em;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
+  text-align: left;
+  padding: 0 0.5em
+}
+
+.contentContainer h2 {
+  margin-top: 0;
+}
+
+.warningIcon {
+  margin-right: 0.1em;
+  color: var(--default-color);
+}
+
+.warningText {
+  font-weight: 600;
+  font-style: italic;
+}
+
+.contentContainer li {
+  list-style-type: disclosure-closed;
 }

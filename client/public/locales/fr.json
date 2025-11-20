@@ -15,7 +15,9 @@
     "downloadButtonTitle": "Télécharger",
 
     "infoButtonAriaLabel": "Afficher les informations sur Simple Polls",
-    "infoButtonTitle": "Info"
+    "infoButtonTitle": "Info",
+
+    "warningEnglishOnly": "Note : Ce contenu n'est disponible qu'en anglais."
   },
   "home": {
     "createButton": "Créer un nouveau sondage",

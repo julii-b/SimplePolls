@@ -23,7 +23,7 @@ app.use(cors({
 app.use(userMiddleware);
 
 // Routes:
-app.use('/', apiDocsRouter);
+app.use('/docs', apiDocsRouter);
 app.use('/me', meRouter);
 app.use('/polls', pollsRouter);
 app.use('/answers', answersRouter);

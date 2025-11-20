@@ -26,12 +26,23 @@
   line-height: 0.78em;
   margin: 0.2em 0.6em;
   text-shadow: 0 0 0.03em white;
+  text-decoration: none;
+}
+@media (max-width: 600px) {
+  .simplePollsTitle {
+    font-size: 3.5em
+  }
+}
+.simplePollsTitle a:hover {
+  text-decoration: none;
 }
 
 .simpleTitle {
   color: var(--participate-color);
+  font-weight: 800;
 }
 
 .pollsTitle {
   color: var(--create-color);
+  font-weight: 800;
 }

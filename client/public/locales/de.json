@@ -15,7 +15,9 @@
     "downloadButtonTitle": "Herunterladen",
 
     "infoButtonAriaLabel": "Informationen über Simple Polls anzeigen",
-    "infoButtonTitle": "Info"
+    "infoButtonTitle": "Info",
+
+    "warningEnglishOnly": "Hinweis: Dieser Inhalt ist nur auf Englisch verfügbar."
   },
   "home": {
     "createButton": "Neue Umfrage erstellen",

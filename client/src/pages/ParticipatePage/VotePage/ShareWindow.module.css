@@ -1,7 +1,7 @@
 .shareWindow {
   background-color: var(--participate-bg-color) !important;
   border-color:  var(--participate-color) !important;
-  scrollbar-color: #BA8F9E #ffffff00 !important;
+  scrollbar-color: var(--participate-color) #ffffff00 !important;
 }
 .closeButton {
   background-color: var(--participate-bg-color) !important;

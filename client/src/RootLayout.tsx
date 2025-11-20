@@ -18,13 +18,14 @@ const RootLayout = () => {
         <ChangeLanguageButton />
       </div>
       
-      <Link to='/'>
-        <h1 className={stylesRootLayout.simplePollsTitle}>
+      
+      <h1 className={stylesRootLayout.simplePollsTitle}>
+        <Link to='/'>
           <span className={stylesRootLayout.simpleTitle}>Simple</span>
           <wbr />
           <span className={stylesRootLayout.pollsTitle}>Polls</span>
-        </h1>
-      </Link>
+        </Link>
+      </h1>
 
       { navigation.state === 'loading' || navigation.state === 'submitting'
       ? <LoadingPage />

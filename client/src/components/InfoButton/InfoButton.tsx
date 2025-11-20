@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfo } from '@fortawesome/free-solid-svg-icons';
 import type { JSX } from 'react/jsx-dev-runtime';
+import InfoContent from './InfoContent';
 
 /**
  * A button to change the language of the application.
@@ -19,7 +20,7 @@ const InfoButton = (): JSX.Element => {
     children: (
       <div className={stylesInfoB.contentContainer}>
 
-        Some info will go here.
+        <InfoContent />
 
       </div>
     ),
