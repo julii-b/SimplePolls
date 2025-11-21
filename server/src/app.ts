@@ -10,6 +10,8 @@ import errorHandler from './middlewares/errorHandler.js';
 
 const app = express();
 
+// Trust proxy, needed for rate limiting behind reverse proxy:
+app.set("trust proxy", true);
 //Rate limiter middleware:
 app.use(rateLimiter);
 // Parse incoming JSON payload:
