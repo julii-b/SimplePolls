@@ -14,6 +14,12 @@
     "downloadButtonAriaLabel": "Download as an app",
     "downloadButtonTitle": "Download",
 
+    "downloadAppleTitle": "To install the app on your Apple device:",
+    "downloadAppleShare1": "Click the '",
+    "downloadAppleShare2": "Share' button",
+    "downloadAppleAdd1": "Click the '",
+    "downloadAppleAdd2": "Add to Home Screen' button",
+
     "infoButtonAriaLabel": "Show information about Simple Polls",
     "infoButtonTitle": "Info"
   },

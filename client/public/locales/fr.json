@@ -14,6 +14,12 @@
     "downloadButtonAriaLabel": "Télécharger en tant qu'application",
     "downloadButtonTitle": "Télécharger",
 
+    "downloadAppleTitle": "Pour installer l'application sur votre appareil Apple :",
+    "downloadAppleShare1": "Cliquez sur le bouton '",
+    "downloadAppleShare2": "Partager'",
+    "downloadAppleAdd1": "Cliquez sur le bouton '",
+    "downloadAppleAdd2": "Ajouter à l'écran d'accueil'",
+
     "infoButtonAriaLabel": "Afficher les informations sur Simple Polls",
     "infoButtonTitle": "Info",
 

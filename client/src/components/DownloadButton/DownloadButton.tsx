@@ -1,59 +1,31 @@
-import stylesDownloadB from './DownloadButton.module.css';
-import { useTranslation } from 'react-i18next';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
-import type { JSX } from 'react/jsx-dev-runtime';
-import { useEffect, useState } from 'react';
+import type { JSX } from "react/jsx-dev-runtime";
+import DownloadButtonApple from "./DownloadButtonApple";
+import DownloadButtonOther from "./DownloadButtonOther";
 
-// Extended event interface for beforeinstallprompt:
-interface BeforeInstallPromptEvent extends Event {
-  prompt: () => Promise<void>;
-  userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform?: string }>;
+function isIOS(): boolean {
+  const ua = navigator.userAgent;
+  const iOSDevice = /iPad|iPhone|iPod/.test(ua);
+  const iPadOS = !iOSDevice && ua.includes("Mac OS X") && navigator.maxTouchPoints > 1;
+  return iOSDevice || iPadOS;
+}
+
+function isMacSafari(): boolean {
+  const ua = navigator.userAgent;
+  const isMac = ua.includes("Mac OS X") && navigator.maxTouchPoints <= 1;
+  const isSafari = /Safari/.test(ua) && !/Chrome/.test(ua) && !/Edg/.test(ua) && !/OPR/.test(ua);
+  return isMac && isSafari;
 }
 
 /**
- * A button to change the language of the application.
- * Opens a window with language options when clicked.
+ * A button to show the appropriate install prompt based on the device.
  * 
  * @returns {JSX.Element} The rendered button component.
  */
 const DownloadButton = (): JSX.Element => {
-  const { t } = useTranslation();
-
-  const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
-  
-  // Capture the beforeinstallprompt event to use the prompt later:
-  useEffect(() => {
-    const handler = (e: Event) => {
-      e.preventDefault();
-      setInstallPrompt(e as BeforeInstallPromptEvent);
-    };
-    window.addEventListener("beforeinstallprompt", handler);
-    return () => window.removeEventListener("beforeinstallprompt", handler);
-  }, []);
-
-
-  if (installPrompt) { // Render button only if installPrompt is available
-    return (
-      <>
-        <button // Button to open download window
-        className={`button ${stylesDownloadB.openButton}`}
-        onClick={async (e) => {
-          e.preventDefault();
-          await installPrompt.prompt(); // Show install prompt
-          if ((await installPrompt.userChoice).outcome === "accepted") { // Hide button after acceptance
-            setInstallPrompt(null); 
-          }
-        }}
-        aria-label={t('common.downloadButtonAriaLabel')}
-          title={t('common.downloadButtonTitle')}
-        >
-          <FontAwesomeIcon icon={faDownload} />
-        </button>
-      </>
-    );
+  if (isIOS() || isMacSafari()) {
+    return <DownloadButtonApple />;
   } else {
-    return <></>;
+    return <DownloadButtonOther />;
   }
 };
 
