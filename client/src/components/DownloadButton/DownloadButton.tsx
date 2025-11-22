@@ -1,9 +1,15 @@
 import stylesDownloadB from './DownloadButton.module.css';
-import useWindow from "../../customHooks/useWindow";
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import type { JSX } from 'react/jsx-dev-runtime';
+import { useEffect, useState } from 'react';
+
+// Extended event interface for beforeinstallprompt:
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform?: string }>;
+}
 
 /**
  * A button to change the language of the application.
@@ -12,34 +18,43 @@ import type { JSX } from 'react/jsx-dev-runtime';
  * @returns {JSX.Element} The rendered button component.
  */
 const DownloadButton = (): JSX.Element => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
 
-    // Create the window:
-    const [ DownloadWindow, openWindow, _ ] = useWindow({
-    children: (
-      <div className={stylesDownloadB.contentContainer}>
+  const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  
+  // Capture the beforeinstallprompt event to use the prompt later:
+  useEffect(() => {
+    const handler = (e: Event) => {
+      e.preventDefault();
+      setInstallPrompt(e as BeforeInstallPromptEvent);
+    };
+    window.addEventListener("beforeinstallprompt", handler);
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
 
-        Download the PWA: to be implemented
 
-      </div>
-    ),
-    windowClassName: stylesDownloadB.window,
-    closeButtonClassName: stylesDownloadB.closeButton
-  });
-
-  return (
-    <>
-      <button // Button to open download window
-      className={`button ${stylesDownloadB.openButton}`}
-      onClick={() => {openWindow();}}
-      aria-label={t('common.downloadButtonAriaLabel')}
-        title={t('common.downloadButtonTitle')}
-      >
-        <FontAwesomeIcon icon={faDownload} />
-      </button>
-      { DownloadWindow }
-    </>
-  );
+  if (installPrompt) { // Render button only if installPrompt is available
+    return (
+      <>
+        <button // Button to open download window
+        className={`button ${stylesDownloadB.openButton}`}
+        onClick={async (e) => {
+          e.preventDefault();
+          await installPrompt.prompt(); // Show install prompt
+          if ((await installPrompt.userChoice).outcome === "accepted") { // Hide button after acceptance
+            setInstallPrompt(null); 
+          }
+        }}
+        aria-label={t('common.downloadButtonAriaLabel')}
+          title={t('common.downloadButtonTitle')}
+        >
+          <FontAwesomeIcon icon={faDownload} />
+        </button>
+      </>
+    );
+  } else {
+    return <></>;
+  }
 };
 
 export default DownloadButton;
