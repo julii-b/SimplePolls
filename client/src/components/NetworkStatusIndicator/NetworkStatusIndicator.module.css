@@ -1,0 +1,38 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+.indicatorContainer {
+  position: fixed;
+  top: 5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  min-width: 70vw;
+  max-width: min(90vw, 1000px);
+  z-index: 1000;
+  border: 6px solid var(--default-color);
+  border-radius: 25px;
+  background-color: var(--default-bg-color);
+  backdrop-filter: brightness(1.5) blur(20px);
+  padding: 0.5em 1em;
+}
+
+.indicatorContainer img {
+  height: 2.7em;
+  width: auto;
+  margin: auto 1em;
+  transform: translateY(-0.2em);
+}
+
+.indicatorContainer p {
+  font-weight: 500;
+  font-size: 1.1em;
+}

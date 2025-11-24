@@ -8,6 +8,8 @@
 
     "loadingText": "Chargement",
 
+    "offlineText": "Vous êtes hors ligne. Veuillez vous connecter à Internet.",
+
     "languageButtonAriaLabel": "Changer la langue",
     "languageButtonTitle": "Changer la langue",
 

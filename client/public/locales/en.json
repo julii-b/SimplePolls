@@ -8,6 +8,8 @@
 
     "loadingText": "Loading",
 
+    "offlineText": "You are offline. Please connect to the internet.",
+
     "languageButtonAriaLabel": "Change language",
     "languageButtonTitle": "Change language",
 

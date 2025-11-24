@@ -4,6 +4,7 @@ import LoadingPage from './pages/LoadingPage.tsx';
 import ChangeLanguageButton from './components/ChangeLanguageButton/ChangeLanguagButton.tsx';
 import DownloadButton from './components/DownloadButton/DownloadButton.tsx';
 import InfoButton from './components/InfoButton/InfoButton.tsx';
+import NetworkStatusIndicator from './components/NetworkStatusIndicator/NetworkStatusIndicator.tsx';
 
 
 const RootLayout = () => {
@@ -12,6 +13,8 @@ const RootLayout = () => {
 
   return (
     <>
+      <NetworkStatusIndicator />
+
       <div className={stylesRootLayout.buttonsContainer}>
         <InfoButton />
         <DownloadButton />
