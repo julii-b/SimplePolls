@@ -23,14 +23,14 @@ const LoadingPage = () => {
     <div className={`contentCard ${stylesLoadingPage.loadingCard}`} >
 
       <picture>
-          <source srcSet="/Logo.webp" type="image/webp" />
-          <img
-          className={stylesLoadingPage.spinner} 
-          src="/Logo.png"
-          alt="Loading"
-          aria-label="Loading"
-          />
-        </picture>
+        <source srcSet="/Logo.webp" type="image/webp" />
+        <img
+        className={stylesLoadingPage.spinner} 
+        src="/Logo.png"
+        alt="Loading"
+        aria-label="Loading"
+        />
+      </picture>
 
       <p
       className={stylesLoadingPage.loadingText}

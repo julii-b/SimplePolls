@@ -1,15 +1,18 @@
-import type { JSX } from "react";
+import { useState, type JSX } from "react";
 import type { Answer } from "../../../types/answer";
-import { Form } from "react-router-dom";
 import stylesAnswers from './Answers.module.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
+import * as voteService from '../../../services/voteService';
+import { useRevalidator } from "react-router-dom";
+import LoadingOverlay from "../../../components/LoadingOverlay/LoadingOverlay";
 
 
 /**
  * Renders all answers in an array as forms to vote, or remove vote to answer.
- * Includes information about the amount of votes
+ * Includes information about the amount of votes.
+ * Votes and removes votes through voteService.
  * 
  * @param param
  * @param { Answers[] } param.answers - Array of all answers to render
@@ -18,6 +21,9 @@ import { useTranslation } from "react-i18next";
  */
 const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: number[]}): JSX.Element => {
   const {t} = useTranslation();
+  const revalidator = useRevalidator();
+  const [isLoading, setIsLoading] =  useState<boolean>(false);
+  
   // Count all votes to calculate percentages:
   let totalVotes: number = 0;
   for (const answer of answers) {
@@ -28,7 +34,7 @@ const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: 
   let answersJSX: JSX.Element[] = [];
   for (const answer of answers) {
     const answerJSX: JSX.Element = (
-      <Form method='post'
+      <div
       key={'answer'+answer.id}
       className={stylesAnswers.answerContainer}
   >
@@ -48,10 +54,14 @@ const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: 
         {votedAnswers.includes(answer.id)
         ? (
           <button // button if user voted for the answer
-          type='submit'
-          name='action'
           className={`${stylesAnswers.checkBox} ${stylesAnswers.button} button`}
-          value={'removeVote'}
+          onClick={async () => {
+            // Remove vote and revalidate loader data:
+            setIsLoading(true);
+            await voteService.deleteVote(answer.id);
+            await revalidator.revalidate();
+            setIsLoading(false);
+          }}
           aria-label={t('participate.removeVoteAriaLabel', { index: answer.id })}
           title={t('participate.removeVoteTitle')} // tooltip
           >
@@ -59,10 +69,14 @@ const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: 
           </button>
         ) : (
           <button // Button if user didn't vote for the answer
-          type='submit'
-          name='action'
           className={`${stylesAnswers.checkBox} ${stylesAnswers.button} button`}
-          value={'castVote'}
+          onClick={async () => {
+            // Cast vote and revalidate loader data:
+            setIsLoading(true);
+            await voteService.vote(answer.id);
+            await revalidator.revalidate();
+            setIsLoading(false);
+          }}
           aria-label={t('participate.castVoteAriaLabel', { index: answer.id })}
           title={t('participate.castVoteTitle')} // tooltip
           >
@@ -90,15 +104,18 @@ const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: 
           </div>
         </div>
         
-      </Form>
+      </div>
     );
     answersJSX.push(answerJSX);
   }
 
   return (
-    <div className={stylesAnswers.answersContainer}>
-      {answersJSX}
-    </div>
+    <>
+      {isLoading && <LoadingOverlay />}
+      <div className={stylesAnswers.answersContainer}>
+        {answersJSX}
+      </div>
+    </>
   );
 }
 export default VoteAnswers;

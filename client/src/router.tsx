@@ -6,7 +6,7 @@ import HomePage from './pages/HomePage.tsx';
 import CreatePage, {loader as createLoader, action as createAction} from './pages/CreatePage/CreatePage.tsx';
 import ParticipatePage from './pages/ParticipatePage/ParticipatePageContainer.tsx';
 import JoinPage, { loader as joinLoader } from './pages/ParticipatePage/JoinPage/JoinPage.tsx';
-import VotePage, { loader as voteLoader, action as voteAction } from './pages/ParticipatePage/VotePage/VotePage.tsx';
+import VotePage, { loader as voteLoader } from './pages/ParticipatePage/VotePage/VotePage.tsx';
 import ErrorElement from './components/ErrorElement/ErrorElement.tsx';
 
 const router = createBrowserRouter([
@@ -53,7 +53,6 @@ const router = createBrowserRouter([
                 {
                     path: ':pollId', // '/participate/:pollId'
                     loader: voteLoader, // load poll and answers
-                    action: voteAction, // submit vote/change poll/change answer/add answer/remove answer
                     element: <VotePage />,
                     errorElement: <ErrorElement />
                 }

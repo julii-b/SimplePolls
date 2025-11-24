@@ -54,4 +54,3 @@ const VotePage = (): JSX.Element	 => {
 
 export default VotePage;
 export { loader } from "./loader";
-export { action } from "./action";
