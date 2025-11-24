@@ -26,7 +26,10 @@ const NetworkStatusIndicator = (): JSX.Element => {
           className={styles.indicatorContainer}
           aria-live="assertive"
           >
-            <img src='/LogoSad.png' alt='' aria-hidden="true" />
+            <picture>
+              <source srcSet="/LogoSad.webp" type="image/webp" />
+              <img src='/LogoSad.png' alt='' aria-hidden="true" />
+            </picture>
             <p>
               {t('common.offlineText')}
             </p>

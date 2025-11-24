@@ -23,7 +23,7 @@ const LoadingPage = () => {
     <div className={`contentCard ${stylesLoadingPage.loadingCard}`} >
 
       <picture>
-          {/* <source srcSet="/loadingSpinner.webp" type="image/webp" />*/}
+          <source srcSet="/Logo.webp" type="image/webp" />
           <img
           className={stylesLoadingPage.spinner} 
           src="/Logo.png"

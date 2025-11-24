@@ -43,7 +43,7 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  background-image: url('./../backgroundImage2048.png');
+  background-image: url('./../backgroundImage2048.webp');
   min-width: 320px;
   min-height: 100vh;
 }
