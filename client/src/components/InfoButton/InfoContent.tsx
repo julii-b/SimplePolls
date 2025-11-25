@@ -1,9 +1,16 @@
 import infoButtonStyles from "./InfoButton.module.css";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import type { JSX } from "react";
 import { useTranslation } from "react-i18next";
 
-const InfoContent = () => {
+
+/**
+ * Content for the info window.
+ * 
+ * @returns {JSX.Element}
+ */
+const InfoContent = (): JSX.Element => {
   const { t, i18n } = useTranslation();
   
   return (

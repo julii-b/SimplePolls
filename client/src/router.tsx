@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import App from './RootLayout.tsx';
 
-import HomePage from './pages/HomePage.tsx';
+import HomePage from './pages/HomePage/HomePage.tsx';
 import CreatePage, {loader as createLoader, action as createAction} from './pages/CreatePage/CreatePage.tsx';
 import ParticipatePage from './pages/ParticipatePage/ParticipatePageContainer.tsx';
 import JoinPage, { loader as joinLoader } from './pages/ParticipatePage/JoinPage/JoinPage.tsx';

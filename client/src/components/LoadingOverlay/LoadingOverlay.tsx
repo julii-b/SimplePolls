@@ -5,7 +5,8 @@ import { useTranslation } from "react-i18next";
 
 
 /**
- * Loading overlay component to indicate loading state.
+ * Loading overlay component that can be rendered to indicate a loading state.
+ * 
  * @returns {JSX.Element}
  */
 const LoadingOverlay = (): JSX.Element => {

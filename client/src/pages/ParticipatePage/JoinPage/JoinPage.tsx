@@ -6,8 +6,9 @@ import styles from './JoinPage.module.css';
 
 /**
  * Renders the join-page with an input field to type a new poll id and a list of all created and participated polls.
+ * Has to be used together with the exported loader function.
  * 
- * @returns { JSX.Element }
+ * @returns { JSX.Element } The JoinPage component to be used as an outlet in the ParticipatePage component.
  */
 const JoinPage = () => {
     

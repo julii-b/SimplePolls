@@ -10,7 +10,7 @@ import ShareWindowContent from "./ShareWindowContent";
 
 
 /**
- * Renders the vote-page header including edit button (if user is owner)
+ * Renders the vote-page header with the question text and an edit button (if user is owner)
  * 
  * @returns { JSX.Element }
  */

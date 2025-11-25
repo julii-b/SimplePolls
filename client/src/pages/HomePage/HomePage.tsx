@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import style from './HomePage.module.css';
+import type { JSX } from "react";
 
-const HomePage = () => {
+/**
+ * Renders the home page with links to the create and participate routes
+ * @returns {JSX.Element} The HomePage component to be used as an outlet in the RootLayout component.
+ */
+const HomePage = (): JSX.Element => {
   const { t } = useTranslation();
 
   return (
-    <div
+    <nav
     className={`cardsContainer`}
     role='main'
     >
@@ -45,7 +50,7 @@ const HomePage = () => {
         </Link>
 
       </div>
-    </div>
+    </nav>
   );
 };
 export default HomePage;

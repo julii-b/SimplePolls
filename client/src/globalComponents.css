@@ -1,3 +1,7 @@
+/**
+ * Global CSS styles for reused classNames across multiple components.
+ */
+
 .cardsContainer {
   display: flex;
   flex-wrap: wrap;

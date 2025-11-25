@@ -21,6 +21,10 @@ export default defineConfig({
         'pwa-512x512.png',
         'pwa-maskable-192x192.png',
         'pwa-maskable-512x512.png',
+        'Logo.png',
+        'LogoSad.png',
+        'LogoCreate.png',
+        'LogoParticipate.png',
         'offline.html'
       ],
       manifest: {

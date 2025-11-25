@@ -8,8 +8,9 @@ import styles from './votePage.module.css';
 
 /**
  * Renders the page to vote for a poll.
+ * Has to be used together with the exported loader function.
  * 
- * @returns { JSX.Element }
+ * @returns { JSX.Element } The VotePage component to be used as an outlet in the ParticipatePage component.
  */
 const VotePage = (): JSX.Element	 => {
 

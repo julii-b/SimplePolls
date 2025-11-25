@@ -1,10 +1,20 @@
-import { useEffect, useRef, type JSX } from "react";
+import React, { useEffect, useRef, type JSX } from "react";
 import stylesWindow from './Window.module.css';
 import { createPortal } from "react-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Window component that can be used to display content in a window overlay.
+ * 
+ * @param param - Props for the window component.
+ * @param {React.ReactNode} param.children - The content to be displayed inside the window.
+ * @param {() => void} param.closeButtonFunction - Function to be called when the close button is clicked.
+ * @param {string} param.windowClassName - Optional class name for the window container.
+ * @param {string} param.closeButtonClassName - Optional class name for the close button.
+ * @returns {JSX.Element} The rendered window component.
+ */
 const Window = ({
   children,
   closeButtonFunction,

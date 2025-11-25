@@ -1,8 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type JSX } from 'react';
 import stylesLoadingPage from './LoadingPage.module.css';
 import { useTranslation } from 'react-i18next';
 
-const LoadingPage = () => {
+/**
+ * Loading page component to be displayed during navigation loading states.
+ * 
+ * @returns {JSX.Element} The LoadingPage component to be used in the router, will be an outlet in the RootLayout component.
+ */
+const LoadingPage = (): JSX.Element => {
   const { t } = useTranslation();
 
   // State for animated dots and effect to update them:

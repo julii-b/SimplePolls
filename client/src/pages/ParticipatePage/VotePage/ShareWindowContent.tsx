@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
  * 
  * @param param
  * @param { string } param.pollId - ID of the poll to share
- * @returns 
+ * @returns {JSX.Element} The ShareWindowContent component to be used inside a Window component.
  */
 const ShareWindowContent = ({ pollId }: { pollId: string }): JSX.Element	 => {
   const { t } = useTranslation();

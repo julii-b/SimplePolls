@@ -17,7 +17,7 @@ function isMacSafari(): boolean {
 }
 
 /**
- * A button to show the appropriate install prompt based on the device.
+ * A button that shows the appropriate install prompt based on the device.
  * 
  * @returns {JSX.Element} The rendered button component.
  */

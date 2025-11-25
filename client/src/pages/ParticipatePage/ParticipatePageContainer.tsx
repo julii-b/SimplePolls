@@ -1,7 +1,11 @@
 import { Outlet } from 'react-router-dom';
 import style from './ParticipatePage.module.css';
 
-const VoteContainer = () => {
+/**
+ * ParticipatePage container component that wraps the JoinPage and VotePage components.
+ * @returns {JSX.Element} The ParticipatePage component to be used as an outlet in the RootLayout component.
+ */
+const ParticipatePage = () => {
   return (
     <div
     className={`cardsContainer`}
@@ -13,4 +17,4 @@ const VoteContainer = () => {
     </div>
   );
 };
-export default VoteContainer;
+export default ParticipatePage;

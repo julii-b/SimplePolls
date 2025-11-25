@@ -25,6 +25,10 @@
   padding: 0.5em 1em;
 }
 
+.indicatorContainer picture {
+  margin: auto 0;
+}
+
 .indicatorContainer img {
   height: 2.7em;
   width: auto;
