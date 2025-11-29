@@ -24,7 +24,6 @@
   min-height: 3.2em;
   resize: none;
   overflow: hidden;
-  transition: none;
 }
 .answerContainer .answerInput::placeholder {
   color: var(--create-color);

@@ -21,7 +21,6 @@
   border-color: var(--create-color) !important;
   min-height: 4em;
   height: 4em;
-  transition: none;
 }
 .questionInput::placeholder {
   color: var(--create-color);
