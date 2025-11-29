@@ -1,13 +1,13 @@
 # SimplePolls
 
-SimplePolls is a full‑stack polling application built with React and Express. Users can use the app to ask each other productive or fun questions and vote in real-time.
+SimplePolls is a full‑stack polling application built with a React frontend and an Express backend. Users can use the app to ask each other productive or fun questions and vote on them.
 
 It has the following features:
 - Users can create new polls and edit existing polls in their ownership
 - Users can share their polls to other users
 - Users can participate in polls created by other users
-- The app is available in three languages
-- The app's responsive design allows it to be used on mobile and desktop
+- The frontend is available in English, German & French
+- The frontend's responsive design allows it to be used on mobile and desktop
 - The backend offers a public API
 
 You can have a look and play around with the frontend here: [simplepolls.julius-busch.com](https://simplepolls.julius-busch.com)
@@ -19,12 +19,14 @@ And view the API documentation here: [apisimplepolls.julius-busch.com/docs](http
 - Frontend:
     - Language: TypeScript
     - Framework: React
-    - Routing: React Router API
+    - Routing: React Router (Data Mode)
+    - Build Tool: Vite
+    - Internationalization: i18next
 - Backend:
     - Language: TypeScript
     - Framework: Express
     - ORM: Prisma with PostgreSQL
-    - Documentation: OpenAPI
+    - API Documentation: Swagger UI (OpenAPI)
     - Tests: Supertest & Vitest
 
 ## 🧩 Project Structure
@@ -84,6 +86,7 @@ cd SimplePolls
 
 #### 1.1 Copy environment file
 
+On Linux:
 ```bash
 cd server
 cp .env.example .env
@@ -137,3 +140,5 @@ copy .env.example .env
 npm install
 npm run dev
 ```
+
+Now you can access the frontend at [localhost:5173](http://localhost:5173) or at [simplepolls.julius-busch.com](https://simplepolls.julius-busch.com) 

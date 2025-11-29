@@ -24,8 +24,7 @@ export default defineConfig({
         'Logo.png',
         'LogoSad.png',
         'LogoCreate.png',
-        'LogoParticipate.png',
-        'offline.html'
+        'LogoParticipate.png'
       ],
       manifest: {
         name: 'SimplePolls',
@@ -34,7 +33,7 @@ export default defineConfig({
         start_url: '/',
         scope: '/',
         display: 'standalone',
-        background_color: '#C3A3CC',
+        background_color: '#FFF9FF',
         theme_color: '#6F2F5D',
         orientation: 'portrait',
         icons: [
