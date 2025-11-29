@@ -51,37 +51,39 @@ const VoteAnswers = ({answers, votedAnswers}: {answers: Answer[], votedAnswers: 
         aria-hidden='true'
         />
 
-        {votedAnswers.includes(answer.id)
-        ? (
-          <button // button if user voted for the answer
-          className={`${stylesAnswers.checkBox} ${stylesAnswers.button} button`}
-          onClick={async () => {
-            // Remove vote and revalidate loader data:
-            setIsLoading(true);
-            await voteService.deleteVote(answer.id);
-            await revalidator.revalidate();
-            setIsLoading(false);
-          }}
-          aria-label={t('participate.removeVoteAriaLabel', { index: answer.id })}
-          title={t('participate.removeVoteTitle')} // tooltip
-          >
-            <FontAwesomeIcon className={stylesAnswers.checkMark} icon={faCheck} />
-          </button>
-        ) : (
-          <button // Button if user didn't vote for the answer
-          className={`${stylesAnswers.checkBox} ${stylesAnswers.button} button`}
-          onClick={async () => {
-            // Cast vote and revalidate loader data:
-            setIsLoading(true);
-            await voteService.vote(answer.id);
-            await revalidator.revalidate();
-            setIsLoading(false);
-          }}
-          aria-label={t('participate.castVoteAriaLabel', { index: answer.id })}
-          title={t('participate.castVoteTitle')} // tooltip
-          >
-          </button>
-        )}
+        <div className={stylesAnswers.checkBoxContainer}>
+          {votedAnswers.includes(answer.id)
+          ? (
+            <button // button if user voted for the answer
+            className={`${stylesAnswers.checkBox} ${stylesAnswers.button} button`}
+            onClick={async () => {
+              // Remove vote and revalidate loader data:
+              setIsLoading(true);
+              await voteService.deleteVote(answer.id);
+              await revalidator.revalidate();
+              setIsLoading(false);
+            }}
+            aria-label={t('participate.removeVoteAriaLabel', { index: answer.id })}
+            title={t('participate.removeVoteTitle')} // tooltip
+            >
+              <FontAwesomeIcon className={stylesAnswers.checkMark} icon={faCheck} />
+            </button>
+          ) : (
+            <button // Button if user didn't vote for the answer
+            className={`${stylesAnswers.checkBox} ${stylesAnswers.button} button`}
+            onClick={async () => {
+              // Cast vote and revalidate loader data:
+              setIsLoading(true);
+              await voteService.vote(answer.id);
+              await revalidator.revalidate();
+              setIsLoading(false);
+            }}
+            aria-label={t('participate.castVoteAriaLabel', { index: answer.id })}
+            title={t('participate.castVoteTitle')} // tooltip
+            >
+            </button>
+          )}
+        </div>
 
         <div // answer text
         className={stylesAnswers.answerText}

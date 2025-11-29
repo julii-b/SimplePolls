@@ -13,6 +13,14 @@
   border-bottom: none;
 }
 
+.checkBoxContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5em;
+  height: 2.5em;
+}
+
 .checkBox {
   color: var(--participate-color);
   background-color: var(--participate-bg-color);

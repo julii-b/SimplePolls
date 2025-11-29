@@ -14,7 +14,7 @@
 @media (max-width: 650px) {
   .buttonsContainer {
     top: 0.5em;
-    font-size: 0.7em;
+    font-size: 0.8em;
     /*flex-direction: column;*/
     gap: 0.5em;
   }
@@ -30,7 +30,7 @@
 }
 @media (max-width: 600px) {
   .simplePollsTitle {
-    font-size: 3.5em
+    font-size: 3.8em
   }
 }
 .simplePollsTitle a:hover {
