@@ -78,7 +78,7 @@ server/ # Backend (Express)
 
 Clone the repository:
 ```
-git clone https://github.com/julii-b/simplepolls.git
+git clone https://github.com/julii-b/SimplePolls.git
 cd SimplePolls
 ```
 
@@ -121,16 +121,14 @@ If you want, you can now have a look at the API routes documentation at [localho
 
 #### 2.1 Copy environment file
 
-Open another terminal window.
+Open another terminal window in `SpimplePolls/client`.
 
 On Linux:
 ```bash
-cd client
 cp .env.example .env
 ```
 On Windows:
 ```
-cd client
 copy .env.example .env
 ```
 
