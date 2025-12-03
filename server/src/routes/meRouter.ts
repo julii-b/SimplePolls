@@ -30,7 +30,7 @@ const meRouter = Router({ mergeParams: true });
  *                   items:
  *                     $ref: '#/components/schemas/Poll'
  *                 votedAnswers:
- *                   type: arry
+ *                   type: array
  *                   items:
  *                     type: integer
  */
