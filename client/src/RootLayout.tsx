@@ -25,18 +25,21 @@ const RootLayout = (): JSX.Element => {
         <ChangeLanguageButton />
       </div>
       
-      
-      <h1 className={stylesRootLayout.simplePollsTitle}>
-        <Link to='/'>
-          <span className={stylesRootLayout.simpleTitle}>Simple</span>
-          <wbr />
-          <span className={stylesRootLayout.pollsTitle}>Polls</span>
-        </Link>
-      </h1>
+      <div className={stylesRootLayout.scrollableContainer}>
 
-      { navigation.state === 'loading' || navigation.state === 'submitting'
-      ? <LoadingPage />
-      : <Outlet /> }
+        <h1 className={stylesRootLayout.simplePollsTitle}>
+          <Link to='/'>
+            <span className={stylesRootLayout.simpleTitle}>Simple</span>
+            <wbr />
+            <span className={stylesRootLayout.pollsTitle}>Polls</span>
+          </Link>
+        </h1>
+
+        { navigation.state === 'loading' || navigation.state === 'submitting'
+        ? <LoadingPage />
+        : <Outlet /> }
+        
+      </div>
     </>
   );
 };

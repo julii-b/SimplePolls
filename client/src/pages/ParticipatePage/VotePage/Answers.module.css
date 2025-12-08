@@ -5,6 +5,7 @@
 .answerContainer {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 1em;
   padding: 0.8em;
   border-bottom: 2px solid #BA8F9E80;
@@ -14,6 +15,7 @@
 }
 
 .checkBoxContainer {
+  font-size: min(1em, 20px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,22 +47,35 @@
 }
 
 .answerText {
+  flex-grow: 20;
   display: block;
   text-align: left;
+  width: min-content;
+  min-width: 60%;
   font-size: 1.1em;
   font-weight: 600;
   line-height: 1.2;
   overflow-wrap: anywhere;
   padding: 0.5em 0;
-  flex-grow: 1;
+}
+@media (max-width: 600px) {
+  .answerText {
+    padding: 0;
+  }
 }
 
 .answerResult {
+  flex-grow: 1;
   padding-top: 0;
   font-weight: 600;
 }
 .progressBarContainer {
-  width: 5em;
+  display: flex;
+  flex-direction: column;
+  align-items: normal;
+  width: 100%;
+  min-width: 5em;
+  flex-grow: 1;
   height: 0.5em;
   border-color: var(--participate-color);
   border-style: solid;
@@ -71,12 +86,14 @@
 }
 @media (max-width: 600px) {
   .progressBarContainer {
-    width: 3em;
+    width: 100%;
+    min-width: 3em;
   }
 }
 .progressBar {
   width: 100%;
   height: 100%;
+  align-items: normal;
   background-color: var(--participate-color);
   transition: all 1s linear;
 }

@@ -1,7 +1,7 @@
 .headerContainer {
   display: flex;
   flex-direction: row;
-  gap: 0.8em;
+  gap: min(0.8em, 10px);
   min-height: 4em;
   padding-bottom: 1.5em;
   border-bottom: 3px solid var(--participate-color);
@@ -13,6 +13,7 @@
 }
 
 .button {
+  font-size: min(1.1em, 20px);
   background-color: var(--participate-bg-color) !important;
   border-color: var(--participate-color) !important;
 }
@@ -61,7 +62,7 @@
   display: flex;
   flex-wrap: nowrap;
   align-content: flex-start;
-  gap: 0.8em;
+  gap: min(0.8em, 10px);
 }
 @media (max-width: 600px) {
   .headerRightContainer {
@@ -69,7 +70,7 @@
     flex-wrap: wrap;
     justify-content: flex-end;
     width: 2.5em;
-    gap: 0.3em;
+    gap: min(0.3em, 10px);
   }
 }
 

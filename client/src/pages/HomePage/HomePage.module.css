@@ -20,6 +20,7 @@
   .createNewCard {
     width: 100%;
     height: 30vh;
+    min-height: calc(12em - 2vh);
   }
 }
 
@@ -27,8 +28,8 @@
   background-color: var(--create-bg-color) !important;
   border-color: var(--create-color) !important;
   width: 70%;
-  min-height: min(4.5em, 8vh);;
-  max-height: min(10vh, 6em);
+  min-height: min(4.5em, 8vh);
+  max-height: 5em;
   margin-bottom: -1em;
 }
 .createNewButton:hover,
@@ -47,6 +48,7 @@
   .participateCard {
     width: 100%;
     height: 30vh;
+    min-height: calc(12em - 2vh);
   }
 }
 
@@ -55,7 +57,7 @@
   border-color: var(--participate-color) !important;
   width: 70%;
   min-height: min(4.5em, 8vh);
-  max-height: min(10vh, 6em);
+  max-height: 5em;
   margin-bottom: -1em;
 }
 .participateButton:hover,

@@ -1,7 +1,10 @@
 .buttonsContainer {
   position: absolute;
-  right: 1.5em;
   top: 1em;
+  left: 50%;
+  width: min(98vw, 1000px);
+  transform: translateX(-50%);
+  justify-content: flex-end;
   display: flex;
   flex-direction: row;
   gap: 0.7em;
@@ -15,13 +18,34 @@
   .buttonsContainer {
     top: 0.5em;
     font-size: 0.8em;
-    /*flex-direction: column;*/
+    gap: 0.5em;
+  }
+}
+@media (max-height: 600px) {
+  .buttonsContainer {
+    top: 0.5em;
+    font-size: 0.75em;
     gap: 0.5em;
   }
 }
 
+
+.scrollableContainer {
+  overflow-y: auto;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 3em auto 0 auto;
+  padding: 0 0 2em 0;
+  width: min(98vw,1000px);
+  max-width: 100%;
+  max-height: calc(100% - 5em);
+}
+
+
+
 .simplePollsTitle {
-  font-size: 5em;
+  font-size: min(5em, 80px);
   letter-spacing: -0.07em;
   line-height: 0.78em;
   margin: 0.2em 0.6em;
@@ -30,7 +54,12 @@
 }
 @media (max-width: 600px) {
   .simplePollsTitle {
-    font-size: 3.8em
+    font-size: min(3.8em, 80px)
+  }
+}
+@media (max-width: 500px) {
+  .simplePollsTitle {
+    font-size: min(3em, 60px)
   }
 }
 .simplePollsTitle a:hover {

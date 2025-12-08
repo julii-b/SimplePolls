@@ -10,12 +10,13 @@
 
 .shareWindowContainer {
   position: fixed;
-  top: 50vh;
+  top: 50dvh;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 30em;
   max-width: 85vw;
-  height: inherit;
+  height: auto;
+  max-height: 90vh;
   padding: 3.5em 1em 2em 1em;
   align-items: center;
   text-align: center;
